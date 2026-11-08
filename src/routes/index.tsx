@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-const BASE_URL = "https://mesa-creativa.netlify.app";
+const BASE_URL = "https://demo-servicios-web-y-apps.mesacreativa3.workers.dev";
 const TITLE = "Mesa Creativa — Páginas web para negocios en Caracas";
 const DESC =
   "Páginas web profesionales para negocios en Caracas: catálogo, menú y WhatsApp directo. Planes desde $120.";
