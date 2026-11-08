@@ -4,8 +4,7 @@ const BASE_URL = "https://mesa-creativa.netlify.app";
 const TITLE = "Mesa Creativa — Páginas web para negocios en Caracas";
 const DESC =
   "Páginas web profesionales para negocios en Caracas: catálogo, menú y WhatsApp directo. Planes desde $120.";
-const OG_IMAGE = `${BASE_URL}/media/og-image.jpg`;
-
+const OG_IMAGE = `${BASE_URL}/media/caracas-og.jpg`;
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
