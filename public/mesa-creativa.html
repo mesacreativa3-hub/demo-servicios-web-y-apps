@@ -572,6 +572,33 @@ footer{padding:56px 0 120px;border-top:1px solid var(--line)}
   </div>
 </section>
 
+<!-- ============ BRIEF CON IA ============ -->
+<section class="about" id="brief">
+  <div class="wrap">
+    <p class="eyebrow rv">Brief inteligente</p>
+    <h2 class="rv">Cuéntanos de tu negocio y armamos tu brief al instante</h2>
+    <p class="lead rv" style="margin-top:26px">Describe qué haces y cómo te gustaría verte. Te preparamos una propuesta de página web con secciones, estilo y plan sugerido, lista para enviarnos por WhatsApp y pedir tu cotización.</p>
+    <form class="form-grid rv" id="brief-form" novalidate>
+      <div class="field form-full"><label for="b-negocio">Tu negocio</label>
+        <input id="b-negocio" type="text" maxlength="120" placeholder="Ej.: Panadería La Candelaria, consultorio odontológico…" required /></div>
+      <div class="field form-full"><label for="b-servicios">¿Qué vendes u ofreces?</label>
+        <textarea id="b-servicios" rows="4" maxlength="1200" placeholder="Productos, servicios, a quién le vendes, zona de Caracas…" style="resize:vertical;font:inherit" required></textarea></div>
+      <div class="field form-full"><label for="b-estilo">Estilo que te gusta</label>
+        <select id="b-estilo"><option>Minimalista y elegante</option><option>Moderno y tecnológico</option><option>Clásico y formal</option><option>Cálido y artesanal</option><option>Colorido y juvenil</option></select></div>
+      <div class="field form-full" style="margin-top:10px"><button class="btn btn-primary" type="submit" id="b-btn">Generar mi brief</button></div>
+      <p class="form-msg form-full" id="b-error"></p>
+    </form>
+    <div id="b-result" style="display:none;margin-top:32px" class="card">
+      <h3>Tu brief</h3>
+      <pre id="b-text" style="white-space:pre-wrap;font:inherit;line-height:1.6;margin:14px 0 22px"></pre>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn btn-primary" id="b-wa" href="#" target="_blank" rel="noopener">Enviar brief por WhatsApp</a>
+        <button class="btn btn-ghost" type="button" id="b-copy">Copiar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ E. PAQUETES Y PRECIOS ============ -->
 <section class="about" id="paquetes">
   <div class="wrap">
@@ -752,5 +779,24 @@ if (heroMedia && !matchMedia("(prefers-reduced-motion: reduce)").matches){
 }
 </script>
 <script>(function(){var b=document.getElementById("mbar"),h=document.getElementById("top");if(!b||!h)return;if("IntersectionObserver"in window){new IntersectionObserver(function(e){b.classList.toggle("show",!e[0].isIntersecting)}).observe(h)}else b.classList.add("show")})();</script>
+<script>
+(function(){var f=document.getElementById("brief-form");if(!f)return;
+var btn=document.getElementById("b-btn"),err=document.getElementById("b-error"),res=document.getElementById("b-result"),out=document.getElementById("b-text");
+f.addEventListener("submit",function(e){e.preventDefault();
+var d={negocio:document.getElementById("b-negocio").value,servicios:document.getElementById("b-servicios").value,estilo:document.getElementById("b-estilo").value};
+err.classList.remove("show");
+if(d.negocio.trim().length<2||d.servicios.trim().length<5){err.textContent="Cuéntanos el nombre de tu negocio y qué ofreces.";err.classList.add("show");return;}
+btn.disabled=true;btn.textContent="Generando…";
+fetch("/api/public/generate-brief",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(d)})
+.then(function(r){return r.json();}).then(function(j){
+if(!j.brief)throw new Error(j.error||"Error");
+out.textContent=j.brief;res.style.display="block";
+document.getElementById("b-wa").href="https://wa.me/"+WA_PHONE+"?text="+encodeURIComponent("¡Hola! Quiero cotizar mi página web. Este es mi brief:\n\n"+j.brief);
+res.scrollIntoView({behavior:"smooth",block:"start"});
+}).catch(function(x){err.textContent=x.message||"No pudimos generar el brief.";err.classList.add("show");})
+.finally(function(){btn.disabled=false;btn.textContent="Generar mi brief";});});
+document.getElementById("b-copy").addEventListener("click",function(){navigator.clipboard&&navigator.clipboard.writeText(out.textContent);this.textContent="¡Copiado!";});
+})();
+</script>
 </body>
 </html>

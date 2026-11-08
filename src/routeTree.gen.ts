@@ -10,33 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiPublicGenerateBriefRouteImport } from './routes/api/public/generate-brief'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicGenerateBriefRoute = ApiPublicGenerateBriefRouteImport.update({
+  id: '/api/public/generate-brief',
+  path: '/api/public/generate-brief',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/public/generate-brief': typeof ApiPublicGenerateBriefRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/public/generate-brief': typeof ApiPublicGenerateBriefRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/public/generate-brief': typeof ApiPublicGenerateBriefRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/api/public/generate-brief'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/api/public/generate-brief'
+  id: '__root__' | '/' | '/api/public/generate-brief'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiPublicGenerateBriefRoute: typeof ApiPublicGenerateBriefRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +58,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/generate-brief': {
+      id: '/api/public/generate-brief'
+      path: '/api/public/generate-brief'
+      fullPath: '/api/public/generate-brief'
+      preLoaderRoute: typeof ApiPublicGenerateBriefRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiPublicGenerateBriefRoute: ApiPublicGenerateBriefRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
