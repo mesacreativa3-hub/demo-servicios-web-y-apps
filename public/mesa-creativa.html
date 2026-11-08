@@ -683,8 +683,19 @@ footer{padding:56px 0 120px;border-top:1px solid var(--line)}
 <script>
 /* ==== WhatsApp: número de contacto ==== */
 var WA_PHONE = "34604343158";
-var WA_TEXT  = "Hola, requiero más información sobre cómo crear la página web de mi negocio.";
-var WA_URL   = "https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent(WA_TEXT);
+var WA_ZONA = new URLSearchParams(window.location.search).get("zona");
+var WA_TRAZA = WA_ZONA === "oeste"
+  ? "\n\nZona de contacto: Caracas Oeste"
+  : WA_ZONA === "este"
+    ? "\n\nZona de contacto: Caracas Este"
+    : "";
+
+var WA_TEXT =
+  "Hola, requiero más información sobre cómo crear la página web de mi negocio." +
+  WA_TRAZA;
+
+var WA_URL =
+  "https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent(WA_TEXT);
 document.querySelectorAll("[data-wa]").forEach(function(a){
   a.href = WA_URL; a.target = "_blank"; a.rel = "noopener";
 });
