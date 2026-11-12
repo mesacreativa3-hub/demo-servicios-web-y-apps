@@ -207,6 +207,28 @@ footer{padding:56px 0 120px;border-top:1px solid var(--line)}
 /* ===== Carta / Menú digital ===== */
 .menu{max-width:840px;margin:48px auto 0}
 .menu-cat{margin-bottom:46px}
+.pf{margin-top:90px;text-align:center}
+.pf .lead{margin:22px auto 0;max-width:760px}
+.pf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:34px;margin-top:50px}
+.pf-card{background:none;border:0;padding:0;cursor:pointer;color:inherit;font:inherit;text-align:center;transition:transform .3s}
+.pf-card:hover{transform:translateY(-6px)}
+.phone{width:240px;height:480px;margin:0 auto;border-radius:34px;border:9px solid #1d1b18;background:#fff;overflow:hidden;box-shadow:0 24px 50px rgba(0,0,0,.5);position:relative}
+.phone img{width:100%;display:block}
+.phone .scr{height:100%;overflow:hidden}
+.pf-tag{display:inline-block;margin-top:22px;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.pf-name{font-family:var(--serif);font-size:1.25rem;margin:8px 0 6px;color:var(--cream)}
+.pf-txt{color:var(--cream-dim);font-size:.95rem;max-width:280px;margin:0 auto 14px}
+.pf-cta{font-size:.85rem;font-weight:700;color:var(--gold);border-bottom:1px solid var(--gold)}
+.fx{font-family:var(--sans);color:#222;text-align:left;font-size:11px}
+.fx-top{background:#c0392b;color:#fff;padding:14px 12px 12px}
+.fx-top b{display:block;font-size:14px}
+.fx-search{margin:8px 0 0;background:#fff;color:#888;border-radius:6px;padding:6px 8px}
+.fx-item{display:flex;gap:8px;padding:9px 10px;border-bottom:1px solid #eee;align-items:center}
+.fx-ico{width:38px;height:38px;border-radius:8px;background:#f1ebe2;display:grid;place-items:center;font-size:18px;flex:none}
+.fx-item p{margin:0}.fx-item .n{font-weight:700}.fx-item .d{color:#777;font-size:10px}
+.fx-item .pr{margin-left:auto;font-weight:800;color:#c0392b;text-align:right}
+.fx-item .pr small{display:block;background:#25d366;color:#fff;border-radius:4px;padding:2px 5px;font-size:9px;margin-top:3px}
+
 .menu-cat:last-child{margin-bottom:0}
 .menu-cat h3{font-size:1.35rem;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:4px}
 .dish{display:flex;gap:20px;align-items:baseline;padding:15px 0;border-bottom:1px solid var(--line)}
@@ -436,31 +458,38 @@ footer{padding:56px 0 120px;border-top:1px solid var(--line)}
         </div>
       </div>
 
-      <div class="menu-cat">
-        <h3>Postres</h3>
-        <div class="dish star">
-          <div class="dish-photo"><img src="/media/Tarta_de_queso_con_frutos_rojos.jpg" alt="Quesillo con frutos rojos" loading="lazy" decoding="async" /></div>
-          <div class="dish-body">
-            <span class="star-tag">Recomendado del chef</span>
-            <p class="dish-name">Quesillo con frutos rojos</p>
-            <p class="dish-desc">Cremosa y horneada al momento.</p>
-            <ul class="allergens" aria-label="Alérgenos"><li><svg viewBox="0 0 24 24"><path d="M9 3h6M9.5 3v3L7 10v11h10V10l-2.5-4V3M7 13h10"/></svg>Lácteos</li><li><svg viewBox="0 0 24 24"><ellipse cx="12" cy="13" rx="6" ry="8"/></svg>Huevo</li><li><svg viewBox="0 0 24 24"><path d="M12 21V8M12 8c-2-1-3-3-3-5 2 1 3 3 3 5zm0 0c2-1 3-3 3-5-2 1-3 3-3 5zM12 13c-2-1-3.5-2.5-3.5-4.5 2 .8 3.5 2.5 3.5 4.5zm0 0c2-1 3.5-2.5 3.5-4.5-2 .8-3.5 2.5-3.5 4.5zM12 18c-2-1-3.5-2.5-3.5-4.5 2 .8 3.5 2.5 3.5 4.5zm0 0c2-1 3.5-2.5 3.5-4.5-2 .8-3.5 2.5-3.5 4.5z"/></svg>Gluten</li></ul>
-          </div>
-          <span class="price">$8</span>
-        </div>
-        <div class="dish star">
-          <div class="dish-photo"><img src="/media/Torrija_caramelizada.jpg" alt="Torreja caramelizada con helado de vainilla" loading="lazy" decoding="async" /></div>
-          <div class="dish-body">
-            <p class="dish-name">Torreja caramelizada con helado de vainilla</p>
-            <p class="dish-desc">Esponjosa, con caramelo crujiente.</p>
-            <ul class="allergens" aria-label="Alérgenos"><li><svg viewBox="0 0 24 24"><path d="M12 21V8M12 8c-2-1-3-3-3-5 2 1 3 3 3 5zm0 0c2-1 3-3 3-5-2 1-3 3-3 5zM12 13c-2-1-3.5-2.5-3.5-4.5 2 .8 3.5 2.5 3.5 4.5zm0 0c2-1 3.5-2.5 3.5-4.5-2 .8-3.5 2.5-3.5 4.5zM12 18c-2-1-3.5-2.5-3.5-4.5 2 .8 3.5 2.5 3.5 4.5zm0 0c2-1 3.5-2.5 3.5-4.5-2 .8-3.5 2.5-3.5 4.5z"/></svg>Gluten</li><li><svg viewBox="0 0 24 24"><path d="M9 3h6M9.5 3v3L7 10v11h10V10l-2.5-4V3M7 13h10"/></svg>Lácteos</li><li><svg viewBox="0 0 24 24"><ellipse cx="12" cy="13" rx="6" ry="8"/></svg>Huevo</li></ul>
-          </div>
-          <span class="price">$7</span>
-        </div>
-      </div>
     </div>
 
     <p class="note rv" style="margin-top:34px">Carta de ejemplo: sustituye estos platos y precios por los de tu negocio al crear tu landing page.</p>
+    <div class="pf" id="portfolio-web">
+      <p class="eyebrow rv">Proyectos reales · Caracas</p>
+      <h2 class="rv">Páginas web hechas para vender, sea cual sea tu negocio</h2>
+      <p class="lead rv">No importa si vendes repuestos, ropa, atiendes en un consultorio o prestas servicios profesionales: estructuramos tu web para que tus clientes en Caracas y desde cualquier lugar vean tu catálogo, entiendan lo que ofreces y te escriban directamente al WhatsApp listos para comprar.</p>
+      <div class="pf-grid">
+        <button type="button" class="pf-card rv" data-pf="un catálogo para comercio (Ferretería)">
+          <div class="phone"><div class="scr fx"><div class="fx-top"><b>Ferretería La Gran Caracas</b>Catálogo · precios en $<div class="fx-search">Buscar tornillo, pintura, bombillo…</div></div><div class="fx-item"><span class="fx-ico">🔨</span><div><p class="n">Taladro percutor 650W</p><p class="d">Incluye maletín y brocas</p></div><p class="pr">$45<small>Pedir</small></p></div><div class="fx-item"><span class="fx-ico">🔧</span><div><p class="n">Juego de llaves combinadas</p><p class="d">12 piezas, acero cromo-vanadio</p></div><p class="pr">$22<small>Pedir</small></p></div><div class="fx-item"><span class="fx-ico">🎨</span><div><p class="n">Pintura caucho mate blanco</p><p class="d">Cuñete 4 galones, alto rendimiento</p></div><p class="pr">$38<small>Pedir</small></p></div><div class="fx-item"><span class="fx-ico">🔒</span><div><p class="n">Cerradura de pomo</p><p class="d">Acero inoxidable, 3 llaves</p></div><p class="pr">$14<small>Pedir</small></p></div><div class="fx-item"><span class="fx-ico">💡</span><div><p class="n">Bombillo LED 12W</p><p class="d">Luz blanca, pack de 4</p></div><p class="pr">$9<small>Pedir</small></p></div></div></div>
+          <span class="pf-tag">Comercios y tiendas</span>
+          <p class="pf-name">Ferretería La Gran Caracas</p>
+          <p class="pf-txt">Catálogo digital con precios en dólares y pedidos al WhatsApp sin comisiones.</p>
+          <span class="pf-cta">Quiero una web así</span>
+        </button>
+        <button type="button" class="pf-card rv" data-pf="veterinaria / salud">
+          <div class="phone"><div class="scr"><img src="/media/portfolio-vet.jpg" alt="Diseño de web para veterinaria" loading="lazy" /></div></div>
+          <span class="pf-tag">Clínicas, salud y estética</span>
+          <p class="pf-name">Clínica veterinaria</p>
+          <p class="pf-txt">Servicios claros, testimonios y botón directo para agendar consultas.</p>
+          <span class="pf-cta">Quiero una web así</span>
+        </button>
+        <button type="button" class="pf-card rv" data-pf="servicios profesionales">
+          <div class="phone"><div class="scr"><img src="/media/portfolio-notary.jpg" alt="Diseño de web para servicios profesionales" loading="lazy" /></div></div>
+          <span class="pf-tag">Servicios y asesoría</span>
+          <p class="pf-name">Servicios notariales</p>
+          <p class="pf-txt">Presencia profesional que genera confianza para cotizar y cerrar clientes.</p>
+          <span class="pf-cta">Quiero una web así</span>
+        </button>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -687,6 +716,8 @@ footer{padding:56px 0 120px;border-top:1px solid var(--line)}
 <script>
 /* ==== WhatsApp: número de contacto ==== */
 var WA_PHONE = "34604343158";
+
+document.querySelectorAll(".pf-card").forEach(function(c){c.addEventListener("click",function(){window.open("https://wa.me/"+WA_PHONE+"?text="+encodeURIComponent("Hola, vi el diseño de la web de "+c.dataset.pf+" en su portfolio y quiero cotizar una similar para mi negocio."),"_blank","noopener");});});
 var WA_ZONA = new URLSearchParams(window.location.search).get("zona");
 var WA_TRAZA = WA_ZONA === "oeste"
   ? "\n\nZona de contacto: Caracas Oeste"
