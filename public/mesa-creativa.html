@@ -292,6 +292,35 @@ footer{padding:56px 0 120px;border-top:1px solid var(--line)}
 @media(min-width:900px){.mbar{display:none}}
 @media(max-width:899px){body{padding-bottom:84px}.wa-float{display:none}}
 @media(prefers-reduced-motion:reduce){.mbar{transition:none}}
+
+#brief .bp-grid{display:grid;gap:40px;margin-top:10px}
+@media(min-width:900px){#brief .bp-grid{grid-template-columns:minmax(0,1fr) 260px;align-items:start}}
+#brief .bp-side{text-align:center}
+#brief .bp-note{font-size:.75rem;color:var(--cream-dim);margin-top:12px}
+.bp{height:100%;overflow:auto;scrollbar-width:none;text-align:left;font-family:var(--sans);font-size:11px;--r:4px;background:var(--bg);color:var(--tx);transition:background-color .25s,color .25s}
+.bp *{transition:background-color .25s,color .25s,border-color .25s,border-radius .25s}
+.bp-empty{height:100%;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;color:#777;font-size:13px;background:#f3f3f3}
+.bp-top{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid var(--ln)}
+.bp-name{font-weight:700;font-size:13px}
+.bp-menu{width:16px;height:10px;border-top:2px solid var(--tx);border-bottom:2px solid var(--tx);position:relative}
+.bp-menu:after{content:"";position:absolute;left:0;right:0;top:2px;border-top:2px solid var(--tx)}
+.bp-hero{padding:var(--pad,24px) 14px}
+.bp-hero h4{font-size:18px;line-height:1.2;margin:0 0 14px;font-family:var(--hf,inherit);font-weight:var(--hw,700)}
+.bp-btn{display:inline-block;padding:8px 14px;background:var(--ac);color:var(--on,#fff);font-weight:700;border-radius:var(--r)}
+.bp-cards{padding:0 14px 16px;display:grid;gap:10px}
+.bp-card{padding:10px 12px;border:1px solid var(--ln);border-radius:var(--r);background:var(--cd)}
+.bp-card b{display:block;font-family:var(--hf,inherit);font-size:12px;margin-bottom:3px;color:var(--act,var(--tx))}
+.bp-card span{opacity:.8}
+.bp-foot{padding:14px;background:var(--ac);color:var(--on,#fff);text-align:center;font-weight:700}
+.bp.t-min{--bg:#fafaf7;--tx:#1b1b1b;--ac:#b08d57;--ln:#e6e2d8;--cd:transparent;--hf:var(--serif);--hw:400;--pad:40px;--r:0}
+.bp.t-tec{--bg:#0b1020;--tx:#e8ecff;--ac:#4cc9f0;--on:#0b1020;--ln:#222a45;--cd:#121a33;--r:12px;--act:#4cc9f0}
+.bp.t-cla{--bg:#f4efe6;--tx:#1f2a44;--ac:#8b1e2d;--ln:#1f2a44;--cd:transparent;--hf:var(--serif);--r:0}
+.bp.t-cla .bp-card{border-width:0 0 1px}
+.bp.t-cal{--bg:#fbf1e3;--tx:#4a2f1b;--ac:#c0652d;--ln:#ecd6bb;--cd:#fff7ec;--r:16px}
+.bp.t-col{--bg:#fff;--tx:#222;--ac:linear-gradient(90deg,#ff4d8d,#ffb703);--ln:#ffd1e1;--cd:#fff6fa;--hw:900;--r:22px;--act:#ff4d8d}
+.bp.t-col .bp-btn,.bp.t-col .bp-foot{background-image:var(--ac);background-color:#ff4d8d}
+.bp.t-col .bp-name{font-weight:900}
+@media(prefers-reduced-motion:reduce){.bp,.bp *{transition:none!important}}
 </style>
 </head>
 <body>
@@ -612,6 +641,7 @@ footer{padding:56px 0 120px;border-top:1px solid var(--line)}
     <p class="eyebrow rv">Brief inteligente</p>
     <h2 class="rv">Cuéntanos sobre tu negocio y creamos tu propuesta web al instante.</h2>
     <p class="lead rv" style="margin-top:26px">Describe qué haces, qué necesitas y cómo te gustaría que fuera tu página web. Prepararemos una propuesta personalizada con las secciones, el estilo visual y un plan recomendado. Después, podrás enviárnosla por WhatsApp y solicitar tu cotización.</p>
+    <div class="bp-grid">
     <form class="form-grid rv" id="brief-form" novalidate>
       <div class="field form-full"><label for="b-negocio">Tu negocio</label>
         <input id="b-negocio" type="text" maxlength="120" placeholder="Ej.: Panadería La Candelaria, consultorio odontológico…" required /></div>
@@ -622,6 +652,8 @@ footer{padding:56px 0 120px;border-top:1px solid var(--line)}
       <div class="field form-full" style="margin-top:10px"><button class="btn btn-primary" type="submit" id="b-btn">Generar mi brief</button></div>
       <p class="form-msg form-full" id="b-error"></p>
     </form>
+      <div class="bp-side rv"><div class="phone"><div class="scr bp t-min" id="bp-scr"><div class="bp-empty">Describe tu negocio para ver tu propuesta</div></div></div><p class="bp-note">Vista previa orientativa</p></div>
+    </div>
     <div id="b-result" style="display:none;margin-top:32px" class="card">
       <h3>Tu brief</h3>
       <pre id="b-text" style="white-space:pre-wrap;font:inherit;line-height:1.6;margin:14px 0 22px"></pre>
@@ -863,6 +895,22 @@ sel.value=ord[0];
 }).catch(function(){restore();sel.value=orig[0];});}
 function sched(){clearTimeout(t);t=setTimeout(go,800);}
 n.addEventListener("input",sched);sv.addEventListener("input",sched);
+})();
+</script>
+<script>
+(function(){var scr=document.getElementById("bp-scr"),sel=document.getElementById("b-estilo");if(!scr||!sel)return;
+var T={"Minimalista y elegante":"t-min","Moderno y tecnológico":"t-tec","Clásico y formal":"t-cla","Cálido y artesanal":"t-cal","Colorido y juvenil":"t-col"};
+function theme(){var c=T[sel.value]||"t-min";scr.className="scr bp "+c;}
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
+function render(d){if(!d||!d.nombre)return;while(scr.firstChild)scr.removeChild(scr.firstChild);
+var top=el("div","bp-top");top.appendChild(el("span","bp-name",d.nombre));top.appendChild(el("span","bp-menu"));scr.appendChild(top);
+var h=el("div","bp-hero");h.appendChild(el("h4",null,d.eslogan));h.appendChild(el("span","bp-btn",d.cta));scr.appendChild(h);
+var cs=el("div","bp-cards");(d.servicios||[]).slice(0,3).forEach(function(s){var c=el("div","bp-card");c.appendChild(el("b",null,s.titulo));c.appendChild(el("span",null,s.detalle));cs.appendChild(c);});scr.appendChild(cs);
+scr.appendChild(el("div","bp-foot",d.nombre));theme();}
+var cur=window.briefPreview;
+try{Object.defineProperty(window,"briefPreview",{configurable:true,get:function(){return cur;},set:function(v){cur=v;render(v);}});}catch(e){}
+if(cur)render(cur);
+sel.addEventListener("change",theme);theme();
 })();
 </script>
 </body>
