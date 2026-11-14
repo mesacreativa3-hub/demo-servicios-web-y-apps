@@ -294,9 +294,13 @@ footer{padding:56px 0 120px;border-top:1px solid var(--line)}
 @media(prefers-reduced-motion:reduce){.mbar{transition:none}}
 
 #brief .bp-grid{display:grid;gap:40px;margin-top:10px}
-@media(min-width:900px){#brief .bp-grid{grid-template-columns:minmax(0,1fr) 260px;align-items:start}}
+@media(min-width:900px){#brief .bp-grid{grid-template-columns:minmax(0,1fr) 380px;align-items:start}}
 #brief .bp-side{text-align:center}
 #brief .bp-note{font-size:.75rem;color:var(--cream-dim);margin-top:12px}
+#brief .phone-photo{position:relative;width:min(100%,380px);aspect-ratio:565/1003;margin:0 auto}
+#brief .pp-screen{position:absolute;left:29.91%;top:1.5%;width:58.76%;height:67.2%;border-radius:12% 12% 0 0/5.9% 5.9% 0 0;overflow:hidden;background:#0b0b0b}
+#brief .phone-photo>img{position:absolute;inset:0;width:100%;height:100%;max-width:none;z-index:2;pointer-events:none;-webkit-mask-image:linear-gradient(to bottom,#000 78%,transparent);mask-image:linear-gradient(to bottom,#000 78%,transparent)}
+#brief .pp-screen .bp-top{padding-top:26px}
 .bp{height:100%;overflow:auto;scrollbar-width:none;text-align:left;font-family:var(--sans);font-size:11px;--r:4px;background:var(--bg);color:var(--tx);transition:background-color .25s,color .25s}
 .bp *{transition:background-color .25s,color .25s,border-color .25s,border-radius .25s}
 .bp-empty{height:100%;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;color:#777;font-size:13px;background:#f3f3f3}
@@ -652,7 +656,7 @@ footer{padding:56px 0 120px;border-top:1px solid var(--line)}
       <div class="field form-full" style="margin-top:10px"><button class="btn btn-primary" type="submit" id="b-btn">Generar mi brief</button></div>
       <p class="form-msg form-full" id="b-error"></p>
     </form>
-      <div class="bp-side rv"><div class="phone"><div class="scr bp t-min" id="bp-scr"><div class="bp-empty">Describe tu negocio para ver tu propuesta</div></div></div><p class="bp-note">Vista previa orientativa</p></div>
+      <div class="bp-side rv"><div class="phone-photo"><div class="pp-screen"><div class="scr bp t-min" id="bp-scr"><div class="bp-empty">Describe tu negocio para ver tu propuesta</div></div></div><img src="/media/movil-marco.webp" alt="" loading="lazy" /></div><p class="bp-note">Vista previa orientativa</p></div>
     </div>
     <div id="b-result" style="display:none;margin-top:32px" class="card">
       <h3>Tu brief</h3>
@@ -890,8 +894,8 @@ fetch("/api/public/generate-preview",{method:"POST",headers:{"Content-Type":"app
 var ord=j&&j.ordenEstilos;if(!Array.isArray(ord)||ord.length!==5||ord.some(function(v){return orig.indexOf(v)<0;}))throw new Error("x");
 window.briefPreview=j;restore();
 var opts={};Array.prototype.forEach.call(sel.options,function(o){opts[o.value]=o;});
-ord.forEach(function(v,i){var o=opts[v];o.textContent=v+(i===0?" ⭐ Recomendado":"");sel.appendChild(o);});
-sel.value=ord[0];
+ord.forEach(function(v,i){var o=opts[v];o.value=v;o.textContent=v+(i===0?" ⭐ Recomendado":"");sel.appendChild(o);});
+sel.value=ord[0];sel.dispatchEvent(new Event("change"));
 }).catch(function(){restore();sel.value=orig[0];});}
 function sched(){clearTimeout(t);t=setTimeout(go,800);}
 n.addEventListener("input",sched);sv.addEventListener("input",sched);
