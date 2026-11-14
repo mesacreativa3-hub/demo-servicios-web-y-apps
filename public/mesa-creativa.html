@@ -845,5 +845,25 @@ res.scrollIntoView({behavior:"smooth",block:"start"});
 document.getElementById("b-copy").addEventListener("click",function(){navigator.clipboard&&navigator.clipboard.writeText(out.textContent);this.textContent="¡Copiado!";});
 })();
 </script>
+<script>
+(function(){var n=document.getElementById("b-negocio"),sv=document.getElementById("b-servicios"),sel=document.getElementById("b-estilo");if(!n||!sv||!sel)return;
+var orig=Array.prototype.map.call(sel.options,function(o){return o.value;});
+var t=null,done=false,loading=null;
+function restore(){sel.disabled=false;if(loading&&loading.parentNode)loading.parentNode.removeChild(loading);loading=null;}
+function go(){if(done)return;var a=n.value.trim(),b=sv.value.trim();if(a.length<2||b.length<5)return;done=true;
+loading=document.createElement("option");loading.textContent="Analizando tu negocio…";loading.value="";sel.insertBefore(loading,sel.firstChild);sel.value="";sel.disabled=true;
+var prev=orig.indexOf(sel.value)>=0?sel.value:orig[0];
+fetch("/api/public/generate-preview",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({negocio:a,servicios:b})})
+.then(function(r){if(!r.ok)throw new Error("x");return r.json();}).then(function(j){
+var ord=j&&j.ordenEstilos;if(!Array.isArray(ord)||ord.length!==5||ord.some(function(v){return orig.indexOf(v)<0;}))throw new Error("x");
+window.briefPreview=j;restore();
+var opts={};Array.prototype.forEach.call(sel.options,function(o){opts[o.value]=o;});
+ord.forEach(function(v,i){var o=opts[v];o.textContent=v+(i===0?" ⭐ Recomendado":"");sel.appendChild(o);});
+sel.value=ord[0];
+}).catch(function(){restore();sel.value=orig[0];});}
+function sched(){clearTimeout(t);t=setTimeout(go,800);}
+n.addEventListener("input",sched);sv.addEventListener("input",sched);
+})();
+</script>
 </body>
 </html>
