@@ -6,12 +6,12 @@
 <title>Mesa Creativa — Páginas web para negocios en Caracas</title>
 <meta name="description" content="Páginas web profesionales para negocios en Caracas: catálogo, menú y WhatsApp directo. Planes desde $120." />
 <meta name="author" content="Mesa Creativa" />
-<link rel="canonical" href="https://mesa-creativa.netlify.app/" />
+<link rel="canonical" href="https://demo-servicios-web-y-apps.mesacreativa3.workers.dev/" />
 
 <!-- ===== Open Graph (vista previa en WhatsApp) ===== -->
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Mesa Creativa" />
-<meta property="og:url" content="https://mesa-creativa.netlify.app/" />
+<meta property="og:url" content="https://demo-servicios-web-y-apps.mesacreativa3.workers.dev/" />
 <meta property="og:title" content="Mesa Creativa — Páginas web para negocios en Caracas" />
 <meta property="og:description" content="Páginas web profesionales para negocios en Caracas: catálogo, menú y WhatsApp directo. Planes desde $120." />
 <meta property="og:image" content="https://demo-servicios-web-y-apps.mesacreativa3.workers.dev/media/caracas-og.jpg" />
@@ -28,7 +28,8 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Manrope:wght@300;400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
 
 <style>
 :root{
@@ -213,7 +214,7 @@ footer{padding:56px 0 120px;border-top:1px solid var(--line)}
 .pf-card{background:none;border:0;padding:0;cursor:pointer;color:inherit;font:inherit;text-align:center;transition:transform .3s}
 .pf-card:hover{transform:translateY(-6px)}
 .phone{width:240px;height:480px;margin:0 auto;border-radius:34px;border:9px solid #1d1b18;background:#fff;overflow:hidden;box-shadow:0 24px 50px rgba(0,0,0,.5);position:relative}
-.phone img{width:100%;display:block}
+.phone img{width:100%;height:auto;display:block}
 .phone img.fx-ico{width:38px;height:38px;max-width:38px;object-fit:cover;flex:none}
 .phone .scr{height:100%;overflow:hidden}
 .pf-tag{display:inline-block;margin-top:22px;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
@@ -294,74 +295,37 @@ footer{padding:56px 0 120px;border-top:1px solid var(--line)}
 @media(prefers-reduced-motion:reduce){.mbar{transition:none}}
 
 #brief .bp-grid{display:grid;gap:40px;margin-top:10px}
-@media(min-width:900px){#brief .bp-grid{grid-template-columns:minmax(0,1fr) 380px;align-items:center}}
+@media(min-width:900px){#brief .bp-grid{grid-template-columns:minmax(0,1fr) 380px;align-items:start}}
 #brief .bp-side{text-align:center}
 #brief .bp-note{font-size:.75rem;color:var(--cream-dim);margin-top:12px}
 #brief .phone-photo{position:relative;width:min(100%,380px);aspect-ratio:565/1003;margin:0 auto}
 #brief .pp-screen{position:absolute;left:29.91%;top:1.5%;width:58.76%;height:67.2%;border-radius:12% 12% 0 0/5.9% 5.9% 0 0;overflow:hidden;background:#0b0b0b}
 #brief .phone-photo>img{position:absolute;inset:0;width:100%;height:100%;max-width:none;z-index:2;pointer-events:none;-webkit-mask-image:linear-gradient(to bottom,#000 78%,transparent);mask-image:linear-gradient(to bottom,#000 78%,transparent)}
-#bp-scr{height:100%;overflow:hidden;text-align:left;font-family:var(--sans);font-size:11px;line-height:1.35;display:flex;flex-direction:column;background:#f3f3f3;color:#222}
-#bp-scr .bp-empty{flex:1;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;color:#777;font-size:13px}
-#bp-scr .b{animation:bpIn .45s ease-out both}
-#bp-scr .b-top{animation-name:bpTop}
-#bp-scr .b-btn{animation-name:bpPop}
-@keyframes bpIn{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
-@keyframes bpTop{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
-@keyframes bpPop{0%{opacity:0;transform:scale(.7)}70%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:none}}
-@media(prefers-reduced-motion:reduce){#bp-scr .b{animation:none!important}}
-#bp-scr .b-top{display:flex;justify-content:space-between;align-items:center;padding:28px 14px 10px;font-weight:700;font-size:12.5px}
-#bp-scr .b-top i{font-style:normal;font-size:14px}
-#bp-scr .b-h{font-size:18px;line-height:1.15;margin:0;padding:0 14px}
-#bp-scr .b-sub{font-size:11.5px;padding:6px 14px 0;opacity:.85}
-#bp-scr .b-btnw{padding:12px 14px 4px}
-#bp-scr .b-btn{display:inline-block;font-size:12px;font-weight:700;padding:8px 14px}
-#bp-scr .b-items{padding:12px 14px 0;display:grid;gap:7px}
-#bp-scr .b-it b{display:block;font-size:11.5px}
-#bp-scr .b-it span{opacity:.75;font-size:10.5px}
-#bp-scr .b-foot{margin-top:auto;padding:12px 14px;font-size:10.5px;text-align:center}
-#bp-scr.m-min{background:#fbfbf9;color:#1c2421}
-#bp-scr.m-min .b-top{border-bottom:1px solid #e6ebe8}
-#bp-scr.m-min .b-h{font-family:var(--serif);font-weight:400;font-size:19px;padding-top:26px}
-#bp-scr.m-min .b-btn{border:1px solid #3f7d6b;color:#3f7d6b;border-radius:4px;background:transparent}
-#bp-scr.m-min .b-items{gap:0;padding-top:18px}
-#bp-scr.m-min .b-it{padding:9px 0;border-top:1px solid #e6ebe8}
-#bp-scr.m-min .b-it b{font-weight:400;font-family:var(--serif);font-size:12.5px}
-#bp-scr.m-min .b-foot{border-top:1px solid #e6ebe8;color:#3f7d6b}
-#bp-scr.m-tec{background:#0b1224;color:#e9eefc}
-#bp-scr.m-tec .b-top,#bp-scr.m-tec .b-h{font-weight:800}
-#bp-scr.m-tec .b-badge{display:inline-block;margin:14px 14px 8px;padding:4px 9px;border:1px solid #243153;background:#131c33;border-radius:14px;font-size:10px;font-weight:700}
-#bp-scr.m-tec .b-btn{background:linear-gradient(135deg,#22d3ee,#7c5cff);color:#0b1224;border-radius:14px;font-weight:800}
-#bp-scr.m-tec .b-items{grid-template-columns:1fr 1fr}
-#bp-scr.m-tec .b-it{background:#131c33;border:1px solid #243153;border-radius:14px;padding:14px 8px;text-align:center}
-#bp-scr.m-tec .b-it b{font-weight:700;font-size:11.5px}
-#bp-scr.m-tec .b-foot{color:#22d3ee;font-weight:700}
-#bp-scr.m-cla{background:#f4eee2;color:#1f1a17;text-align:center}
-#bp-scr.m-cla .b-top{font-family:var(--serif);text-transform:uppercase;letter-spacing:.08em;font-size:11px}
-#bp-scr.m-cla .b-main{margin:10px 12px 0;padding:12px 4px;border:3px double #b08d57}
-#bp-scr.m-cla .b-h{font-family:var(--serif);text-transform:uppercase;letter-spacing:.08em;font-size:17px;font-weight:500}
-#bp-scr.m-cla .b-btn{background:#7a1f2b;color:#f4eee2;border-radius:2px;font-family:var(--serif);letter-spacing:.08em;text-transform:uppercase;font-size:10.5px}
-#bp-scr.m-cla .b-items{gap:2px;text-align:center}
-#bp-scr.m-cla .b-it b{font-family:var(--serif);font-weight:500;font-size:12.5px}
-#bp-scr.m-cla .b-div{color:#b08d57;font-size:11px}
-#bp-scr.m-cla .b-foot{font-family:var(--serif);letter-spacing:.08em;text-transform:uppercase;font-size:9.5px;color:#7a1f2b}
-#bp-scr.m-cal{background:#fbf1e3;color:#4a2f1b}
-#bp-scr.m-cal .b-h{font-family:var(--serif);font-weight:600;padding-top:14px}
-#bp-scr.m-cal .b-h em{font-style:italic;color:#c0652d}
-#bp-scr.m-cal .b-btn{background:#c0652d;color:#fbf1e3;border-radius:999px}
-#bp-scr.m-cal .b-it{background:#fff8ee;border:1px solid #ecd9bd;border-radius:18px;padding:6px 12px}
-#bp-scr.m-cal .b-items{gap:5px}
-#bp-scr.m-cal .b-h{padding-top:6px}
-#bp-scr.m-cal .b-foot{font-family:var(--serif);font-style:italic;color:#c0652d}
-#bp-scr.m-col{background:#fff;color:#111;font-weight:800}
-#bp-scr.m-col .b-top{font-weight:800}
-#bp-scr.m-col .b-hero{margin:4px 12px 0;padding:14px 4px 12px;border:2px solid #111;border-radius:16px;box-shadow:3px 3px 0 #111;background:linear-gradient(135deg,#ff3d6e,#ffb703);color:#fff}
-#bp-scr.m-col .b-h{text-transform:uppercase;font-weight:800}
-#bp-scr.m-col .b-sub{font-weight:600;opacity:1}
-#bp-scr.m-col .b-btn{background:#ffd60a;color:#111;border:2px solid #111;border-radius:16px;box-shadow:3px 3px 0 #111;font-weight:800}
-#bp-scr.m-col .b-it{border:2px solid #111;border-radius:16px;box-shadow:3px 3px 0 #111;padding:8px 12px}
-#bp-scr.m-col .b-it b{font-weight:800;font-size:12px}
-#bp-scr.m-col .b-foot{margin:auto 12px 10px;background:#ffd60a;border:2px solid #111;border-radius:16px;font-weight:800;text-transform:uppercase;font-size:11px;padding:8px}
-@media (max-width:899px){.qr-cap{transform:translateX(1ch)}}
+#brief .pp-screen .bp-top{padding-top:26px}
+.bp{height:100%;overflow:auto;scrollbar-width:none;text-align:left;font-family:var(--sans);font-size:11px;--r:4px;background:var(--bg);color:var(--tx);transition:background-color .25s,color .25s}
+.bp *{transition:background-color .25s,color .25s,border-color .25s,border-radius .25s}
+.bp-empty{height:100%;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;color:#777;font-size:13px;background:#f3f3f3}
+.bp-top{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid var(--ln)}
+.bp-name{font-weight:700;font-size:13px}
+.bp-menu{width:16px;height:10px;border-top:2px solid var(--tx);border-bottom:2px solid var(--tx);position:relative}
+.bp-menu:after{content:"";position:absolute;left:0;right:0;top:2px;border-top:2px solid var(--tx)}
+.bp-hero{padding:var(--pad,24px) 14px}
+.bp-hero h4{font-size:18px;line-height:1.2;margin:0 0 14px;font-family:var(--hf,inherit);font-weight:var(--hw,700)}
+.bp-btn{display:inline-block;padding:8px 14px;background:var(--ac);color:var(--on,#fff);font-weight:700;border-radius:var(--r)}
+.bp-cards{padding:0 14px 16px;display:grid;gap:10px}
+.bp-card{padding:10px 12px;border:1px solid var(--ln);border-radius:var(--r);background:var(--cd)}
+.bp-card b{display:block;font-family:var(--hf,inherit);font-size:12px;margin-bottom:3px;color:var(--act,var(--tx))}
+.bp-card span{opacity:.8}
+.bp-foot{padding:14px;background:var(--ac);color:var(--on,#fff);text-align:center;font-weight:700}
+.bp.t-min{--bg:#fafaf7;--tx:#1b1b1b;--ac:#b08d57;--ln:#e6e2d8;--cd:transparent;--hf:var(--serif);--hw:400;--pad:40px;--r:0}
+.bp.t-tec{--bg:#0b1020;--tx:#e8ecff;--ac:#4cc9f0;--on:#0b1020;--ln:#222a45;--cd:#121a33;--r:12px;--act:#4cc9f0}
+.bp.t-cla{--bg:#f4efe6;--tx:#1f2a44;--ac:#8b1e2d;--ln:#1f2a44;--cd:transparent;--hf:var(--serif);--r:0}
+.bp.t-cla .bp-card{border-width:0 0 1px}
+.bp.t-cal{--bg:#fbf1e3;--tx:#4a2f1b;--ac:#c0652d;--ln:#ecd6bb;--cd:#fff7ec;--r:16px}
+.bp.t-col{--bg:#fff;--tx:#222;--ac:linear-gradient(90deg,#ff4d8d,#ffb703);--ln:#ffd1e1;--cd:#fff6fa;--hw:900;--r:22px;--act:#ff4d8d}
+.bp.t-col .bp-btn,.bp.t-col .bp-foot{background-image:var(--ac);background-color:#ff4d8d}
+.bp.t-col .bp-name{font-weight:900}
+@media(prefers-reduced-motion:reduce){.bp,.bp *{transition:none!important}}
 </style>
 </head>
 <body>
@@ -369,7 +333,7 @@ footer{padding:56px 0 120px;border-top:1px solid var(--line)}
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
   <div class="wrap nav-in">
-    <a href="#top"><img class="logo" src="/media/Logo_mesa_creativa_blanco.png" alt="Mesa Creativa" /></a>
+    <a href="#top"><img class="logo" src="/media/Logo_mesa_creativa_blanco.png" width="256" height="256" alt="Mesa Creativa" /></a>
     <nav class="nav-links" id="nav-links">
       <a href="#quienes-somos">Quiénes Somos</a>
       <a href="#paquetes">Paquetes</a>
@@ -388,7 +352,7 @@ footer{padding:56px 0 120px;border-top:1px solid var(--line)}
 <!-- ============ A. HERO ============ -->
 <section class="hero" id="top">
   <div class="hero-media">
-    <img src="/media/caracas-avila.jpg" alt="Caracas al atardecer con el cerro Ávila, el Hotel Humboldt en la cima y el teleférico" />
+    <img src="/media/caracas-avila.webp" width="1920" height="1088" fetchpriority="high" decoding="async" alt="Caracas al atardecer con el cerro Ávila, el Hotel Humboldt en la cima y el teleférico" />
   </div>
   <div class="wrap hero-in">
     <p class="eyebrow rv">Desarrollo web y presencia digital · Caracas, Venezuela</p>
@@ -419,8 +383,8 @@ footer{padding:56px 0 120px;border-top:1px solid var(--line)}
       </div>
     </div>
     <figure class="rv" style="margin:48px 0 0 calc(50% - 50vw);text-align:center;width:min(620px,92vw)">
-      <img src="/media/movil-qr.png" alt="Móvil mostrando la web junto a un código QR" loading="lazy" style="width:100%;height:auto;display:block;margin:0">
-      <figcaption class="lead qr-cap" style="position:relative;margin:-26% 0.8% 0 auto;width:fit-content;max-width:62%;text-align:center;font-size:1.05rem;line-height:1.5">Creamos un código QR personalizado<br>para que tus clientes accedan fácilmente<br>a la información de tu negocio.</figcaption>
+      <img src="/media/movil-qr.webp" alt="Móvil mostrando la web junto a un código QR" width="896" height="1200" loading="lazy" style="width:100%;height:auto;display:block;margin:0">
+      <figcaption class="lead" style="position:relative;margin:-26% 0.8% 0 auto;width:fit-content;max-width:62%;text-align:center;font-size:1.05rem;line-height:1.5">Creamos un código QR personalizado<br>para que tus clientes accedan fácilmente<br>a la información de tu negocio.</figcaption>
     </figure>
   </div>
 </section>
@@ -545,17 +509,17 @@ footer{padding:56px 0 120px;border-top:1px solid var(--line)}
           <span class="pf-cta">Quiero una web así</span>
         </button>
         <button type="button" class="pf-card rv" data-pf="veterinaria / salud">
-          <div class="phone"><div class="scr" style="background:#fff;font-family:Manrope,system-ui,sans-serif;color:#0b2a4a;text-align:left;display:flex;flex-direction:column"><div style="display:flex;align-items:center;gap:6px;padding:10px 12px;border-bottom:1px solid #e6edf5"><span style="width:22px;height:22px;border-radius:50%;background:#0b5fa5;color:#fff;display:grid;place-items:center;font-size:12px">🐾</span><b style="font-size:11px;line-height:1.1">Centro Veterinario Ávila<br><small style="font-weight:400;color:#5b7690;font-size:8px">Salud y cuidado para tu mascota</small></b></div><img src="/media/vet-avila.jpg" alt="Consulta veterinaria" loading="lazy" style="width:100%;height:120px;object-fit:cover"><div style="background:#0b3a66;color:#fff;padding:12px;flex:1"><p style="font-size:8px;letter-spacing:.1em;color:#7fd3ff;margin:0 0 6px">MÁS DE 15 AÑOS EN CARACAS</p><p style="font-size:15px;font-weight:800;line-height:1.15;margin:0 0 8px">Un chequeo a tiempo puede salvar la vida de tu mascota.</p><p style="font-size:9px;opacity:.85;margin:0 0 10px">Consultas, vacunación, laboratorio y emergencias.</p><span style="display:block;background:#1fb6e8;color:#fff;font-size:9px;font-weight:700;text-align:center;padding:7px;border-radius:5px;margin-bottom:6px">Agendar cita</span><span style="display:block;border:1px solid #ffffff55;font-size:9px;text-align:center;padding:7px;border-radius:5px">Escríbenos por WhatsApp</span></div></div></div>
+          <div class="phone"><div class="scr"><img src="/media/portfolio-vet.jpg" alt="Diseño de web para veterinaria" width="600" height="1200" loading="lazy" /></div></div>
           <span class="pf-tag">Clínicas, salud y estética</span>
-          <p class="pf-name">Centro Veterinario Ávila</p>
+          <p class="pf-name">Clínica veterinaria</p>
           <p class="pf-txt">Servicios claros, testimonios y botón directo para agendar consultas.</p>
           <span class="pf-cta">Quiero una web así</span>
         </button>
-        <button type="button" class="pf-card rv" data-pf="servicio técnico de celulares">
-          <div class="phone"><div class="scr fx"><div class="fx-top" style="background:linear-gradient(135deg,#0a1a3a,#1559d6)"><b>TecnoExpress Taller &amp; Accesorios</b>Servicio técnico express · iPhone y Android<div class="fx-search">Buscar pantalla, batería, cargador…</div></div><div class="fx-item"><img class="fx-ico" src="/media/tx-pantalla.jpg" alt="Cambio de pantalla" loading="lazy"><div><p class="n">Cambio de pantalla</p><p class="d">Instalación en 45 min, con garantía</p></div><p class="pr">$35<small>Cotizar</small></p></div><div class="fx-item"><img class="fx-ico" src="/media/tx-placa.jpg" alt="Reparación de placa" loading="lazy"><div><p class="n">Reparación de placa</p><p class="d">Microelectrónica especializada</p></div><p class="pr">$40<small>Cotizar</small></p></div><div class="fx-item"><img class="fx-ico" src="/media/tx-pantalla.jpg" alt="Cambio de batería" loading="lazy"><div><p class="n">Cambio de batería</p><p class="d">Original, listo el mismo día</p></div><p class="pr">$25<small>Cotizar</small></p></div><div class="fx-item"><img class="fx-ico" src="/media/tx-accesorios.jpg" alt="Cargador rápido 65W" loading="lazy"><div><p class="n">Cargador rápido 65W</p><p class="d">USB-C, incluye cable</p></div><p class="pr">$18<small>Cotizar</small></p></div><div class="fx-item"><img class="fx-ico" src="/media/tx-accesorios.jpg" alt="Forro y mica" loading="lazy"><div><p class="n">Forro y mica</p><p class="d">Hidrogel antigolpes</p></div><p class="pr">$12<small>Cotizar</small></p></div></div></div>
-          <span class="pf-tag">Servicios técnicos y reparación</span>
-          <p class="pf-name">TecnoExpress Taller &amp; Accesorios</p>
-          <p class="pf-txt">Diagnóstico en línea, catálogo de repuestos y botón directo para cotizar reparaciones al WhatsApp.</p>
+        <button type="button" class="pf-card rv" data-pf="servicios profesionales">
+          <div class="phone"><div class="scr"><img src="/media/portfolio-notary.jpg" alt="Diseño de web para servicios profesionales" width="600" height="1200" loading="lazy" /></div></div>
+          <span class="pf-tag">Servicios y asesoría</span>
+          <p class="pf-name">Servicios notariales</p>
+          <p class="pf-txt">Presencia profesional que genera confianza para cotizar y cerrar clientes.</p>
           <span class="pf-cta">Quiero una web así</span>
         </button>
       </div>
@@ -679,16 +643,29 @@ footer{padding:56px 0 120px;border-top:1px solid var(--line)}
 <!-- ============ BRIEF CON IA ============ -->
 <section class="about" id="brief">
   <div class="wrap">
-    <p class="eyebrow rv">Ejemplos por estilo</p>
-    <h2 class="rv">Elige un estilo y mira cómo se arma tu página.</h2>
-    <p class="lead rv" style="margin-top:26px">Mira cómo podría verse tu web en negocios típicos de Caracas. Elige un estilo y la verás armarse en el móvil. Cuando encuentres el que te guste, pídenos tu cotización por WhatsApp.</p>
+    <p class="eyebrow rv">Brief inteligente</p>
+    <h2 class="rv">Cuéntanos sobre tu negocio y creamos tu propuesta web al instante.</h2>
+    <p class="lead rv" style="margin-top:26px">Describe qué haces, qué necesitas y cómo te gustaría que fuera tu página web. Prepararemos una propuesta personalizada con las secciones, el estilo visual y un plan recomendado. Después, podrás enviárnosla por WhatsApp y solicitar tu cotización.</p>
     <div class="bp-grid">
     <form class="form-grid rv" id="brief-form" novalidate>
+      <div class="field form-full"><label for="b-negocio">Tu negocio</label>
+        <input id="b-negocio" type="text" maxlength="120" placeholder="Ej.: Panadería La Candelaria, consultorio odontológico…" required /></div>
+      <div class="field form-full"><label for="b-servicios">¿Qué vendes u ofreces?</label>
+        <textarea id="b-servicios" rows="4" maxlength="1200" placeholder="Productos, servicios, a quién le vendes, zona de Caracas…" style="resize:vertical;font:inherit" required></textarea></div>
       <div class="field form-full"><label for="b-estilo">Estilo que te gusta</label>
         <select id="b-estilo"><option>Minimalista y elegante</option><option>Moderno y tecnológico</option><option>Clásico y formal</option><option>Cálido y artesanal</option><option>Colorido y juvenil</option></select></div>
-      <div class="field form-full" style="margin-top:10px"><button class="btn btn-primary" type="button" id="b-btn">Quiero una página así</button></div>
+      <div class="field form-full" style="margin-top:10px"><button class="btn btn-primary" type="submit" id="b-btn">Generar mi brief</button></div>
+      <p class="form-msg form-full" id="b-error"></p>
     </form>
-      <div class="bp-side rv"><div class="phone-photo"><div class="pp-screen" aria-label="Ejemplo de página web"><div id="bp-scr"><div class="bp-empty">Elige un estilo para ver un ejemplo</div></div></div><img src="/media/movil-marco.webp" alt="" loading="lazy" /></div><p class="bp-note">Ejemplo ilustrativo</p></div>
+      <div class="bp-side rv"><div class="phone-photo"><div class="pp-screen"><div class="scr bp t-min" id="bp-scr"><div class="bp-empty">Describe tu negocio para ver tu propuesta</div></div></div><img src="/media/movil-marco.webp" alt="" loading="lazy" /></div><p class="bp-note">Vista previa orientativa</p></div>
+    </div>
+    <div id="b-result" style="display:none;margin-top:32px" class="card">
+      <h3>Tu brief</h3>
+      <pre id="b-text" style="white-space:pre-wrap;font:inherit;line-height:1.6;margin:14px 0 22px"></pre>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn btn-primary" id="b-wa" href="#" target="_blank" rel="noopener">Enviar brief por WhatsApp</a>
+        <button class="btn btn-ghost" type="button" id="b-copy">Copiar</button>
+      </div>
     </div>
   </div>
 </section>
@@ -748,7 +725,7 @@ footer{padding:56px 0 120px;border-top:1px solid var(--line)}
 <footer>
   <div class="wrap">
     <div class="foot">
-      <img class="logo" loading="lazy" src="/media/Logo_mesa_creativa_blanco.png" alt="Mesa Creativa" />
+      <img class="logo" loading="lazy" src="/media/Logo_mesa_creativa_blanco.png" width="256" height="256" alt="Mesa Creativa" />
       <a href="mailto:mesacreativaccs@gmail.com">mesacreativaccs@gmail.com</a>
     </div>
     <nav class="foot-links" aria-label="Secciones">
@@ -887,30 +864,61 @@ if (heroMedia && !matchMedia("(prefers-reduced-motion: reduce)").matches){
 </script>
 <script>(function(){var b=document.getElementById("mbar"),h=document.getElementById("top");if(!b||!h)return;if("IntersectionObserver"in window){new IntersectionObserver(function(e){b.classList.toggle("show",!e[0].isIntersecting)}).observe(h)}else b.classList.add("show")})();</script>
 <script>
-(function(){var scr=document.getElementById("bp-scr"),sel=document.getElementById("b-estilo"),btn=document.getElementById("b-btn"),note=document.querySelector("#brief .bp-note"),ps=document.querySelector("#brief .pp-screen");if(!scr||!sel)return;
-var MODELOS={
-"Minimalista y elegante":{c:"m-min",tipo:"Farmacia independiente",nombre:"Farmacia Salud Plena",h:"Tu salud, cerca de ti",sub:"Medicinas, cuidado personal y entrega a domicilio en tu zona.",btn:"Pedir por WhatsApp",items:[["Medicinas y récipes","Consulta disponibilidad"],["Cuidado personal","Higiene, bebés y bienestar"],["Entrega a domicilio","Rápida y segura"]],pie:"Lun a Sáb · 8:00 a 20:00"},
-"Moderno y tecnológico":{c:"m-tec",tipo:"Bodegón / minimarket",nombre:"Minimarket La Esquina",badge:"🛵 Delivery en 30 min",h:"Tu bodegón, ahora a un clic",sub:"Víveres, bebidas y más, directo a tu puerta.",btn:"Hacer pedido",items:[["🛒 Víveres"],["🥤 Bebidas"],["🧼 Aseo"],["🍿 Snacks"]],pie:"Pago móvil · Zelle · Efectivo"},
-"Clásico y formal":{c:"m-cla",tipo:"Barbería / peluquería",nombre:"Barbería El Clásico",h:"CORTE, BARBA Y TRADICIÓN",sub:"Tradición y buen estilo en cada visita.",btn:"Reservar cita",items:[["Corte clásico"],["Arreglo de barba"],["Afeitado con toalla caliente"]],div:true,pie:"Citas por WhatsApp · Lun a Sáb"},
-"Cálido y artesanal":{c:"m-cal",tipo:"Panadería, pastelería y café",nombre:"Panadería La Espiga",hHtml:["Pan ","recién horneado"," cada mañana"],sub:"Pan, tortas y café hechos con cariño.",btn:"Hacer mi encargo",items:[["🥖 Pan del día","Canilla y campesino"],["🎂 Tortas por encargo","Cumpleaños y eventos"],["☕ Café y dulces","Para acompañar"]],pie:"Horneamos desde las 6:00 a. m."},
-"Colorido y juvenil":{c:"m-col",tipo:"Venta de comida rápida",nombre:"Chamo Burger",h:"¿HAMBRE? ¡LLEGAMOS YA!",sub:"Burgers, perros y tequeños bien servidos.",btn:"¡Pide ya!",items:[["🍔 Hamburguesa doble"],["🌭 Perro caliente"],["🧀 Tequeños x6"]],colors:["#ffe066","#ff8fab","#a5d8ff"],pie:"¡Combos y delivery!"}};
+(function(){var f=document.getElementById("brief-form");if(!f)return;
+var btn=document.getElementById("b-btn"),err=document.getElementById("b-error"),res=document.getElementById("b-result"),out=document.getElementById("b-text");
+f.addEventListener("submit",function(e){e.preventDefault();
+var d={negocio:document.getElementById("b-negocio").value,servicios:document.getElementById("b-servicios").value,estilo:document.getElementById("b-estilo").value};
+err.classList.remove("show");
+if(d.negocio.trim().length<2||d.servicios.trim().length<5){err.textContent="Cuéntanos el nombre de tu negocio y qué ofreces.";err.classList.add("show");return;}
+btn.disabled=true;btn.textContent="Generando…";
+fetch("/api/public/generate-brief",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(d)})
+.then(function(r){return r.json();}).then(function(j){
+if(!j.brief)throw new Error(j.error||"Error");
+out.textContent=j.brief;res.style.display="block";
+document.getElementById("b-wa").href="https://wa.me/"+WA_PHONE+"?text="+encodeURIComponent("¡Hola! Quiero cotizar mi página web. Este es mi brief:\n\n"+j.brief);
+res.scrollIntoView({behavior:"smooth",block:"start"});
+}).catch(function(x){err.textContent=x.message||"No pudimos generar el brief.";err.classList.add("show");})
+.finally(function(){btn.disabled=false;btn.textContent="Generar mi brief";});});
+document.getElementById("b-copy").addEventListener("click",function(){navigator.clipboard&&navigator.clipboard.writeText(out.textContent);this.textContent="¡Copiado!";});
+})();
+</script>
+<script>
+(function(){var n=document.getElementById("b-negocio"),sv=document.getElementById("b-servicios"),sel=document.getElementById("b-estilo");if(!n||!sv||!sel)return;
+var orig=Array.prototype.map.call(sel.options,function(o){return o.value;});
+var t=null,done=false,loading=null;
+function restore(){sel.disabled=false;if(loading&&loading.parentNode)loading.parentNode.removeChild(loading);loading=null;}
+function basic(a,b){var p=b.split(/[,.;\n]+/).map(function(x){x=x.trim();return x.charAt(0).toUpperCase()+x.slice(1);}).filter(Boolean),g=["Atención personalizada","Calidad garantizada","Contáctanos hoy"],h=["Pregunta por WhatsApp","Hecho a tu medida","Respuesta rápida"],cut=function(x,n){return x.length>n?x.slice(0,n-1)+"…":x;};return {_basic:true,nombre:cut(a,40),eslogan:cut("Bienvenido a "+a,70),cta:"Contáctanos",servicios:[0,1,2].map(function(i){return {titulo:cut(p[i]||g[i],28),detalle:h[i]};})};}
+function go(){if(done)return;var a=n.value.trim(),b=sv.value.trim();if(a.length<2||b.length<5)return;done=true;
+loading=document.createElement("option");loading.textContent="Analizando tu negocio…";loading.value="";sel.insertBefore(loading,sel.firstChild);sel.value="";sel.disabled=true;
+var prev=orig.indexOf(sel.value)>=0?sel.value:orig[0];
+var ac=window.AbortController?new AbortController():null,tm=setTimeout(function(){if(ac)ac.abort();},20000);
+var em=document.querySelector("#bp-scr .bp-empty");if(em)em.textContent="Preparando tu propuesta…";
+fetch("/api/public/generate-preview",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({negocio:a,servicios:b}),signal:ac?ac.signal:undefined})
+.then(function(r){if(!r.ok)throw new Error("x");return r.json();}).then(function(j){clearTimeout(tm);
+var ord=j&&j.ordenEstilos;if(!Array.isArray(ord)||ord.length!==5||ord.some(function(v){return orig.indexOf(v)<0;}))throw new Error("x");
+window.briefPreview=j;restore();
+var opts={};Array.prototype.forEach.call(sel.options,function(o){opts[o.value]=o;});
+ord.forEach(function(v,i){var o=opts[v];o.value=v;o.textContent=v+(i===0?" ⭐ Recomendado":"");sel.appendChild(o);});
+sel.value=ord[0];sel.dispatchEvent(new Event("change"));
+}).catch(function(){clearTimeout(tm);restore();sel.value=orig[0];done=false;window.briefPreview=basic(a,b);});}
+function sched(){clearTimeout(t);t=setTimeout(go,800);}
+n.addEventListener("input",sched);sv.addEventListener("input",sched);
+})();
+</script>
+<script>
+(function(){var scr=document.getElementById("bp-scr"),sel=document.getElementById("b-estilo");if(!scr||!sel)return;
+var T={"Minimalista y elegante":"t-min","Moderno y tecnológico":"t-tec","Clásico y formal":"t-cla","Cálido y artesanal":"t-cal","Colorido y juvenil":"t-col"};
+function theme(){var c=T[sel.value]||"t-min";scr.className="scr bp "+c;}
 function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
-function cur(){return MODELOS[sel.value]||MODELOS["Minimalista y elegante"];}
-function build(){var m=cur(),n=0;while(scr.firstChild)scr.removeChild(scr.firstChild);scr.className=m.c;
-function blk(e,parent){e.classList.add("b");e.style.animationDelay=(n++*120)+"ms";(parent||scr).appendChild(e);return e;}
-var top=el("div","b-top");top.appendChild(el("span",null,m.nombre));top.appendChild(el("i",null,"☰"));blk(top);
-var wrap=scr;if(m.c==="m-cla"){wrap=el("div","b-main");scr.appendChild(wrap);}if(m.c==="m-col"){wrap=el("div","b-hero");scr.appendChild(wrap);}
-var h=el("h4","b-h");if(m.badge){var bd=el("div",null);bd.appendChild(el("span","b-badge",m.badge));wrap.appendChild(bd);}
-if(m.hHtml){h.appendChild(document.createTextNode(m.hHtml[0]));h.appendChild(el("em",null,m.hHtml[1]));h.appendChild(document.createTextNode(m.hHtml[2]));}else h.textContent=m.h;blk(h,wrap);
-blk(el("div","b-sub",m.sub),wrap);
-var bw=el("div","b-btnw");bw.appendChild(el("span","b-btn b",m.btn));bw.firstChild.style.animationDelay=(n++*120)+"ms";wrap.appendChild(bw);
-var it=el("div","b-items");m.items.forEach(function(x,i){if(m.div&&i>0)it.appendChild(el("div","b-div","✦"));var d=el("div","b-it");d.appendChild(el("b",null,x[0]));if(x[1])d.appendChild(el("span",null,x[1]));if(m.colors)d.style.background=m.colors[i];it.appendChild(d);});blk(it);
-blk(el("div","b-foot",m.pie));
-if(note)note.textContent="Ejemplo ilustrativo · "+m.tipo;if(ps)ps.setAttribute("aria-label","Ejemplo de página web para "+m.tipo);}
-sel.addEventListener("change",build);
-if(btn)btn.addEventListener("click",function(){var m=cur();var msg="Hola, vi los ejemplos en su web y me gustó el estilo "+sel.value+" (como el ejemplo de "+m.tipo+"). Quiero cotizar una página para mi negocio.";window.open("https://wa.me/"+WA_PHONE+"?text="+encodeURIComponent(msg),"_blank","noopener");});
-var sec=document.getElementById("brief");
-if("IntersectionObserver"in window&&sec){var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();build();}},{threshold:.4});io.observe(sec);}else build();
+function render(d){if(!d||!d.nombre)return;while(scr.firstChild)scr.removeChild(scr.firstChild);
+var top=el("div","bp-top");top.appendChild(el("span","bp-name",d.nombre));top.appendChild(el("span","bp-menu"));scr.appendChild(top);
+var h=el("div","bp-hero");h.appendChild(el("h4",null,d.eslogan));h.appendChild(el("span","bp-btn",d.cta));scr.appendChild(h);
+var cs=el("div","bp-cards");(d.servicios||[]).slice(0,3).forEach(function(s){var c=el("div","bp-card");c.appendChild(el("b",null,s.titulo));c.appendChild(el("span",null,s.detalle));cs.appendChild(c);});scr.appendChild(cs);
+scr.appendChild(el("div","bp-foot",d.nombre));theme();var nt=document.querySelector("#brief .bp-note");if(nt)nt.textContent=d._basic?"Vista previa orientativa (básica)":"Vista previa orientativa";}
+var cur=window.briefPreview;
+try{Object.defineProperty(window,"briefPreview",{configurable:true,get:function(){return cur;},set:function(v){cur=v;render(v);}});}catch(e){}
+if(cur)render(cur);
+sel.addEventListener("change",theme);theme();
 })();
 </script>
 </body>
