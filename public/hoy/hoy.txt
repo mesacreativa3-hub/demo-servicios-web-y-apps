@@ -1,0 +1,19 @@
+# ============================================================
+#  NOVEDADES DEL DÍA  -  edita este archivo cada día
+# ============================================================
+#  - Cada línea tiene la forma:   nombre: texto
+#  - Las líneas que empiezan con # son notas y no se muestran.
+#  - Si dejas una línea vacía o la borras, esa parte no aparece.
+#  - En fotoX escribe el nombre exacto de la foto que subiste
+#    a la carpeta "hoy" (ejemplo: foto1: mi-plato.jpg)
+#  - Usa fotos en formato JPG, PNG o WEBP.
+# ============================================================
+
+fecha: Domingo 22 de noviembre de 2026
+novedades: Hoy abrimos con música en vivo a partir de las 8 pm. ¡Te esperamos!
+plato: Arroz meloso de mariscos con fumet de la casa
+postre: Tarta de queso con frutos rojos
+
+foto1: /media/Arroz_meloso_de_marisco.jpg
+foto2: /media/Entrecot_a_la_brasa.jpg
+foto3: /media/Tarta_de_queso_con_frutos_rojos.jpg
