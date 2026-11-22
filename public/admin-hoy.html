@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Novedades del día · Administración</title>
+<style>
+:root{--bg:#0e0d0b;--card:#17150f;--cream:#f7f3ec;--dim:#b9b2a3;--gold:#c9a227;--line:rgba(247,243,236,.16);--err:#ff9a8a;--ok:#86e0a0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--cream);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:20px 16px 48px}
+.box{max-width:520px;margin:0 auto}
+h1{font-size:1.45rem;margin:6px 0 4px;font-weight:600}
+.sub{color:var(--dim);font-size:.92rem;margin:0 0 20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:16px}
+label.l{display:block;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin:14px 0 6px}
+label.l:first-child{margin-top:0}
+input[type=text],input[type=email],input[type=password],textarea{width:100%;font:inherit;font-size:16px;color:var(--cream);background:#0e0d0b;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+textarea{min-height:96px;resize:vertical}
+input:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
+.btn{display:inline-flex;align-items:center;justify-content:center;font:inherit;font-weight:600;border:0;border-radius:999px;padding:13px 22px;background:linear-gradient(120deg,#c9a227,#b87333);color:#17140c;cursor:pointer;text-align:center;text-decoration:none}
+.btn:disabled{opacity:.55;cursor:wait}
+.btn.big{width:100%;font-size:1.05rem;padding:16px}
+.btn.small{padding:9px 8px;font-size:.85rem;width:100%}
+.btn.ghost{background:transparent;color:var(--cream);border:1px solid var(--line)}
+.slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.slot{display:flex;flex-direction:column;gap:8px;min-width:0}
+.ph{aspect-ratio:1;border-radius:12px;border:1px dashed var(--line);background:#0e0d0b;display:grid;place-items:center;color:var(--dim);font-size:.8rem;overflow:hidden}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.row{display:flex;flex-direction:column;gap:6px}
+.msg{min-height:1.4em;font-size:.92rem;margin:12px 0 0}
+.msg.err{color:var(--err)}.msg.ok{color:var(--ok)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.link{color:var(--gold);font-size:.9rem;background:none;border:0;cursor:pointer;font:inherit;text-decoration:underline;padding:0}
+.fecha{color:var(--dim);font-size:.9rem;margin:0 0 6px}
+[hidden]{display:none!important}
+</style>
+<script src="/hoy/config.js"></script>
+</head>
+<body>
+<div class="box">
+
+  <!-- ENTRAR -->
+  <section id="v-login" hidden>
+    <h1>Novedades del día</h1>
+    <p class="sub">Entra con tu correo y contraseña para editar lo que se ve en la web.</p>
+    <form class="card" id="login" autocomplete="on">
+      <label class="l" for="em">Correo</label>
+      <input type="email" id="em" autocomplete="username" required>
+      <label class="l" for="pw">Contraseña</label>
+      <input type="password" id="pw" autocomplete="current-password" required>
+      <p class="msg" id="m-login" role="status"></p>
+      <button class="btn big" type="submit" style="margin-top:12px" id="b-login">Entrar</button>
+    </form>
+  </section>
+
+  <!-- EDITAR -->
+  <section id="v-edit" hidden>
+    <div class="top">
+      <h1>Novedades del día</h1>
+      <button class="link" type="button" id="b-out">Salir</button>
+    </div>
+    <p class="sub">Lo que publiques aquí aparece en la web al instante.</p>
+
+    <div class="card">
+      <label class="l">Fotos del día (hasta 3)</label>
+      <div class="slots">
+        <div class="slot"><div class="ph" id="ph1">Sin foto</div><div class="row"><label class="btn small">Elegir<input type="file" accept="image/*" id="f1" hidden></label><button type="button" class="btn small ghost" id="x1">Quitar</button></div></div>
+        <div class="slot"><div class="ph" id="ph2">Sin foto</div><div class="row"><label class="btn small">Elegir<input type="file" accept="image/*" id="f2" hidden></label><button type="button" class="btn small ghost" id="x2">Quitar</button></div></div>
+        <div class="slot"><div class="ph" id="ph3">Sin foto</div><div class="row"><label class="btn small">Elegir<input type="file" accept="image/*" id="f3" hidden></label><button type="button" class="btn small ghost" id="x3">Quitar</button></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="fecha" id="fecha"></p>
+      <label class="l" for="t-nov">Novedades del día</label>
+      <textarea id="t-nov" maxlength="600" placeholder="Ej: Hoy tenemos música en vivo a las 8 pm"></textarea>
+      <label class="l" for="t-plato">Plato del día</label>
+      <input type="text" id="t-plato" maxlength="160" placeholder="Ej: Arroz meloso de mariscos">
+      <label class="l" for="t-postre">Postre del día</label>
+      <input type="text" id="t-postre" maxlength="160" placeholder="Ej: Tarta de queso con frutos rojos">
+    </div>
+
+    <button class="btn big" type="button" id="b-pub">Publicar en la web</button>
+    <p class="msg" id="m-edit" role="status"></p>
+    <p style="text-align:center;margin-top:18px"><a class="link" href="/mesa-creativa.html#hoy" target="_blank" rel="noopener">Ver cómo queda en la web</a></p>
+  </section>
+
+</div>
+<script>
+(function(){
+var C=window.HOY_CONFIG||{},U=(C.url||"").replace(/\/$/,""),K=C.key||"";
+var $=function(i){return document.getElementById(i)};
+var SK="hoy_admin_session",slots=[null,{url:null,blob:null},{url:null,blob:null},{url:null,blob:null}];
+
+function getS(){try{return JSON.parse(localStorage.getItem(SK)||"null")}catch(e){return null}}
+function setS(s){try{if(s)localStorage.setItem(SK,JSON.stringify(s));else localStorage.removeItem(SK)}catch(e){}}
+function msg(id,t,cls){var m=$(id);m.textContent=t||"";m.className="msg"+(cls?" "+cls:"")}
+function api(path,opt,tok){opt=opt||{};opt.headers=Object.assign({apikey:K},opt.headers||{});if(tok)opt.headers.Authorization="Bearer "+tok;return fetch(U+path,opt)}
+function saveSession(j){var s={access_token:j.access_token,refresh_token:j.refresh_token,expires_at:Math.floor(Date.now()/1000)+(j.expires_in||3600)};setS(s);return s}
+async function token(){
+  var s=getS();if(!s)throw new Error("login");
+  if(s.expires_at-60>Date.now()/1000)return s.access_token;
+  var r=await api("/auth/v1/token?grant_type=refresh_token",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({refresh_token:s.refresh_token})});
+  if(!r.ok){setS(null);throw new Error("login")}
+  return saveSession(await r.json()).access_token;
+}
+function fechaHoy(){var t=new Date().toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long",year:"numeric"});return t.charAt(0).toUpperCase()+t.slice(1)}
+function view(v){$("v-login").hidden=v!=="login";$("v-edit").hidden=v!=="edit"}
+function paint(n){
+  var s=slots[n],ph=$("ph"+n);ph.textContent="";
+  var src=s.blob?s.prev:(s.url?s.url+"?v="+(s.v||Date.now()):null);
+  if(!src){ph.textContent="Sin foto";return}
+  var im=new Image();im.alt="Foto "+n;im.src=src;ph.appendChild(im);
+}
+function toJpeg(file){return new Promise(function(res,rej){
+  var u=URL.createObjectURL(file),img=new Image();
+  img.onload=function(){
+    var m=1600,w=img.naturalWidth,h=img.naturalHeight,r=Math.min(1,m/Math.max(w,h)),c=document.createElement("canvas");
+    c.width=Math.round(w*r);c.height=Math.round(h*r);c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+    URL.revokeObjectURL(u);c.toBlob(function(b){b?res(b):rej(new Error("No se pudo preparar la foto"))},"image/jpeg",.82);
+  };
+  img.onerror=function(){URL.revokeObjectURL(u);rej(new Error("Ese formato de foto no es compatible. Prueba con otra foto."))};
+  img.src=u;
+})}
+
+async function load(){
+  msg("m-edit","");$("fecha").textContent="Se publicará con la fecha de hoy: "+fechaHoy();
+  var tok=await token();
+  var r=await api("/rest/v1/hoy?id=eq.1&select=*",{cache:"no-store"},tok);
+  if(r.status===401)throw new Error("login");
+  if(!r.ok)throw new Error("No se pudieron cargar los datos actuales.");
+  var a=await r.json(),d=a[0]||{};
+  $("t-nov").value=d.novedades||"";$("t-plato").value=d.plato||"";$("t-postre").value=d.postre||"";
+  for(var n=1;n<=3;n++){slots[n]={url:d["foto"+n]||null,blob:null,v:d.updated_at};paint(n)}
+}
+async function show(){
+  view("edit");
+  try{await load()}catch(e){
+    if(e.message==="login"){view("login");msg("m-login","Tu sesión venció. Vuelve a entrar.","err")}
+    else msg("m-edit",e.message,"err");
+  }
+}
+
+$("login").addEventListener("submit",async function(e){
+  e.preventDefault();$("b-login").disabled=true;msg("m-login","Entrando…");
+  try{
+    var r=await api("/auth/v1/token?grant_type=password",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:$("em").value.trim(),password:$("pw").value})});
+    if(!r.ok){msg("m-login","Correo o contraseña incorrectos.","err");return}
+    saveSession(await r.json());msg("m-login","");$("pw").value="";show();
+  }catch(err){msg("m-login","No hay conexión. Inténtalo de nuevo.","err")}
+  finally{$("b-login").disabled=false}
+});
+$("b-out").addEventListener("click",function(){setS(null);view("login")});
+
+[1,2,3].forEach(function(n){
+  $("f"+n).addEventListener("change",async function(e){
+    var f=e.target.files&&e.target.files[0];if(!f)return;
+    msg("m-edit","Preparando foto…");
+    try{var b=await toJpeg(f);slots[n]={url:slots[n].url,blob:b,prev:URL.createObjectURL(b)};paint(n);msg("m-edit","")}
+    catch(err){msg("m-edit",err.message,"err")}
+    e.target.value="";
+  });
+  $("x"+n).addEventListener("click",function(){slots[n]={url:null,blob:null};paint(n)});
+});
+
+$("b-pub").addEventListener("click",async function(){
+  var btn=this;btn.disabled=true;msg("m-edit","Publicando… no cierres esta página.");
+  try{
+    var tok=await token(),row={fecha:fechaHoy(),novedades:$("t-nov").value.trim()||null,plato:$("t-plato").value.trim()||null,postre:$("t-postre").value.trim()||null,updated_at:new Date().toISOString()};
+    for(var n=1;n<=3;n++){
+      var s=slots[n];
+      if(s.blob){
+        var up=await api("/storage/v1/object/hoy/foto"+n+".jpg",{method:"POST",headers:{"Content-Type":"image/jpeg","x-upsert":"true"},body:s.blob},tok);
+        if(up.status===401)throw new Error("login");
+        if(!up.ok)throw new Error("No se pudo subir la foto "+n+".");
+        s.url=U+"/storage/v1/object/public/hoy/foto"+n+".jpg";s.blob=null;
+      }
+      row["foto"+n]=s.url||null;
+    }
+    var r=await api("/rest/v1/hoy?id=eq.1",{method:"PATCH",headers:{"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify(row)},tok);
+    if(r.status===401)throw new Error("login");
+    if(!r.ok)throw new Error("No se pudo guardar. Inténtalo de nuevo.");
+    for(var k=1;k<=3;k++){slots[k].v=row.updated_at;paint(k)}
+    msg("m-edit","✅ Publicado. Ya se ve en la web.","ok");
+  }catch(err){
+    if(err.message==="login"){view("login");msg("m-login","Tu sesión venció. Vuelve a entrar.","err")}
+    else msg("m-edit",err.message,"err");
+  }finally{btn.disabled=false}
+});
+
+if(!U||!K){view("login");msg("m-login","Falta configurar la conexión (archivo hoy/config.js).","err");$("b-login").disabled=true}
+else if(getS())show();else view("login");
+})();
+</script>
+</body>
+</html>
