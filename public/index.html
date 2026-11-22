@@ -279,6 +279,9 @@ footer{padding:56px 0 120px;border-top:1px solid var(--line)}
 .foot-admin{display:block;width:fit-content;margin:14px auto 0;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cream-dim);opacity:.45;text-decoration:none;padding:6px 10px}
 .foot-admin:hover,.foot-admin:focus-visible{opacity:1;color:var(--gold)}
 /* ===== Novedades del día ===== */
+.hoy-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:4px}
+.menu-cat .hoy-head h3{border:0;padding:0;margin:0}
+.hoy-nota{flex:1 1 260px;margin:0;color:var(--cream-dim);font-size:.84rem;line-height:1.45}
 .hoy-fecha{color:var(--gold);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin:14px 0 0}
 .hoy-fotos{display:flex;gap:10px;margin:14px 0 16px}
 .hoy-fotos:empty{display:none}
@@ -536,7 +539,10 @@ body.ct-lock{overflow:hidden}
       </div>
 
       <div class="menu-cat" id="hoy">
-        <h3>Novedades del día</h3>
+        <div class="hoy-head">
+          <h3>Novedades del día</h3>
+          <p class="hoy-nota">Tú lo actualizas cada día desde tu móvil: sube hasta 3 fotos y cuéntales a tus clientes las novedades, el plato y el postre del día.</p>
+        </div>
         <p class="hoy-fecha" id="hoy-fecha" hidden></p>
         <div class="hoy-fotos" id="hoy-fotos"></div>
         <div class="hoy-item" data-k="novedades" hidden><span class="hoy-tag">Novedades</span><p></p></div>
