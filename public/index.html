@@ -156,6 +156,7 @@ header.nav.open .nav-toggle span:nth-child(3){transform:translateY(-6.5px) rotat
 /* ===== Packs ===== */
 .packs{display:grid;gap:22px;margin-top:48px}
 @media(min-width:920px){.packs{grid-template-columns:repeat(3,1fr);align-items:center}.pack.featured{transform:scale(1.05)}.pack.featured:hover{transform:scale(1.0815)}}
+@media(min-width:760px){.packs.p4{grid-template-columns:repeat(2,1fr)}}@media(min-width:1180px){.packs.p4{grid-template-columns:repeat(4,1fr)}}
 .pack{display:flex;flex-direction:column;gap:18px}
 .pack .amount{font-family:var(--serif);font-size:2.6rem;color:var(--cream);line-height:1}
 .pack.featured{border-color:rgba(201,162,39,.5);background:linear-gradient(160deg,rgba(201,162,39,.14),rgba(247,243,236,.02))}
@@ -498,7 +499,7 @@ body.ct-lock{overflow:hidden}
 
     <div class="rv" style="text-align:center;margin-top:56px">
       <a class="btn btn-primary btn-lg" href="https://wa.me/34604343158?text=Hola%2C%20vi%20tu%20web%20y%20quiero%20informaci%C3%B3n%20sobre%20crear%20la%20landing%20page%20de%20mi%20negocio." target="_blank" rel="noopener">Quiero mi landing page</a>
-      <p class="note" style="text-align:center;margin-top:18px">Desde $120 · Web Catálogo + Menú $190 · Web Pro a Medida desde $290</p>
+      <p class="note" style="text-align:center;margin-top:18px">Desde $120 · Web Catálogo + Menú $190 · Autogestionable $290 · Web Pro desde $480</p>
     </div>
   </div>
 </section>
@@ -695,7 +696,7 @@ body.ct-lock{overflow:hidden}
     <p class="eyebrow rv">Próximos pasos</p>
     <h2 class="rv">Empezamos en tres movimientos</h2>
     <div class="grid g3">
-      <div class="card rv"><span class="num">1</span><h3>Confirmar el plan</h3><p>Eliges Landing Emprendedor, Web Catálogo + Menú o Web Pro a Medida.</p></div>
+      <div class="card rv"><span class="num">1</span><h3>Confirmar el plan</h3><p>Eliges Landing Emprendedor, Web Catálogo + Menú, Catálogo Autogestionable o Web Pro a Medida.</p></div>
       <div class="card rv"><span class="num">2</span><h3>Agendar la fecha</h3><p>Reservamos el día de inicio en agenda con el anticipo del 50%.</p></div>
       <div class="card rv"><span class="num">3</span><h3>Brief y moodboard</h3><p>Alineamos estilo, colores y referencias visuales antes de empezar tu web.</p></div>
     </div>
@@ -728,17 +729,21 @@ body.ct-lock{overflow:hidden}
   <div class="wrap">
     <p class="eyebrow rv">Paquetes y precios</p>
     <h2 class="rv">Elige el plan para tu negocio</h2>
+    <p class="lead rv" style="margin-top:26px">De menor a mayor: empieza con lo esencial y crece cuando tu negocio lo necesite. Cada plan indica qué incluye y qué necesita para funcionar.</p>
 
-    <div class="packs">
+    <div class="packs p4">
       <div class="card pack rv">
         <span class="tag">Landing Emprendedor</span>
         <div class="amount">$120</div>
+        <p class="note" style="margin-top:-8px">Pago único · para empezar a vender por WhatsApp</p>
         <ul class="feat">
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Página de una sola vista</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Presentación de tus servicios</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Página de una sola vista con tu logo y colores</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Presentación de hasta 5 servicios o productos</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Hasta 6 fotos optimizadas para celular</span></li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Botones directos a WhatsApp</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Ubicación en Google Maps</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Enlaces a tus redes</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Ubicación en Google Maps y enlaces a tus redes</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Código QR listo para imprimir</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Publicada en enlace gratuito · 1 ronda de ajustes</span></li>
         </ul>
         <a class="btn btn-ghost" href="#" data-wa>Lo quiero</a>
       </div>
@@ -746,31 +751,64 @@ body.ct-lock{overflow:hidden}
       <div class="card pack featured rv">
         <span class="tag">★ Recomendado · Web Catálogo + Menú</span>
         <div class="amount">$190</div>
+        <p class="note" style="margin-top:-8px">Pago único · nosotros actualizamos tu información</p>
         <ul class="feat">
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Catálogo de productos o servicios con precios en $</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Fotos organizadas</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Todo lo del Landing Emprendedor</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Catálogo o menú de hasta 30 productos o platos con precios en $</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Fotos organizadas por categorías</span></li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Buscador y filtros</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Botón «Pedir por WhatsApp» en cada producto</span></li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Código QR digital para compartir</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>2 rondas de ajustes</span></li>
         </ul>
         <a class="btn btn-primary" href="#" data-wa>Lo quiero</a>
       </div>
 
       <div class="card pack rv">
-        <span class="tag">★ Web Pro a Medida</span>
-        <div class="amount">$290+</div>
+        <span class="tag">Catálogo Autogestionable</span>
+        <div class="amount">$290</div>
+        <p class="note" style="margin-top:-8px">+ $10/mes · tú actualizas tu información</p>
         <ul class="feat">
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Múltiples secciones</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Catálogo extenso</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Todo lo del Web Catálogo + Menú</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Panel privado con tu clave: cambia precios, fotos y «Novedades del día» desde tu celular</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Hasta 80 productos o platos</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Formulario de reservas o pedidos por WhatsApp</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Respaldo de tus datos y soporte por WhatsApp</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>La mensualidad cubre el panel, el servidor y los respaldos</span></li>
+        </ul>
+        <a class="btn btn-ghost" href="#" data-wa>Lo quiero</a>
+      </div>
+
+      <div class="card pack rv">
+        <span class="tag">Web Pro a Medida</span>
+        <div class="amount">Desde $480</div>
+        <p class="note" style="margin-top:-8px">Cotización según alcance · mensualidad opcional $20</p>
+        <ul class="feat">
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Todo lo del Catálogo Autogestionable</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Múltiples secciones: inicio, nosotros, servicios, galería y contacto</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Catálogo extenso, con más de 80 productos y categorías</span></li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Cotizador por WhatsApp</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Integración de analítica</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Integración de analítica de visitas</span></li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Optimización completa para Google</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Dominio .com propio durante el primer año</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>30 días de soporte tras la entrega</span></li>
         </ul>
         <a class="btn btn-ghost btn-gold-outline" href="#" data-wa>Pedir cotización</a>
       </div>
 
     </div>
 
-    <p class="note rv">Precios en dólares ($ USD). Todos los planes incluyen adaptación para celulares, botón flotante de WhatsApp y entrega lista para usar.</p>
+    <div class="card rv" style="margin-top:40px">
+      <h3>Servicios adicionales</h3>
+      <ul class="feat" style="margin-top:16px">
+        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Dominio .com propio:</b> $20 al año (registro y renovación)</span></li>
+        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Plan Cuidado:</b> $8/mes para Landing y Catálogo: mantenimiento, respaldo y 1 cambio pequeño al mes</span></li>
+        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Cambios puntuales:</b> desde $5 (precios, textos o fotos)</span></li>
+        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Fotos y video de tu negocio:</b> se cotiza aparte</span></li>
+      </ul>
+    </div>
+
+    <p class="note rv">Precios en dólares ($ USD), pago único salvo donde se indique mensualidad. Todos los planes incluyen adaptación para celulares, botón flotante de WhatsApp y entrega lista para usar.</p>
   </div>
 </section>
 
