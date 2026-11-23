@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Casa Araguaney · Restaurante de ejemplo · Web Pro de Mesa Creativa</title>
+<meta name="description" content="Web de ejemplo del plan Web Pro a Medida de Mesa Creativa: restaurante caraqueño ficticio con menú de más de 90 platos, pedidos y reservas por WhatsApp." />
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#0e0d0b" />
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png" />
+<meta property="og:title" content="Casa Araguaney · Web de ejemplo de Mesa Creativa" />
+<meta property="og:description" content="Así se ve una Web Pro a Medida: menú completo, pedidos y reservas por WhatsApp." />
+<meta property="og:image" content="/media/caracas-og.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- Cloudflare Web Analytics: pega aquí el fragmento que te da Cloudflare (Web Analytics → Add a site).
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "TU_TOKEN"}'></script>
+-->
+<script src="/hoy/config.js"></script>
+<style>
+:root{
+  --carbon:#0e0d0b;--carbon-2:#14120f;--cream:#f7f3ec;--cream-dim:#c8bfb1;
+  --gold:#c9a227;--copper:#b87333;--line:rgba(247,243,236,.12);--maxw:1160px;
+  --serif:"Fraunces",Georgia,serif;--sans:"Manrope",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--carbon);color:var(--cream);font-family:var(--sans);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+section{padding:clamp(64px,10vw,120px) 0;position:relative;scroll-margin-top:120px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.02em;line-height:1.08;margin:0}
+h2{font-size:clamp(1.9rem,5vw,3.1rem)}
+h3{font-size:1.12rem;letter-spacing:0}
+p{margin:0}
+.eyebrow{font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:18px}
+.lead{color:var(--cream-dim);font-size:clamp(1rem,2.1vw,1.12rem);max-width:62ch}
+.muted{color:var(--cream-dim)}
+
+/* Franja de demo */
+.demo-bar{position:fixed;inset:0 0 auto 0;z-index:70;height:38px;display:flex;align-items:center;justify-content:center;gap:12px;background:linear-gradient(120deg,var(--gold),var(--copper));color:#17140c;font-size:.74rem;letter-spacing:.06em;font-weight:500;padding:0 12px;text-align:center}
+.demo-bar a{font-weight:600;white-space:nowrap}
+@media(max-width:560px){.demo-bar .long{display:none}}
+
+/* Navegación */
+header.nav{position:fixed;top:38px;left:0;right:0;z-index:60;backdrop-filter:blur(14px);background:rgba(14,13,11,.72);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.brand{font-family:var(--serif);font-size:1.35rem;text-decoration:none;letter-spacing:-.01em}
+.brand small{display:block;font-family:var(--sans);font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-top:-2px}
+.nav-links{display:none;gap:26px}
+.nav-links a{text-decoration:none;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cream-dim)}
+.nav-links a:hover{color:var(--gold)}
+@media(min-width:900px){.nav-links{display:flex}}
+.nav-toggle{display:inline-flex;flex-direction:column;justify-content:center;gap:5px;width:42px;height:42px;padding:0 10px;background:transparent;border:1px solid var(--line);border-radius:999px;cursor:pointer}
+.nav-toggle span{display:block;height:1.5px;background:var(--cream)}
+@media(min-width:900px){.nav-toggle{display:none}}
+@media(max-width:899px){header.nav.open .nav-links{display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(14,13,11,.97);border-bottom:1px solid var(--line);padding:8px 24px 18px}header.nav.open .nav-links a{padding:13px 0;border-bottom:1px solid var(--line)}}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;padding:14px 26px;border-radius:999px;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;border:1px solid transparent;cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s,color .2s;background:none}
+.btn-primary{background:linear-gradient(120deg,var(--gold),var(--copper));color:#17140c}
+.btn-primary:hover{box-shadow:0 16px 36px -12px rgba(201,162,39,.72)}
+.btn-ghost{border-color:var(--line);color:var(--cream)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn-sm{padding:9px 16px;font-size:.7rem}
+
+/* Hero */
+.hero{min-height:100svh;display:flex;align-items:flex-end;padding:0;overflow:hidden}
+.hero-media{position:absolute;inset:0}
+.hero-media img{width:100%;height:100%;object-fit:cover}
+.hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,13,11,.75),rgba(14,13,11,.5) 40%,rgba(14,13,11,.97))}
+.hero-in{position:relative;width:100%;padding:150px 0 clamp(56px,10vw,100px)}
+.hero h1{font-size:clamp(2.4rem,8vw,5rem);max-width:15ch}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero p{margin-top:22px;max-width:52ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+.facts{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:34px;font-size:.78rem;letter-spacing:.08em;color:var(--cream-dim)}
+
+/* Tarjetas y rejillas */
+.grid{display:grid;gap:22px}
+@media(min-width:760px){.g2{grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}.g4{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1080px){.g4{grid-template-columns:repeat(4,1fr)}}
+.card{background:linear-gradient(160deg,rgba(247,243,236,.05),rgba(247,243,236,.015));border:1px solid var(--line);border-radius:18px;padding:28px}
+.card h3{margin:14px 0 8px}
+.card p{color:var(--cream-dim);font-size:.94rem}
+.ico{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(201,162,39,.45)}
+.ico svg{width:22px;height:22px;stroke:var(--gold);fill:none;stroke-width:1.6}
+.photo{border-radius:18px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3}
+.photo img{width:100%;height:100%;object-fit:cover}
+
+/* Menú */
+.menu-tools{position:sticky;top:106px;z-index:20;background:rgba(14,13,11,.94);backdrop-filter:blur(10px);padding:14px 0;margin-top:34px;border-bottom:1px solid var(--line)}
+.search{width:100%;max-width:420px;background:var(--carbon-2);border:1px solid var(--line);border-radius:999px;padding:11px 18px;font-size:.95rem}
+.search:focus{outline:2px solid var(--gold);outline-offset:1px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:12px 0 2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:.74rem;letter-spacing:.06em;cursor:pointer;background:none;color:var(--cream-dim)}
+.chip[aria-pressed="true"]{border-color:var(--gold);color:#17140c;background:var(--gold)}
+.cat-title{margin:46px 0 18px;font-size:1.6rem}
+.dishes{display:grid;gap:16px}
+@media(min-width:700px){.dishes{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1080px){.dishes{grid-template-columns:repeat(3,1fr)}}
+.dish{display:flex;gap:14px;background:linear-gradient(160deg,rgba(247,243,236,.05),rgba(247,243,236,.015));border:1px solid var(--line);border-radius:16px;padding:12px}
+.dish .ph{flex:0 0 96px;height:96px;border-radius:12px;overflow:hidden;background:radial-gradient(circle at 30% 25%,rgba(201,162,39,.22),rgba(184,115,51,.06) 60%,transparent),var(--carbon-2);display:grid;place-items:center;border:1px solid var(--line)}
+.dish .ph img{width:100%;height:100%;object-fit:cover}
+.dish .ph svg{width:34px;height:34px;stroke:var(--gold);fill:none;stroke-width:1.4;opacity:.85}
+.dish .body{flex:1;min-width:0;display:flex;flex-direction:column}
+.dish h4{margin:0;font-family:var(--serif);font-weight:400;font-size:1.05rem;line-height:1.25}
+.dish p{font-size:.84rem;color:var(--cream-dim);line-height:1.45;margin-top:4px}
+.dish .row{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:8px;gap:8px}
+.price{font-family:var(--serif);font-size:1.15rem;color:var(--gold)}
+.add{border:1px solid var(--gold);color:var(--gold);background:none;border-radius:999px;padding:6px 14px;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.add:hover{background:rgba(201,162,39,.14)}
+.star{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
+.empty{color:var(--cream-dim);padding:30px 0}
+.note{margin-top:28px;font-size:.8rem;color:rgba(200,191,177,.7);max-width:70ch}
+
+/* Galería */
+.gallery{display:grid;gap:12px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:900px){.gallery{grid-template-columns:repeat(4,1fr)}}
+.gallery figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);aspect-ratio:1;position:relative}
+.gallery img{width:100%;height:100%;object-fit:cover}
+.gallery figcaption{position:absolute;left:0;right:0;bottom:0;padding:24px 12px 10px;font-size:.74rem;background:linear-gradient(transparent,rgba(14,13,11,.85))}
+
+/* Formularios */
+.form{display:grid;gap:12px}
+.form label{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.form input,.form select,.form textarea{width:100%;background:var(--carbon);border:1px solid var(--line);border-radius:12px;padding:11px 14px;font-size:16px}
+.form input:focus,.form select:focus,.form textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
+.two{display:grid;gap:12px;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.grid>*,.two>*{min-width:0}
+.form input,.form select{min-width:0;max-width:100%}
+.info li{list-style:none;padding:12px 0;border-bottom:1px solid var(--line);color:var(--cream-dim)}
+.info{padding:0;margin:0}
+.info b{color:var(--cream);font-weight:500}
+
+/* Pedido (cotizador) */
+.cart-btn{position:fixed;right:18px;bottom:18px;z-index:80;display:flex;align-items:center;gap:10px;border-radius:999px;padding:14px 20px;background:linear-gradient(120deg,var(--gold),var(--copper));color:#17140c;border:0;font-weight:600;cursor:pointer;box-shadow:0 14px 34px -10px rgba(0,0,0,.8)}
+.cart-btn[hidden]{display:none}
+.cart-btn .n{background:#17140c;color:var(--gold);border-radius:999px;min-width:24px;height:24px;display:grid;place-items:center;font-size:.8rem}
+.drawer{position:fixed;inset:0;z-index:90;display:none}
+.drawer.open{display:block}
+.drawer .shade{position:absolute;inset:0;background:rgba(0,0,0,.6)}
+.drawer .panel{position:absolute;right:0;top:0;bottom:0;width:min(440px,100%);background:var(--carbon-2);border-left:1px solid var(--line);display:flex;flex-direction:column}
+.drawer header{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border-bottom:1px solid var(--line)}
+.drawer .items{flex:1;overflow-y:auto;padding:8px 22px}
+.it{display:flex;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.it .nm{flex:1;font-size:.92rem;line-height:1.35}
+.it .nm small{display:block;color:var(--cream-dim)}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:none;cursor:pointer}
+.drawer footer{padding:18px 22px;border-top:1px solid var(--line)}
+.total{display:flex;justify-content:space-between;font-family:var(--serif);font-size:1.35rem;margin-bottom:14px}
+.x{background:none;border:1px solid var(--line);border-radius:50%;width:38px;height:38px;cursor:pointer}
+
+footer.site{padding:56px 0 120px;border-top:1px solid var(--line);text-align:center;color:var(--cream-dim);font-size:.85rem}
+footer.site p+p{margin-top:10px}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .5s ease-out,transform .5s ease-out}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="demo-bar" role="note">
+  <span>Web de ejemplo <span class="long">· plan Web Pro a Medida de Mesa Creativa</span></span>
+  <a href="/#paquetes">Ver planes →</a>
+</div>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#inicio">Casa Araguaney<small>Cocina caraqueña</small></a>
+    <nav class="nav-links" id="links" aria-label="Secciones">
+      <a href="#nosotros">Nosotros</a><a href="#servicios">Servicios</a><a href="#menu">Menú</a><a href="#galeria">Galería</a><a href="#contacto">Contacto</a>
+    </nav>
+    <button class="nav-toggle" id="toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+<!-- ===== INICIO ===== -->
+<section class="hero" id="inicio">
+  <div class="hero-media"><img src="/media/caracas-avila.jpg" alt="El Ávila visto desde Caracas" fetchpriority="high"></div>
+  <div class="wrap hero-in">
+    <p class="eyebrow">Restaurante de ejemplo · Caracas</p>
+    <h1>La cocina caraqueña <em>de siempre</em>, hecha al momento.</h1>
+    <p class="lead">Arepas, cachapas, pabellón y parrilla para comer aquí, llevar o pedir a domicilio. Haz tu pedido por WhatsApp en un minuto.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#menu">Ver el menú</a>
+      <a class="btn btn-ghost" href="#contacto">Reservar mesa</a>
+    </div>
+    <div class="facts"><span>Lun a sáb · 7:00 a 22:00</span><span>Dom · 8:00 a 17:00</span><span>Delivery en la zona</span></div>
+  </div>
+</section>
+
+<!-- ===== NOSOTROS ===== -->
+<section id="nosotros">
+  <div class="wrap grid g2">
+    <div class="rv">
+      <p class="eyebrow">Nosotros</p>
+      <h2>Una cocina de barrio con recetas de familia</h2>
+      <p class="lead" style="margin-top:22px">Casa Araguaney es un restaurante ficticio creado para mostrar cómo luce una web completa. Aquí iría la historia real del negocio: quién lo fundó, qué lo hace distinto y por qué la gente vuelve.</p>
+      <p class="lead" style="margin-top:14px">Cocinamos cada día con ingredientes del mercado: maíz pilado para las arepas, queso de mano de Guárico y carne mechada a fuego lento.</p>
+    </div>
+    <div class="photo rv"><img src="/media/bandeja-desayuno.jpg" alt="Desayuno servido en bandeja" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- ===== SERVICIOS ===== -->
+<section id="servicios" style="background:var(--carbon-2)">
+  <div class="wrap">
+    <p class="eyebrow rv">Servicios</p>
+    <h2 class="rv">Como prefieras disfrutarlo</h2>
+    <div class="grid g4" style="margin-top:40px">
+      <div class="card rv"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 11h16M6 11v8M18 11v8M5 7h14l1 4H4z"/></svg></div><h3>Comer aquí</h3><p>Salón para 40 personas y terraza. Mesas para grupos con reserva previa.</p></div>
+      <div class="card rv"><div class="ico"><svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7zM9 8V6a3 3 0 0 1 6 0v2"/></svg></div><h3>Para llevar</h3><p>Pide por WhatsApp y recoge sin esperar. Te avisamos cuando esté listo.</p></div>
+      <div class="card rv"><div class="ico"><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7M7 19a2 2 0 1 0 0-.01M17 19a2 2 0 1 0 0-.01"/></svg></div><h3>Delivery</h3><p>Llevamos tu pedido en la zona. El costo del envío se confirma por WhatsApp.</p></div>
+      <div class="card rv"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v4M5 10h14v10H5zM8 10V7h8v3M9 15h6"/></svg></div><h3>Eventos y catering</h3><p>Pasapalos, parrillas y menús para cumpleaños, oficinas y celebraciones.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MENÚ ===== -->
+<section id="menu">
+  <div class="wrap">
+    <p class="eyebrow rv">Menú</p>
+    <h2 class="rv">Elige y arma tu pedido</h2>
+    <p class="lead rv" style="margin-top:18px">Toca «Añadir» en cada plato. Al final envías el pedido con el total por WhatsApp.</p>
+    <div class="menu-tools">
+      <input class="search" id="q" type="search" placeholder="Buscar: arepa, parrilla, postre…" aria-label="Buscar en el menú">
+      <div class="chips" id="chips" role="toolbar" aria-label="Categorías"></div>
+    </div>
+    <div id="carta" aria-live="polite"></div>
+    <p class="note">Precios de ejemplo en dólares (USD), calculados con precios habituales de restaurantes de Caracas. Las fotos son de referencia: en la web real van las fotos que aporta el restaurante.</p>
+  </div>
+</section>
+
+<!-- ===== GALERÍA ===== -->
+<section id="galeria" style="background:var(--carbon-2)">
+  <div class="wrap">
+    <p class="eyebrow rv">Galería</p>
+    <h2 class="rv">Un vistazo a la casa</h2>
+    <div class="gallery rv" style="margin-top:36px">
+      <figure><img src="/media/Entrecot_a_la_brasa.jpg" alt="Carne a la brasa" loading="lazy"><figcaption>De la parrilla</figcaption></figure>
+      <figure><img src="/media/Arroz_meloso_de_marisco.jpg" alt="Arroz con mariscos" loading="lazy"><figcaption>Arroz con mariscos</figcaption></figure>
+      <figure><img src="/media/Gambas_al_ajillo.jpg" alt="Camarones al ajillo" loading="lazy"><figcaption>Camarones al ajillo</figcaption></figure>
+      <figure><img src="/media/Tarta_de_queso_con_frutos_rojos.jpg" alt="Torta de queso" loading="lazy"><figcaption>Postres de la casa</figcaption></figure>
+      <figure><img src="/media/rollos-canela.jpg" alt="Pan dulce horneado" loading="lazy"><figcaption>Horneado cada mañana</figcaption></figure>
+      <figure><img src="/media/wraps-crujientes.jpg" alt="Wraps" loading="lazy"><figcaption>Para llevar</figcaption></figure>
+      <figure><img src="/media/evento-boda.jpg" alt="Mesa preparada para un evento" loading="lazy"><figcaption>Eventos</figcaption></figure>
+      <figure><img src="/media/bandeja-desayuno.jpg" alt="Desayuno" loading="lazy"><figcaption>Desayunos</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACTO ===== -->
+<section id="contacto">
+  <div class="wrap grid g2" style="align-items:start">
+    <div class="rv">
+      <p class="eyebrow">Contacto y reservas</p>
+      <h2>Te esperamos</h2>
+      <ul class="info" style="margin-top:26px">
+        <li><b>Dirección:</b> Av. Principal de Ejemplo, local 3, Chacao, Caracas (dirección ficticia)</li>
+        <li><b>Horario:</b> lunes a sábado de 7:00 a 22:00 · domingo de 8:00 a 17:00</li>
+        <li><b>Pagos:</b> efectivo en dólares, pago móvil, punto de venta y Zelle</li>
+        <li><b>WhatsApp:</b> pedidos, reservas y eventos</li>
+      </ul>
+    </div>
+    <form class="card form rv" id="reserva">
+      <h3 style="margin:0 0 6px">Reservar mesa</h3>
+      <div><label for="r-nombre">Nombre</label><input id="r-nombre" required maxlength="60" autocomplete="name"></div>
+      <div class="two">
+        <div><label for="r-fecha">Fecha</label><input id="r-fecha" type="date" required></div>
+        <div><label for="r-hora">Hora</label><input id="r-hora" type="time" required min="07:00" max="21:30"></div>
+      </div>
+      <div><label for="r-pers">Personas</label><select id="r-pers"><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>Más de 8</option></select></div>
+      <div><label for="r-nota">Comentario (opcional)</label><input id="r-nota" maxlength="140" placeholder="Cumpleaños, silla para bebé…"></div>
+      <button class="btn btn-primary" type="submit" style="margin-top:6px">Reservar por WhatsApp</button>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>Casa Araguaney es un restaurante ficticio. Esta web es un ejemplo del plan <b>Web Pro a Medida</b> de Mesa Creativa.</p>
+    <p>¿Quieres ver cómo se cambian precios y platos desde el celular? <a href="/admin-catalogo.html" style="color:var(--gold)">Probar el panel</a> con el correo <b>demo@example.com</b> y la clave <b>DemoMesa2026</b>.</p>
+    <p><a class="btn btn-ghost btn-sm" href="/#paquetes" style="margin-top:14px">Quiero una web así</a></p>
+  </div>
+</footer>
+
+<button class="cart-btn" id="cartBtn" hidden aria-haspopup="dialog"><span class="n" id="cartN">0</span><span>Ver pedido · <span id="cartT">$0.00</span></span></button>
+
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dTitle">
+  <div class="shade" data-close></div>
+  <div class="panel">
+    <header><h3 id="dTitle" style="font-size:1.4rem">Tu pedido</h3><button class="x" data-close aria-label="Cerrar">✕</button></header>
+    <div class="items" id="items"></div>
+    <footer>
+      <div class="total"><span>Total</span><span id="dTotal">$0.00</span></div>
+      <form class="form" id="pedido">
+        <div class="two">
+          <div><label for="p-modo">Entrega</label><select id="p-modo"><option>Para llevar</option><option>Delivery</option><option>Comer aquí</option></select></div>
+          <div><label for="p-nombre">Nombre</label><input id="p-nombre" required maxlength="60" autocomplete="name"></div>
+        </div>
+        <div id="p-dir-box" hidden><label for="p-dir">Dirección de entrega</label><input id="p-dir" maxlength="160" autocomplete="street-address"></div>
+        <div><label for="p-nota">Nota (opcional)</label><input id="p-nota" maxlength="160" placeholder="Sin cebolla, salsa aparte…"></div>
+        <button class="btn btn-primary" type="submit">Enviar pedido por WhatsApp</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+// WhatsApp que recibe pedidos y reservas de la demo (el de Mesa Creativa).
+var WA="34604343158", NEGOCIO="demo";
+// Copia local del menú: se usa si Supabase no responde.
+var LOCAL={"categorias":["Desayunos y arepas","Empanadas y pasapalos","Cachapas","Platos criollos","Parrilla","Pescados y mariscos","Sopas","Hamburguesas y sándwiches","Contornos","Postres","Bebidas"],"productos":[{"c":"Desayunos y arepas","n":"Arepa reina pepiada","d":"Pollo desmechado con aguacate y un toque de mayonesa, la clásica caraqueña.","p":5.5,"x":true,"f":null},{"c":"Desayunos y arepas","n":"Arepa de pabellón","d":"Carne mechada, caraotas negras, tajadas de plátano maduro y queso blanco rallado.","p":6.0,"x":false,"f":null},{"c":"Desayunos y arepas","n":"Arepa pelúa","d":"Carne mechada jugosa con queso amarillo rallado.","p":5.5,"x":false,"f":null},{"c":"Desayunos y arepas","n":"Arepa de pernil","d":"Pernil horneado en su jugo con rodajas de tomate.","p":5.5,"x":false,"f":null},{"c":"Desayunos y arepas","n":"Arepa dominó","d":"Caraotas negras y queso blanco rallado.","p":4.0,"x":false,"f":null},{"c":"Desayunos y arepas","n":"Arepa de perico","d":"Huevos revueltos con tomate y cebolla.","p":3.75,"x":false,"f":null},{"c":"Desayunos y arepas","n":"Arepa de queso de mano","d":"Queso de mano fresco y mantequilla.","p":4.5,"x":false,"f":null},{"c":"Desayunos y arepas","n":"Arepa de chicharrón","d":"Chicharrón crujiente con guasacaca de la casa.","p":5.0,"x":false,"f":null},{"c":"Desayunos y arepas","n":"Desayuno criollo","d":"Dos arepas, perico, caraotas, queso blanco rallado y nata.","p":8.5,"x":true,"f":"/media/bandeja-desayuno.jpg"},{"c":"Desayunos y arepas","n":"Desayuno Ávila","d":"Huevos al gusto, tocineta, pan canilla y café con leche.","p":7.5,"x":false,"f":null},{"c":"Desayunos y arepas","n":"Cachito de jamón","d":"Pan de cachito recién horneado relleno de jamón ahumado.","p":2.5,"x":false,"f":"/media/croissant-chocolate.jpg"},{"c":"Desayunos y arepas","n":"Pan de jamón (porción)","d":"Relleno de jamón, tocineta, pasas y aceitunas.","p":3.5,"x":false,"f":null},{"c":"Empanadas y pasapalos","n":"Empanada de carne mechada","d":"Masa de maíz frita, crujiente por fuera.","p":2.5,"x":false,"f":null},{"c":"Empanadas y pasapalos","n":"Empanada de pollo","d":"Pollo guisado con ají dulce.","p":2.5,"x":false,"f":null},{"c":"Empanadas y pasapalos","n":"Empanada de queso","d":"Queso blanco rallado.","p":2.0,"x":false,"f":null},{"c":"Empanadas y pasapalos","n":"Empanada de cazón","d":"Cazón guisado al estilo oriental.","p":3.0,"x":false,"f":null},{"c":"Empanadas y pasapalos","n":"Empanada de pabellón","d":"Carne mechada, caraotas, tajada y queso.","p":3.0,"x":false,"f":null},{"c":"Empanadas y pasapalos","n":"Tequeños (6 unidades)","d":"Palitos de queso blanco envueltos en masa crujiente, con salsa de la casa.","p":7.5,"x":true,"f":null},{"c":"Empanadas y pasapalos","n":"Tostones con guasacaca","d":"Plátano verde frito y aplastado, con guasacaca.","p":5.5,"x":false,"f":null},{"c":"Empanadas y pasapalos","n":"Bolitas de yuca con queso (8)","d":"Yuca frita rellena de queso blanco.","p":5.5,"x":false,"f":null},{"c":"Empanadas y pasapalos","n":"Patacón maracucho","d":"Plátano verde con carne mechada, pollo, queso y salsas.","p":8.5,"x":false,"f":null},{"c":"Cachapas","n":"Cachapa con queso de mano","d":"Maíz tierno dorado en budare con queso de mano.","p":7.0,"x":true,"f":null},{"c":"Cachapas","n":"Cachapa con queso y pernil","d":"Con queso de mano y pernil horneado.","p":9.5,"x":false,"f":null},{"c":"Cachapas","n":"Cachapa con queso y chicharrón","d":"Con queso de mano y chicharrón crujiente.","p":9.0,"x":false,"f":null},{"c":"Cachapas","n":"Cachapa con queso y nata","d":"Con queso de mano y nata.","p":7.5,"x":false,"f":null},{"c":"Cachapas","n":"Cachapa con queso y carne mechada","d":"Con queso de mano y carne mechada.","p":9.5,"x":false,"f":null},{"c":"Platos criollos","n":"Pabellón criollo","d":"Carne mechada, arroz blanco, caraotas negras y tajadas.","p":9.5,"x":true,"f":null},{"c":"Platos criollos","n":"Pabellón con baranda","d":"Pabellón criollo con huevo frito y queso rallado.","p":11.0,"x":false,"f":null},{"c":"Platos criollos","n":"Asado negro","d":"Muchacho redondo en salsa de papelón, con arroz blanco y tajadas.","p":11.5,"x":true,"f":null},{"c":"Platos criollos","n":"Polvorosa de pollo","d":"Pastel de pollo guisado con masa hojaldrada y dulce.","p":9.0,"x":false,"f":null},{"c":"Platos criollos","n":"Pollo guisado","d":"Con arroz blanco y tajadas.","p":8.5,"x":false,"f":null},{"c":"Platos criollos","n":"Lengua en salsa","d":"Lengua de res en salsa criolla, con arroz y papas.","p":10.5,"x":false,"f":null},{"c":"Platos criollos","n":"Pastel de chucho","d":"Capas de plátano maduro, cazón guisado y queso.","p":10.0,"x":false,"f":null},{"c":"Platos criollos","n":"Pisillo de res con arepitas","d":"Carne seca desmenuzada y sofrita, con arepitas fritas.","p":9.0,"x":false,"f":null},{"c":"Platos criollos","n":"Hallaca (temporada)","d":"Masa de maíz rellena de guiso de res, cerdo y gallina, en hoja de plátano.","p":6.5,"x":false,"f":null},{"c":"Platos criollos","n":"Plato navideño (temporada)","d":"Hallaca, pernil, ensalada de gallina y pan de jamón.","p":14.0,"x":false,"f":null},{"c":"Parrilla","n":"Parrilla mixta para 2","d":"Lomito, pollo, chorizo y morcilla con yuca, ensalada y guasacaca.","p":28.0,"x":true,"f":null},{"c":"Parrilla","n":"Solomo de cuerito (300 g)","d":"Corte jugoso a la brasa con contorno a elegir.","p":16.0,"x":false,"f":null},{"c":"Parrilla","n":"Punta trasera (300 g)","d":"A la brasa con contorno a elegir.","p":15.0,"x":false,"f":null},{"c":"Parrilla","n":"Lomito a la parrilla (250 g)","d":"Corte tierno con contorno a elegir.","p":17.0,"x":false,"f":null},{"c":"Parrilla","n":"Entrecot a la brasa (300 g)","d":"Con papas y ensalada.","p":18.0,"x":false,"f":"/media/Entrecot_a_la_brasa.jpg"},{"c":"Parrilla","n":"Pechuga a la parrilla","d":"Pechuga marinada con contorno a elegir.","p":10.0,"x":false,"f":null},{"c":"Parrilla","n":"Chorizo y morcilla con arepitas","d":"Para picar en la mesa.","p":7.5,"x":false,"f":null},{"c":"Parrilla","n":"Costillas de cerdo BBQ","d":"Glaseadas con salsa barbacoa, con papas fritas.","p":15.5,"x":false,"f":null},{"c":"Pescados y mariscos","n":"Pescado frito con tostones","d":"Pargo o corocoro según disponibilidad, con ensalada.","p":15.0,"x":true,"f":null},{"c":"Pescados y mariscos","n":"Filete de mero a la plancha","d":"Con arroz y vegetales salteados.","p":16.0,"x":false,"f":null},{"c":"Pescados y mariscos","n":"Camarones al ajillo","d":"En aceite de oliva, ajo y perejil, con pan tostado.","p":14.5,"x":false,"f":"/media/Gambas_al_ajillo.jpg"},{"c":"Pescados y mariscos","n":"Arroz con mariscos","d":"Arroz meloso con camarones, calamar y mejillones.","p":16.5,"x":false,"f":"/media/Arroz_meloso_de_marisco.jpg"},{"c":"Pescados y mariscos","n":"Ceviche de pescado","d":"Pescado blanco curado en limón con cebolla morada y cilantro.","p":11.0,"x":false,"f":null},{"c":"Pescados y mariscos","n":"Cóctel de camarones","d":"Camarones en salsa rosada con galletas.","p":10.0,"x":false,"f":null},{"c":"Pescados y mariscos","n":"Calamares fritos","d":"Aros de calamar rebozados con salsa tártara.","p":10.5,"x":false,"f":null},{"c":"Pescados y mariscos","n":"Pabellón margariteño","d":"Cazón guisado, arroz, caraotas y tajadas.","p":12.0,"x":false,"f":null},{"c":"Sopas","n":"Sopa de res (hervido)","d":"Con verduras, mazorca y arepitas.","p":7.5,"x":true,"f":null},{"c":"Sopas","n":"Sopa de gallina","d":"Con verduras y fideos.","p":7.0,"x":false,"f":null},{"c":"Sopas","n":"Mondongo","d":"Mondongo de res con garbanzos y verduras.","p":8.0,"x":false,"f":null},{"c":"Sopas","n":"Sopa de pescado","d":"Con verduras y un toque de cilantro.","p":8.5,"x":false,"f":null},{"c":"Sopas","n":"Crema de auyama","d":"Suave y cremosa, con queso rallado.","p":5.0,"x":false,"f":null},{"c":"Hamburguesas y sándwiches","n":"Hamburguesa clásica","d":"Carne de 160 g, queso, lechuga y tomate, con papas fritas.","p":9.0,"x":false,"f":null},{"c":"Hamburguesas y sándwiches","n":"Hamburguesa Araguaney","d":"Doble carne, queso de año, tocineta y plátano maduro, con papas.","p":12.0,"x":true,"f":null},{"c":"Hamburguesas y sándwiches","n":"Perro caliente caraqueño","d":"Con repollo, cebolla, papitas rayadas y salsas.","p":3.5,"x":false,"f":null},{"c":"Hamburguesas y sándwiches","n":"Pepito de lomito","d":"Pan canilla con lomito, queso, papitas y salsas.","p":11.0,"x":false,"f":null},{"c":"Hamburguesas y sándwiches","n":"Pepito de pollo","d":"Pan canilla con pollo a la plancha, queso, papitas y salsas.","p":9.0,"x":false,"f":null},{"c":"Hamburguesas y sándwiches","n":"Club house","d":"Pollo, jamón, queso, tocineta y huevo, con papas.","p":8.5,"x":false,"f":null},{"c":"Hamburguesas y sándwiches","n":"Sándwich de pernil","d":"Pernil horneado, queso y salsa de la casa.","p":7.0,"x":false,"f":"/media/sandwich.jpg"},{"c":"Hamburguesas y sándwiches","n":"Wrap de pollo crujiente","d":"Pollo empanizado, lechuga, tomate y salsa de ajo.","p":7.5,"x":false,"f":"/media/wraps-crujientes.jpg"},{"c":"Contornos","n":"Tajadas","d":"Plátano maduro frito.","p":3.0,"x":false,"f":null},{"c":"Contornos","n":"Yuca frita o sancochada","d":"Porción mediana.","p":3.0,"x":false,"f":null},{"c":"Contornos","n":"Papas fritas","d":"Porción mediana.","p":3.0,"x":false,"f":null},{"c":"Contornos","n":"Arroz blanco","d":"Porción mediana.","p":2.0,"x":false,"f":null},{"c":"Contornos","n":"Caraotas negras","d":"Porción mediana.","p":2.5,"x":false,"f":null},{"c":"Contornos","n":"Ensalada mixta","d":"Lechuga, tomate, cebolla y zanahoria.","p":3.5,"x":false,"f":null},{"c":"Contornos","n":"Arepitas fritas (4)","d":"Pequeñas y crujientes.","p":2.5,"x":false,"f":null},{"c":"Contornos","n":"Guasacaca (porción)","d":"Salsa de aguacate, ají y cilantro.","p":1.5,"x":false,"f":null},{"c":"Postres","n":"Quesillo","d":"Flan venezolano con caramelo.","p":4.0,"x":true,"f":null},{"c":"Postres","n":"Tres leches","d":"Bizcocho bañado en tres leches con merengue.","p":4.5,"x":false,"f":null},{"c":"Postres","n":"Bienmesabe","d":"Bizcocho con crema de coco y canela.","p":5.0,"x":false,"f":null},{"c":"Postres","n":"Marquesa de chocolate","d":"Capas de galleta y crema de chocolate.","p":5.0,"x":false,"f":null},{"c":"Postres","n":"Torta de queso con frutos rojos","d":"Cremosa, con salsa de frutos rojos.","p":5.5,"x":false,"f":"/media/Tarta_de_queso_con_frutos_rojos.jpg"},{"c":"Postres","n":"Golfeados (2)","d":"Con papelón, anís y queso de mano.","p":4.5,"x":false,"f":"/media/rollos-canela.jpg"},{"c":"Postres","n":"Dulce de lechosa","d":"Lechosa en almíbar con queso blanco.","p":3.5,"x":false,"f":null},{"c":"Postres","n":"Mousse de parchita","d":"Ligero y ácido, con salsa de parchita.","p":4.5,"x":false,"f":null},{"c":"Bebidas","n":"Papelón con limón","d":"Bebida tradicional bien fría.","p":2.0,"x":true,"f":null},{"c":"Bebidas","n":"Jugo natural","d":"Parchita, mango, guanábana o fresa.","p":2.5,"x":false,"f":null},{"c":"Bebidas","n":"Merengada","d":"De fresa, lechosa o cambur.","p":3.5,"x":false,"f":null},{"c":"Bebidas","n":"Chicha venezolana","d":"Bebida de arroz con canela.","p":3.0,"x":false,"f":null},{"c":"Bebidas","n":"Tizana","d":"Frutas picadas en jugo de naranja y granadina.","p":3.0,"x":false,"f":null},{"c":"Bebidas","n":"Refresco en lata","d":"Variedad de sabores.","p":1.5,"x":false,"f":null},{"c":"Bebidas","n":"Agua mineral 600 ml","d":"Con o sin gas.","p":1.0,"x":false,"f":null},{"c":"Bebidas","n":"Malta","d":"Botella de 250 ml.","p":1.5,"x":false,"f":null},{"c":"Bebidas","n":"Cerveza nacional","d":"Tercio bien frío.","p":2.0,"x":false,"f":null},{"c":"Bebidas","n":"Café guayoyo o marrón","d":"Café venezolano recién colado.","p":1.5,"x":false,"f":null},{"c":"Bebidas","n":"Cappuccino","d":"Espresso con leche espumada.","p":2.5,"x":false,"f":null},{"c":"Bebidas","n":"Trago de ron venezolano","d":"Ron añejo, solo o con hielo.","p":4.0,"x":false,"f":null}]};
+
+var $=function(id){return document.getElementById(id)};
+var ICONS={
+  "Desayunos y arepas":'<circle cx="12" cy="12" r="7"/><path d="M7 12h10"/>',
+  "Empanadas y pasapalos":'<path d="M4 15c0-5 4-9 8-9s8 4 8 9z"/><path d="M6 15l1.5 2M10 15l1 2M14 15l-1 2M18 15l-1.5 2"/>',
+  "Cachapas":'<ellipse cx="12" cy="12" rx="8" ry="6"/><path d="M8 12h8"/>',
+  "Platos criollos":'<circle cx="12" cy="13" r="8"/><circle cx="12" cy="13" r="4"/>',
+  "Parrilla":'<path d="M4 10h16M6 10l2 10M18 10l-2 10M8 6c0-2 2-2 2-4M12 6c0-2 2-2 2-4"/>',
+  "Pescados y mariscos":'<path d="M3 12c4-6 11-6 15 0-4 6-11 6-15 0zM18 12l3-3v6z"/><circle cx="8" cy="11" r=".6"/>',
+  "Sopas":'<path d="M4 11h16a8 8 0 0 1-16 0zM9 7c0-1 1-1 1-3M13 7c0-1 1-1 1-3"/>',
+  "Hamburguesas y sándwiches":'<path d="M4 10a8 5 0 0 1 16 0zM4 14h16M5 17h14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z"/>',
+  "Contornos":'<path d="M5 18c2-6 12-6 14 0zM8 12l-1-5M12 11V5M16 12l1-5"/>',
+  "Postres":'<path d="M6 11h12l-2 9H8zM12 11V7M9 7h6"/><circle cx="12" cy="5" r="1.2"/>',
+  "Bebidas":'<path d="M7 4h10l-1.5 16h-7zM7.5 9h9"/>'
+};
+var DEF_ICON='<circle cx="12" cy="12" r="8"/>';
+
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function money(n){return "$"+Number(n).toFixed(2)}
+function safeImg(u){u=String(u||"");return /^(https:\/\/|\/media\/|\/storage\/)/.test(u)?u:""}
+
+var cats=[],prods=[],cat="Todas",cart={};
+
+function useLocal(){
+  cats=LOCAL.categorias.slice();
+  prods=LOCAL.productos.map(function(p,i){return{id:"l"+i,c:p.c,n:p.n,d:p.d,p:p.p,x:p.x,f:p.f}});
+}
+async function load(){
+  var C=window.HOY_CONFIG||{},U=(C.url||"").replace(/\/$/,""),K=C.key||"";
+  if(!U||!K){useLocal();return}
+  try{
+    var ctl=new AbortController();setTimeout(function(){ctl.abort()},6000);
+    var r=await fetch(U+"/rest/v1/catalogo_publico?negocio=eq."+NEGOCIO+"&select=id,categoria,cat_orden,nombre,descripcion,precio,foto,destacado,orden&order=cat_orden.asc,orden.asc",{headers:{apikey:K},signal:ctl.signal,cache:"no-store"});
+    if(!r.ok)throw 0;
+    var a=await r.json();if(!a.length)throw 0;
+    cats=[];prods=a.map(function(p){if(cats.indexOf(p.categoria)<0)cats.push(p.categoria);return{id:p.id,c:p.categoria,n:p.nombre,d:p.descripcion,p:Number(p.precio),x:p.destacado,f:p.foto}});
+  }catch(e){useLocal()}
+}
+
+function chips(){
+  var h=["Todas"].concat(cats).map(function(c){return '<button class="chip" type="button" data-c="'+esc(c)+'" aria-pressed="'+(c===cat)+'">'+esc(c)+'</button>'}).join("");
+  $("chips").innerHTML=h;
+}
+function render(){
+  var q=$("q").value.trim().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+  var out="",total=0;
+  cats.forEach(function(c){
+    if(cat!=="Todas"&&c!==cat)return;
+    var list=prods.filter(function(p){
+      if(p.c!==c)return false;
+      if(!q)return true;
+      return (p.n+" "+(p.d||"")).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").indexOf(q)>=0;
+    });
+    if(!list.length)return;
+    total+=list.length;
+    out+='<h3 class="cat-title">'+esc(c)+'</h3><div class="dishes">';
+    list.forEach(function(p){
+      var img=safeImg(p.f);
+      var ph=img?'<img src="'+esc(img)+'" alt="'+esc(p.n)+'" loading="lazy">':'<svg viewBox="0 0 24 24" aria-hidden="true">'+(ICONS[c]||DEF_ICON)+'</svg>';
+      out+='<article class="dish"><div class="ph">'+ph+'</div><div class="body">'+(p.x?'<span class="star">★ Recomendado</span>':'')+'<h4>'+esc(p.n)+'</h4><p>'+esc(p.d)+'</p><div class="row"><span class="price">'+money(p.p)+'</span><button class="add" type="button" data-id="'+esc(p.id)+'">Añadir</button></div></div></article>';
+    });
+    out+='</div>';
+  });
+  $("carta").innerHTML=total?out:'<p class="empty">No encontramos platos con esa búsqueda.</p>';
+}
+
+function cartTotal(){var t=0,n=0;Object.keys(cart).forEach(function(k){t+=cart[k].p*cart[k].q;n+=cart[k].q});return{t:t,n:n}}
+function paintCart(){
+  var s=cartTotal();
+  $("cartBtn").hidden=s.n===0;$("cartN").textContent=s.n;$("cartT").textContent=money(s.t);$("dTotal").textContent=money(s.t);
+  var h=Object.keys(cart).map(function(k){var it=cart[k];return '<div class="it"><div class="nm">'+esc(it.n)+'<small>'+money(it.p)+' c/u</small></div><div class="qty"><button type="button" data-m="'+esc(k)+'" aria-label="Quitar uno">−</button><span>'+it.q+'</span><button type="button" data-p="'+esc(k)+'" aria-label="Añadir uno">+</button></div></div>'}).join("");
+  $("items").innerHTML=h||'<p class="empty">Tu pedido está vacío.</p>';
+}
+function add(id){var p=prods.find(function(x){return String(x.id)===String(id)});if(!p)return;if(!cart[id])cart[id]={n:p.n,p:p.p,q:0};cart[id].q++;paintCart()}
+function openD(o){$("drawer").classList.toggle("open",o);document.body.style.overflow=o?"hidden":""}
+function wa(text){window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(text),"_blank","noopener")}
+
+$("chips").addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b)return;cat=b.getAttribute("data-c");chips();render();if($("carta").getBoundingClientRect().top<0)$("menu").scrollIntoView({behavior:"smooth"})});
+$("q").addEventListener("input",render);
+$("carta").addEventListener("click",function(e){var b=e.target.closest(".add");if(!b)return;add(b.getAttribute("data-id"));b.textContent="✓ Añadido";setTimeout(function(){b.textContent="Añadir"},900)});
+$("cartBtn").addEventListener("click",function(){openD(true)});
+$("drawer").addEventListener("click",function(e){
+  if(e.target.closest("[data-close]")){openD(false);return}
+  var m=e.target.closest("[data-m]"),p=e.target.closest("[data-p]");
+  if(p){cart[p.getAttribute("data-p")].q++;paintCart()}
+  if(m){var k=m.getAttribute("data-m");cart[k].q--;if(cart[k].q<=0)delete cart[k];paintCart();if(!cartTotal().n)openD(false)}
+});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")openD(false)});
+$("p-modo").addEventListener("change",function(){$("p-dir-box").hidden=this.value!=="Delivery";$("p-dir").required=this.value==="Delivery"});
+$("pedido").addEventListener("submit",function(e){
+  e.preventDefault();var s=cartTotal();if(!s.n)return;
+  var lines=Object.keys(cart).map(function(k){var it=cart[k];return "• "+it.q+" × "+it.n+" — "+money(it.p*it.q)});
+  var t="[DEMO] Pedido para Casa Araguaney\n\n"+lines.join("\n")+"\n\nTotal: "+money(s.t)+"\nEntrega: "+$("p-modo").value+"\nNombre: "+$("p-nombre").value.trim();
+  if($("p-modo").value==="Delivery")t+="\nDirección: "+$("p-dir").value.trim();
+  if($("p-nota").value.trim())t+="\nNota: "+$("p-nota").value.trim();
+  wa(t);
+});
+$("reserva").addEventListener("submit",function(e){
+  e.preventDefault();
+  var t="[DEMO] Reserva en Casa Araguaney\n\nNombre: "+$("r-nombre").value.trim()+"\nFecha: "+$("r-fecha").value+"\nHora: "+$("r-hora").value+"\nPersonas: "+$("r-pers").value;
+  if($("r-nota").value.trim())t+="\nComentario: "+$("r-nota").value.trim();
+  wa(t);
+});
+(function(){var d=new Date();$("r-fecha").min=d.toISOString().slice(0,10)})();
+$("toggle").addEventListener("click",function(){var o=$("nav").classList.toggle("open");this.setAttribute("aria-expanded",o)});
+$("links").addEventListener("click",function(){$("nav").classList.remove("open")});
+
+var io="IntersectionObserver" in window?new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}})},{threshold:.12}):null;
+document.querySelectorAll(".rv").forEach(function(el){io?io.observe(el):el.classList.add("in")});
+
+load().then(function(){chips();render();paintCart()});
+})();
+</script>
+</body>
+</html>
