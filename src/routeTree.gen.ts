@@ -10,58 +10,33 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ApiPublicGenerateBriefRouteImport } from './routes/api/public/generate-brief'
-import { Route as ApiPublicGeneratePreviewRouteImport } from './routes/api/public/generate-preview'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicGenerateBriefRoute = ApiPublicGenerateBriefRouteImport.update({
-  id: '/api/public/generate-brief',
-  path: '/api/public/generate-brief',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiPublicGeneratePreviewRoute =
-  ApiPublicGeneratePreviewRouteImport.update({
-    id: '/api/public/generate-preview',
-    path: '/api/public/generate-preview',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/api/public/generate-brief': typeof ApiPublicGenerateBriefRoute
-  '/api/public/generate-preview': typeof ApiPublicGeneratePreviewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/api/public/generate-brief': typeof ApiPublicGenerateBriefRoute
-  '/api/public/generate-preview': typeof ApiPublicGeneratePreviewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/api/public/generate-brief': typeof ApiPublicGenerateBriefRoute
-  '/api/public/generate-preview': typeof ApiPublicGeneratePreviewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/public/generate-brief' | '/api/public/generate-preview'
+  fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/public/generate-brief' | '/api/public/generate-preview'
-  id:
-    | '__root__'
-    | '/'
-    | '/api/public/generate-brief'
-    | '/api/public/generate-preview'
+  to: '/'
+  id: '__root__' | '/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ApiPublicGenerateBriefRoute: typeof ApiPublicGenerateBriefRoute
-  ApiPublicGeneratePreviewRoute: typeof ApiPublicGeneratePreviewRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -73,27 +48,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/generate-brief': {
-      id: '/api/public/generate-brief'
-      path: '/api/public/generate-brief'
-      fullPath: '/api/public/generate-brief'
-      preLoaderRoute: typeof ApiPublicGenerateBriefRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/public/generate-preview': {
-      id: '/api/public/generate-preview'
-      path: '/api/public/generate-preview'
-      fullPath: '/api/public/generate-preview'
-      preLoaderRoute: typeof ApiPublicGeneratePreviewRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ApiPublicGenerateBriefRoute: ApiPublicGenerateBriefRoute,
-  ApiPublicGeneratePreviewRoute: ApiPublicGeneratePreviewRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
