@@ -485,6 +485,37 @@ body.ct-lock{overflow:hidden}
 #bp-scr.m-col .b-it b{font-weight:800;font-size:12px}
 #bp-scr.m-col .b-foot{margin:auto 12px 10px;background:#ffd60a;border:2px solid #111;border-radius:16px;font-weight:800;text-transform:uppercase;font-size:11px;padding:8px}
 @media (max-width:899px){.qr-cap{transform:translateX(1ch)}}
+
+/* ===== Ejemplos ===== */
+.ex-grid{display:grid;gap:22px;margin-top:48px}
+@media(min-width:860px){.ex-grid{grid-template-columns:1.15fr .85fr}}
+.ex-card{display:flex;gap:24px;align-items:center;text-decoration:none;color:inherit}
+.ex-card img{width:150px;flex:none;border-radius:18px;border:1px solid var(--line);box-shadow:0 18px 38px -20px rgba(0,0,0,.9)}
+.ex-card h3{margin-top:10px}
+.ex-card .pf-tag{margin-top:0}
+.ex-card .pf-cta{display:inline-block;margin-top:14px}
+.ex-card .btn{margin-top:18px}
+.ex-ico{width:54px;height:54px;flex:none;align-self:flex-start;stroke:var(--gold);fill:none;stroke-width:1.4;stroke-linecap:round}
+@media(max-width:560px){.ex-card{flex-direction:column;align-items:flex-start}.ex-card img{width:min(220px,70%);align-self:center}}
+/* ===== Cómo trabajamos ===== */
+.como-grid{display:grid;gap:40px;margin-top:44px;align-items:start}
+@media(min-width:900px){.como-grid{grid-template-columns:1.2fr .8fr;gap:56px}}
+.como-grid .timeline{margin-top:0}
+.tl b,.faq b{color:var(--cream);font-weight:500}
+.plazos{list-style:none;padding:0;margin:18px 0 0}
+.plazos li{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px solid var(--line);font-size:.92rem;color:var(--cream-dim)}
+.plazos li:last-child{border-bottom:0}
+.plazos b{color:var(--gold);font-weight:500;white-space:nowrap}
+#contacto .ct-cta{justify-content:center}
+/* ===== Preguntas frecuentes ===== */
+.faq{margin-top:40px;max-width:820px;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:20px 0;font-family:var(--serif);font-size:1.12rem;color:var(--cream)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--gold);font-family:var(--sans);font-size:1.4rem;line-height:1;transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--cream-dim);font-size:.96rem;padding:0 0 22px;max-width:68ch}
+.ct-txt small{display:block;font-size:.78rem;color:var(--cream-dim)}
 </style>
 <script src="/hoy/config.js"></script>
 </head>
@@ -495,11 +526,11 @@ body.ct-lock{overflow:hidden}
   <div class="wrap nav-in">
     <a href="#top"><img class="logo" src="/media/logo-mesa-creativa-128.webp" width="128" height="128" alt="Mesa Creativa" /></a>
     <nav class="nav-links" id="nav-links">
-      <a href="#quienes-somos">Quiénes Somos</a>
-      <a href="#paquetes">Paquetes</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#carta">Carta</a>
-      <a href="#reservas">Reservas</a>
+      <a href="#paquetes">Planes</a>
+      <a href="#ejemplos">Ejemplos</a>
+      <a href="#como-trabajamos">Cómo trabajamos</a>
+      <a href="#quienes-somos">Quiénes somos</a>
+      <a href="#preguntas">Preguntas</a>
       <a href="#contacto" data-contact-open>Contacto</a>
     </nav>
     <div class="nav-right">
@@ -526,35 +557,12 @@ body.ct-lock{overflow:hidden}
   </div>
 </section>
 
-<!-- ============ B. QUIÉNES SOMOS ============ -->
-<section id="quienes-somos">
+<!-- ============ B. QUÉ HACEMOS ============ -->
+<section id="que-hacemos">
   <div class="wrap">
-    <p class="eyebrow rv">Quiénes somos</p>
-    <h2 class="rv">El equipo detrás de tus Páginas Web y Apps</h2>
-    <div class="grid g2" style="margin-top:32px">
-      <p class="lead rv">Somos un equipo creativo especializado en crear contenido visual para negocios.</p>
-    </div>
-
-    <div style="margin-top:56px;max-width:560px">
-      <div class="card rv">
-        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 14.4 9.2 22 9.3 16 14.2 18.2 22 12 17.8 5.8 22 8 14.2 2 9.3 9.6 9.2z"/></svg>
-        <h3>Dirección creativa</h3>
-        <p>Cada proyecto web con estructura, estilo y coherencia visual de marca.</p>
-      </div>
-    </div>
-    <figure class="rv" style="margin:48px 0 0 calc(50% - 50vw);text-align:center;width:min(620px,92vw)">
-      <img src="/media/movil-qr.webp" alt="Móvil mostrando la web junto a un código QR" width="896" height="1200" loading="lazy" style="width:100%;height:auto;display:block;margin:0">
-      <figcaption class="lead qr-cap" style="position:relative;margin:-26% 0.8% 0 auto;width:fit-content;max-width:62%;text-align:center;font-size:1.05rem;line-height:1.5">Creamos un código QR personalizado<br>para que tus clientes accedan fácilmente<br>a la información de tu negocio.</figcaption>
-    </figure>
-  </div>
-</section>
-
-<!-- ============ E2. LANDING PAGE PARA TU NEGOCIO ============ -->
-<section id="landing-page">
-  <div class="wrap">
-    <p class="eyebrow rv">Landing page para tu negocio</p>
+    <p class="eyebrow rv">Qué hacemos</p>
     <h2 class="rv">¿Tienes un restaurante, cafetería, comercio o negocio de servicios?</h2>
-    <p class="lead rv" style="margin-top:26px">Además de fotografía y video, creamos tu propia landing page como esta: una página web profesional para tu negocio, con tus fotos, tu carta o servicios y un código QR listo para imprimir en tu local, para que tus clientes accedan a ella al instante desde la mesa.</p>
+    <p class="lead rv" style="margin-top:26px">Creamos tu propia página web, como esta: una página web profesional para tu negocio, con tus fotos, tu carta o servicios y un código QR listo para imprimir en tu local, para que tus clientes accedan a ella al instante desde la mesa.</p>
 
     <div class="grid g3" style="margin-top:56px">
       <div class="card rv">
@@ -574,17 +582,141 @@ body.ct-lock{overflow:hidden}
       </div>
     </div>
 
+    <figure class="rv" style="margin:48px 0 0 calc(50% - 50vw);text-align:center;width:min(620px,92vw)">
+      <img src="/media/movil-qr.webp" alt="Móvil mostrando la web junto a un código QR" width="896" height="1200" loading="lazy" style="width:100%;height:auto;display:block;margin:0">
+      <figcaption class="lead qr-cap" style="position:relative;margin:-26% 0.8% 0 auto;width:fit-content;max-width:62%;text-align:center;font-size:1.05rem;line-height:1.5">Creamos un código QR personalizado<br>para que tus clientes accedan fácilmente<br>a la información de tu negocio.</figcaption>
+    </figure>
+
     <div class="rv" style="text-align:center;margin-top:56px">
-      <a class="btn btn-primary btn-lg" href="https://wa.me/34668580249?text=Hola%2C%20vi%20tu%20web%20y%20quiero%20informaci%C3%B3n%20sobre%20crear%20la%20landing%20page%20de%20mi%20negocio." target="_blank" rel="noopener">Quiero mi landing page</a>
+      <a class="btn btn-primary btn-lg" href="#" data-wa data-wa-text="quiero información sobre crear la página web de mi negocio.">Quiero mi página web</a>
       <p class="note" style="text-align:center;margin-top:18px">Desde $149 · Web Catálogo + Menú $190 · Autogestionable $390 · Web Pro desde $590</p>
     </div>
   </div>
 </section>
 
-<!-- ============ D3. CARTA / MENÚ DIGITAL (demo) ============ -->
+<!-- ============ C. PLANES Y PRECIOS ============ -->
+<section class="about" id="paquetes">
+  <div class="wrap">
+    <p class="eyebrow rv">Paquetes y precios</p>
+    <h2 class="rv">Elige el plan para tu negocio</h2>
+    <p class="lead rv" style="margin-top:26px">De menor a mayor: empieza con lo esencial y crece cuando tu negocio lo necesite. Cada plan indica qué incluye y qué necesita para funcionar.</p>
+
+    <div class="packs p4">
+      <div class="card pack rv">
+        <span class="tag">Landing Emprendedor</span>
+        <div class="amount">$149</div>
+        <p class="note" style="margin-top:-8px">Pago único · para empezar a vender por WhatsApp</p>
+        <ul class="feat">
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Página de una sola vista con tu logo y colores</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Presentación de hasta 5 servicios o productos</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Hasta 6 fotos optimizadas para celular</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Botones directos a WhatsApp</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Ubicación en Google Maps y enlaces a tus redes</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Código QR listo para imprimir</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Publicada en enlace gratuito · 1 ronda de ajustes</span></li>
+        </ul>
+        <a class="btn btn-ghost" href="#" data-wa>Lo quiero</a>
+      </div>
+
+      <div class="card pack featured rv">
+        <span class="tag">★ Recomendado · Web Catálogo + Menú</span>
+        <div class="amount">$190</div>
+        <p class="note" style="margin-top:-8px">Pago único · nosotros actualizamos tu información</p>
+        <ul class="feat">
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Todo lo del Landing Emprendedor</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Catálogo o menú de hasta 30 productos o platos con precios en $</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Fotos organizadas por categorías</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Buscador y filtros</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Botón «Pedir por WhatsApp» en cada producto</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Código QR digital para compartir</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>2 rondas de ajustes</span></li>
+        </ul>
+        <a class="btn btn-primary" href="#" data-wa>Lo quiero</a>
+      </div>
+
+      <div class="card pack rv">
+        <span class="tag">Catálogo Autogestionable</span>
+        <div class="amount">$390</div>
+        <p class="note" style="margin-top:-8px">+ $10/mes · tú actualizas tu información</p>
+        <ul class="feat">
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Todo lo del Web Catálogo + Menú</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Panel privado con tu clave: cambia precios, fotos y «Novedades del día» desde tu celular</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Hasta 80 productos o platos</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Formulario de reservas o pedidos por WhatsApp</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Respaldo de tus datos y soporte por WhatsApp</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>La mensualidad cubre el panel, el servidor y los respaldos</span></li>
+        </ul>
+        <a class="btn btn-ghost" href="#" data-wa>Lo quiero</a>
+        <a class="note" href="#ejemplos" style="margin-top:-4px;text-align:center">Ver cómo funciona el panel →</a>
+      </div>
+
+      <div class="card pack rv">
+        <span class="tag">Web Pro a Medida</span>
+        <div class="amount">Desde $590</div>
+        <p class="note" style="margin-top:-8px">Cotización según alcance · + $20/mes: panel, servidor, respaldos y cambios</p>
+        <ul class="feat">
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Todo lo del Catálogo Autogestionable</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Múltiples secciones: inicio, nosotros, servicios, galería y contacto</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Catálogo extenso, con más de 80 productos y categorías</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Cotizador por WhatsApp</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Integración de analítica de visitas</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Optimización completa para Google</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Dominio .com propio incluido el primer año (luego $20 al año)</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>30 días de soporte tras la entrega</span></li>
+        </ul>
+        <a class="btn btn-ghost btn-gold-outline" href="#" data-wa>Pedir cotización</a>
+        <a class="note" href="/demo-pro.html" target="_blank" rel="noopener" style="margin-top:-4px;text-align:center">Ver una web de ejemplo →</a>
+      </div>
+
+    </div>
+
+    <div class="card rv" style="margin-top:40px">
+      <h3>Servicios adicionales</h3>
+      <ul class="feat" style="margin-top:16px">
+        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Dominio .com propio:</b> $20 al año (registro y renovación)</span></li>
+        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Plan Cuidado:</b> $8/mes para Landing y Catálogo: mantenimiento, respaldo y 1 cambio pequeño al mes</span></li>
+        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Cambios puntuales:</b> desde $5 (precios, textos o fotos)</span></li>
+        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Fotos y video de tu negocio:</b> se cotiza aparte</span></li>
+      </ul>
+    </div>
+
+    <p class="note rv">Precios en dólares ($ USD), pago único salvo donde se indique mensualidad. Todos los planes incluyen adaptación para celulares, botón flotante de WhatsApp y entrega lista para usar. Entrega estimada desde que recibimos fotos y textos: Landing 3–5 días hábiles, Catálogo 5–7, Autogestionable 7–10 y Web Pro 2–4 semanas.</p>
+  </div>
+</section>
+
+<!-- ============ D. EJEMPLOS ============ -->
+<section id="ejemplos">
+  <div class="wrap">
+    <p class="eyebrow rv">Ejemplos</p>
+    <h2 class="rv">Mira cómo puede verse tu web</h2>
+    <p class="lead rv" style="margin-top:26px">Ábrela desde tu celular, como lo harán tus clientes. Todo lo que ves en esta sección son ejemplos: los cambiamos por tu logo, tus fotos y tus precios.</p>
+    <div class="ex-grid">
+      <a class="card ex-card rv" href="/demo-pro.html" target="_blank" rel="noopener">
+        <img src="/media/ejemplo-casa-araguaney.webp" width="520" height="1040" loading="lazy" decoding="async" alt="Página de ejemplo del restaurante Casa Araguaney vista en un celular" />
+        <div>
+          <span class="pf-tag">Web Pro a Medida</span>
+          <h3>Casa Araguaney, restaurante de ejemplo</h3>
+          <p>Web completa con inicio, nosotros, servicios, galería y menú de cocina caraqueña. Tus clientes eligen platos y te los piden por WhatsApp en un minuto.</p>
+          <span class="pf-cta">Ver la web de ejemplo →</span>
+        </div>
+      </a>
+      <div class="card ex-card ex-panel rv">
+        <svg class="ex-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M9.5 7h5M9.5 11h5M9.5 15h3"/></svg>
+        <div>
+          <span class="pf-tag">Catálogo Autogestionable y Web Pro</span>
+          <h3>Tu panel de administración</h3>
+          <p>Entras con tu correo y tu clave desde el celular. Cambias precios, subes fotos, marcas qué está disponible y publicas las «Novedades del día». Los cambios se ven al momento.</p>
+          <a class="btn btn-ghost" href="#" data-wa data-wa-text="quiero ver una demostración del panel de administración.">Pide que te lo enseñemos</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ D2. EJEMPLO: CARTA DIGITAL ============ -->
 <section id="carta">
   <div class="wrap">
-    <p class="eyebrow rv">Carta digital</p>
+    <p class="eyebrow rv">Ejemplo · Carta digital</p>
     <h2 class="rv">Así puede verse tu carta</h2>
     <p class="lead rv" style="margin-top:26px">Ejemplo de carta digital integrada en tu landing: jerarquía clara, platos estrella destacados y precios fáciles de escanear desde el móvil.</p>
 
@@ -638,7 +770,7 @@ body.ct-lock{overflow:hidden}
 
     <p class="note rv" style="margin-top:34px">Carta de ejemplo: sustituye estos platos y precios por los de tu negocio al crear tu landing page.</p>
     <div class="pf" id="portfolio-web">
-      <p class="eyebrow rv">Proyectos reales · Caracas</p>
+      <p class="eyebrow rv">Ejemplos de diseño</p>
       <h2 class="rv">Páginas web hechas para vender, sea cual sea tu negocio</h2>
       <p class="lead rv">No importa si vendes repuestos, ropa, atiendes en un consultorio o prestas servicios profesionales: estructuramos tu web para que tus clientes en Caracas y desde cualquier lugar vean tu catálogo, entiendan lo que ofreces y te escriban directamente al WhatsApp listos para comprar.</p>
       <div class="pf-grid">
@@ -669,12 +801,29 @@ body.ct-lock{overflow:hidden}
   </div>
 </section>
 
-<!-- ============ D4. RESERVAS ============ -->
-<section class="about" id="reservas">
+<!-- ============ D3. EJEMPLOS POR ESTILO ============ -->
+<section class="about" id="brief">
   <div class="wrap">
-    <p class="eyebrow rv">Reservas</p>
+    <p class="eyebrow rv">Ejemplos por estilo</p>
+    <h2 class="rv">Elige un estilo y mira cómo se arma tu página.</h2>
+    <p class="lead rv" style="margin-top:26px">Mira cómo podría verse tu web en negocios típicos de Caracas. Elige un estilo y la verás armarse en el móvil. Cuando encuentres el que te guste, pídenos tu cotización por WhatsApp.</p>
+    <div class="bp-grid">
+    <form class="form-grid rv" id="brief-form" novalidate>
+      <div class="field form-full"><label for="b-estilo">Estilo que te gusta</label>
+        <select id="b-estilo"><option>Minimalista y elegante</option><option>Moderno y tecnológico</option><option>Clásico y formal</option><option>Cálido y artesanal</option><option>Colorido y juvenil</option></select></div>
+      <div class="field form-full" style="margin-top:10px"><button class="btn btn-primary" type="button" id="b-btn">Quiero una página así</button></div>
+    </form>
+      <div class="bp-side rv"><div class="phone-photo"><div class="pp-screen" aria-label="Ejemplo de página web"><div id="bp-scr"><div class="bp-empty">Elige un estilo para ver un ejemplo</div></div></div><img width="565" height="1003" src="/media/movil-marco.webp" alt="" loading="lazy" /></div><p class="bp-note">Ejemplo ilustrativo</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ D4. EJEMPLO: RESERVAS ============ -->
+<section id="reservas">
+  <div class="wrap">
+    <p class="eyebrow rv">Ejemplo · Reservas</p>
     <h2 class="rv">Reserva tu mesa</h2>
-    <p class="lead rv" style="margin-top:26px">Completa el formulario y se abrirá WhatsApp con tu solicitud ya redactada. No se guarda nada en ningún servidor: el mensaje se envía directamente desde tu móvil.</p>
+    <p class="lead rv" style="margin-top:26px">Así reciben reservas los restaurantes: el cliente completa el formulario y se abre WhatsApp con la solicitud ya redactada. No se guarda nada en ningún servidor. Pruébalo: el mensaje llegará marcado como demostración.</p>
 
     <form class="form-grid rv" id="reserva-form" novalidate>
       <div class="field">
@@ -683,7 +832,7 @@ body.ct-lock{overflow:hidden}
       </div>
       <div class="field">
         <label for="r-telefono">Teléfono</label>
-        <input id="r-telefono" type="tel" maxlength="20" autocomplete="tel" placeholder="600 000 000" required />
+        <input id="r-telefono" type="tel" maxlength="20" autocomplete="tel" placeholder="0414 000 0000" required />
       </div>
       <div class="field">
         <label for="r-fecha">Fecha</label>
@@ -723,169 +872,109 @@ body.ct-lock{overflow:hidden}
   </div>
 </section>
 
-<!-- ============ F. PORTFOLIO / REEL ============ -->
-<section class="about" id="portfolio">
+<!-- ============ E. CÓMO TRABAJAMOS ============ -->
+<section class="about" id="como-trabajamos">
   <div class="wrap">
-    <p class="eyebrow rv">Portfolio</p>
-    <h2 class="rv">Trabajo seleccionado</h2>
-    <div class="masonry rv" style="margin-top:40px">
-      <div class="shot light wide"><img width="1200" height="960" loading="lazy" src="/media/bandeja-desayuno.jpg" alt="Bandeja de desayuno con bollería, wraps y bebidas" /></div>
-      <div class="shot light"><img width="1200" height="799" loading="lazy" src="/media/croissant-chocolate.jpg" alt="Croissants de chocolate con chocolate caliente" /></div>
-      <div class="shot light"><img width="1200" height="799" loading="lazy" src="/media/rollos-canela.jpg" alt="Rollos de canela con capuchino sobre mármol" /></div>
-      <div class="shot light"><img width="1200" height="849" loading="lazy" src="/media/wraps-crujientes.jpg" alt="Trío de wraps crujientes con refresco" /></div>
-      <div class="shot light"><img width="1200" height="799" loading="lazy" src="/media/evento-boda.jpg" alt="Bocados gourmet en catering de boda" /></div>
+    <p class="eyebrow rv">Cómo trabajamos</p>
+    <h2 class="rv">De la primera conversación a tu web publicada</h2>
+    <div class="como-grid">
+      <div class="timeline">
+        <div class="tl rv"><span>Paso 1 · Eliges tu plan</span><p>Lo hablamos por WhatsApp y reservas la fecha de inicio con un <b>anticipo del 50 %</b>. La cotización es válida durante 15 días.</p></div>
+        <div class="tl rv"><span>Paso 2 · Nos envías tu material</span><p>Tu logo, tus fotos, los textos y la lista de productos o platos con precios. <b>Las fotos y los videos los pones tú</b>; si no tienes, cotizamos una sesión aparte.</p></div>
+        <div class="tl rv"><span>Paso 3 · Diseñamos y revisas</span><p>Te mandamos un enlace para ver tu web antes de publicarla y pides los ajustes que incluye tu plan.</p></div>
+        <div class="tl rv"><span>Paso 4 · Entrega</span><p>Pagas el <b>50 % restante</b>, publicamos tu web y te entregamos su código QR. Si tu plan tiene panel, te enseñamos a usarlo.</p></div>
+      </div>
+      <div class="card rv">
+        <h3>Plazos de entrega</h3>
+        <p>Cuentan desde que recibimos el anticipo y todo tu material:</p>
+        <ul class="plazos">
+          <li><span>Landing Emprendedor</span><b>3–5 días hábiles</b></li>
+          <li><span>Web Catálogo + Menú</span><b>5–7 días hábiles</b></li>
+          <li><span>Catálogo Autogestionable</span><b>7–10 días hábiles</b></li>
+          <li><span>Web Pro a Medida</span><b>2–4 semanas</b></li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ============ H. CONDICIONES ============ -->
-<section id="condiciones">
+<!-- ============ F. QUIÉNES SOMOS ============ -->
+<section id="quienes-somos">
   <div class="wrap">
-    <p class="eyebrow rv">Condiciones de trabajo</p>
-    <h2 class="rv">Claro desde el primer día</h2>
-    <ul class="checks rv">
-      <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Anticipo del 50% para reservar la fecha de inicio.</span></li>
-      <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Saldo restante contra entrega del material final.</span></li>
-      <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Derechos de uso comercial: redes, web y portfolio del equipo creativo.</span></li>
-      <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Reprogramaciones con un mínimo de 48 horas de aviso.</span></li>
-      <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Propuesta con validez de 15 días desde su emisión.</span></li>
-    </ul>
-  </div>
-</section>
+    <p class="eyebrow rv">Quiénes somos</p>
+    <h2 class="rv">El equipo detrás de tus Páginas Web y Apps</h2>
+    <div class="grid g2" style="margin-top:32px">
+      <p class="lead rv">Somos un equipo pequeño que diseña y programa páginas web para negocios de Caracas. Te atendemos de tú a tú, por WhatsApp o en persona, desde la primera idea hasta después de publicar.</p>
+    </div>
 
-<!-- ============ I. CRONOGRAMA ============ -->
-<section class="about" id="cronograma">
-  <div class="wrap">
-    <p class="eyebrow rv">Cronograma orientativo</p>
-    <h2 class="rv">Cómo avanza el proyecto</h2>
-    <div class="timeline">
-      <div class="tl rv"><span>Semana 1</span><p>Reunión de brief, moodboard y confirmación de la fecha de inicio.</p></div>
-      <div class="tl rv"><span>Entrega</span><p>Primera selección para revisión y, tras tus comentarios, ajustes y entrega final.</p></div>
+    <div class="grid g3" style="margin-top:56px">
+      <div class="card rv">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 14.4 9.2 22 9.3 16 14.2 18.2 22 12 17.8 5.8 22 8 14.2 2 9.3 9.6 9.2z"/></svg>
+        <h3>Dirección creativa</h3>
+        <p>Cada proyecto web con estructura, estilo y coherencia visual de marca.</p>
+      </div>
+      <div class="card rv">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6 2 12l6 6M16 6l6 6-6 6"/></svg>
+        <h3>Desarrollo y panel</h3>
+        <p>Programamos tu web, tu panel de administración y los respaldos semanales de tus datos.</p>
+      </div>
+      <div class="card rv">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        <h3>Atención en Caracas</h3>
+        <p>Aníbal Sánchez y Alexander Ojeda te asesoran, te enseñan los ejemplos y resuelven tus dudas.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ============ J. PRÓXIMOS PASOS ============ -->
-<section class="final" id="contacto">
+<!-- ============ G. PREGUNTAS FRECUENTES ============ -->
+<section class="about" id="preguntas">
   <div class="wrap">
-    <p class="eyebrow rv">Próximos pasos</p>
-    <h2 class="rv">Empezamos en tres movimientos</h2>
-    <div class="grid g3">
-      <div class="card rv"><span class="num">1</span><h3>Confirmar el plan</h3><p>Eliges Landing Emprendedor, Web Catálogo + Menú, Catálogo Autogestionable o Web Pro a Medida.</p></div>
-      <div class="card rv"><span class="num">2</span><h3>Agendar la fecha</h3><p>Reservamos el día de inicio en agenda con el anticipo del 50%.</p></div>
-      <div class="card rv"><span class="num">3</span><h3>Brief y moodboard</h3><p>Alineamos estilo, colores y referencias visuales antes de empezar tu web.</p></div>
+    <p class="eyebrow rv">Preguntas frecuentes</p>
+    <h2 class="rv">Lo que más nos preguntan</h2>
+    <div class="faq rv">
+      <details>
+        <summary>¿Cuánto tarda en estar lista mi web?</summary>
+        <p>Entre 3 días hábiles (Landing) y 4 semanas (Web Pro), contados desde que recibimos el anticipo y todo tu material. Arriba tienes los plazos de cada plan.</p>
+      </details>
+      <details>
+        <summary>¿Quién pone las fotos y los textos?</summary>
+        <p>Tú. Nos envías tus fotos, tu logo y la lista de productos con precios, y nosotros los ordenamos, optimizamos y les damos estilo. Si no tienes fotos, podemos cotizar una sesión aparte.</p>
+      </details>
+      <details>
+        <summary>¿Necesito comprar un dominio?</summary>
+        <p>No. Landing, Catálogo y Autogestionable se publican en un enlace gratuito. Si quieres tu propio .com, cuesta $20 al año; en el Web Pro el primer año está incluido.</p>
+      </details>
+      <details>
+        <summary>¿Puedo cambiar los precios yo mismo?</summary>
+        <p>Sí, con el Catálogo Autogestionable y el Web Pro: entras al panel desde el celular y lo cambias al momento. Con la Landing y el Catálogo nos pides el cambio: desde $5, o incluido en el Plan Cuidado ($8 al mes, 1 cambio pequeño al mes).</p>
+      </details>
+      <details>
+        <summary>¿Para qué es la mensualidad?</summary>
+        <p>Cubre el panel, el servidor donde vive tu web, los respaldos de tus datos y el soporte por WhatsApp. Se paga al inicio de cada mes. Si se deja de pagar, avisamos antes de pausar el panel y la página.</p>
+      </details>
+      <details>
+        <summary>¿Cómo se paga?</summary>
+        <p>En dólares: 50 % de anticipo para reservar la fecha y 50 % a la entrega. Te indicamos los medios de pago disponibles al enviarte la cotización.</p>
+      </details>
+      <details>
+        <summary>¿Mis clientes necesitan descargar algo?</summary>
+        <p>No. Abren tu web desde el navegador del celular, escaneando el código QR o tocando el enlace que compartes por WhatsApp y redes.</p>
+      </details>
     </div>
+  </div>
+</section>
+
+<!-- ============ H. CONTACTO ============ -->
+<section class="final" id="contacto" style="background:var(--carbon)">
+  <div class="wrap">
+    <p class="eyebrow rv">Contacto</p>
+    <h2 class="rv">¿Hablamos de tu web?</h2>
+    <p class="lead rv" style="margin:26px auto 40px">Escríbenos por WhatsApp, cuéntanos qué vende tu negocio y te respondemos con una propuesta y su precio.</p>
     <div class="ct-cta">
       <a class="btn btn-primary btn-lg rv" href="#" data-wa>Hablemos por WhatsApp</a>
       <button class="btn btn-gold-outline btn-lg rv" type="button" data-contact-open>Contacto</button>
     </div>
-  </div>
-</section>
-
-<!-- ============ BRIEF CON IA ============ -->
-<section class="about" id="brief">
-  <div class="wrap">
-    <p class="eyebrow rv">Ejemplos por estilo</p>
-    <h2 class="rv">Elige un estilo y mira cómo se arma tu página.</h2>
-    <p class="lead rv" style="margin-top:26px">Mira cómo podría verse tu web en negocios típicos de Caracas. Elige un estilo y la verás armarse en el móvil. Cuando encuentres el que te guste, pídenos tu cotización por WhatsApp.</p>
-    <div class="bp-grid">
-    <form class="form-grid rv" id="brief-form" novalidate>
-      <div class="field form-full"><label for="b-estilo">Estilo que te gusta</label>
-        <select id="b-estilo"><option>Minimalista y elegante</option><option>Moderno y tecnológico</option><option>Clásico y formal</option><option>Cálido y artesanal</option><option>Colorido y juvenil</option></select></div>
-      <div class="field form-full" style="margin-top:10px"><button class="btn btn-primary" type="button" id="b-btn">Quiero una página así</button></div>
-    </form>
-      <div class="bp-side rv"><div class="phone-photo"><div class="pp-screen" aria-label="Ejemplo de página web"><div id="bp-scr"><div class="bp-empty">Elige un estilo para ver un ejemplo</div></div></div><img width="565" height="1003" src="/media/movil-marco.webp" alt="" loading="lazy" /></div><p class="bp-note">Ejemplo ilustrativo</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ E. PAQUETES Y PRECIOS ============ -->
-<section class="about" id="paquetes">
-  <div class="wrap">
-    <p class="eyebrow rv">Paquetes y precios</p>
-    <h2 class="rv">Elige el plan para tu negocio</h2>
-    <p class="lead rv" style="margin-top:26px">De menor a mayor: empieza con lo esencial y crece cuando tu negocio lo necesite. Cada plan indica qué incluye y qué necesita para funcionar.</p>
-
-    <div class="packs p4">
-      <div class="card pack rv">
-        <span class="tag">Landing Emprendedor</span>
-        <div class="amount">$149</div>
-        <p class="note" style="margin-top:-8px">Pago único · para empezar a vender por WhatsApp</p>
-        <ul class="feat">
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Página de una sola vista con tu logo y colores</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Presentación de hasta 5 servicios o productos</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Hasta 6 fotos optimizadas para celular</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Botones directos a WhatsApp</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Ubicación en Google Maps y enlaces a tus redes</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Código QR listo para imprimir</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Publicada en enlace gratuito · 1 ronda de ajustes</span></li>
-        </ul>
-        <a class="btn btn-ghost" href="#" data-wa>Lo quiero</a>
-      </div>
-
-      <div class="card pack featured rv">
-        <span class="tag">★ Recomendado · Web Catálogo + Menú</span>
-        <div class="amount">$190</div>
-        <p class="note" style="margin-top:-8px">Pago único · nosotros actualizamos tu información</p>
-        <ul class="feat">
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Todo lo del Landing Emprendedor</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Catálogo o menú de hasta 30 productos o platos con precios en $</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Fotos organizadas por categorías</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Buscador y filtros</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Botón «Pedir por WhatsApp» en cada producto</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Código QR digital para compartir</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>2 rondas de ajustes</span></li>
-        </ul>
-        <a class="btn btn-primary" href="#" data-wa>Lo quiero</a>
-      </div>
-
-      <div class="card pack rv">
-        <span class="tag">Catálogo Autogestionable</span>
-        <div class="amount">$390</div>
-        <p class="note" style="margin-top:-8px">+ $10/mes · tú actualizas tu información</p>
-        <ul class="feat">
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Todo lo del Web Catálogo + Menú</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Panel privado con tu clave: cambia precios, fotos y «Novedades del día» desde tu celular</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Hasta 80 productos o platos</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Formulario de reservas o pedidos por WhatsApp</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Respaldo de tus datos y soporte por WhatsApp</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>La mensualidad cubre el panel, el servidor y los respaldos</span></li>
-        </ul>
-        <a class="btn btn-ghost" href="#" data-wa>Lo quiero</a>
-        <a class="note" href="/admin-catalogo.html" target="_blank" rel="noopener" style="margin-top:-4px;text-align:center">Probar el panel de ejemplo →</a>
-      </div>
-
-      <div class="card pack rv">
-        <span class="tag">Web Pro a Medida</span>
-        <div class="amount">Desde $590</div>
-        <p class="note" style="margin-top:-8px">Cotización según alcance · + $20/mes: panel, servidor, respaldos y cambios</p>
-        <ul class="feat">
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Todo lo del Catálogo Autogestionable</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Múltiples secciones: inicio, nosotros, servicios, galería y contacto</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Catálogo extenso, con más de 80 productos y categorías</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Cotizador por WhatsApp</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Integración de analítica de visitas</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Optimización completa para Google</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Dominio .com propio incluido el primer año (luego $20 al año)</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>30 días de soporte tras la entrega</span></li>
-        </ul>
-        <a class="btn btn-ghost btn-gold-outline" href="#" data-wa>Pedir cotización</a>
-        <a class="note" href="/demo-pro.html" target="_blank" rel="noopener" style="margin-top:-4px;text-align:center">Ver una web de ejemplo →</a>
-      </div>
-
-    </div>
-
-    <div class="card rv" style="margin-top:40px">
-      <h3>Servicios adicionales</h3>
-      <ul class="feat" style="margin-top:16px">
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Dominio .com propio:</b> $20 al año (registro y renovación)</span></li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Plan Cuidado:</b> $8/mes para Landing y Catálogo: mantenimiento, respaldo y 1 cambio pequeño al mes</span></li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Cambios puntuales:</b> desde $5 (precios, textos o fotos)</span></li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Fotos y video de tu negocio:</b> se cotiza aparte</span></li>
-      </ul>
-    </div>
-
-    <p class="note rv">Precios en dólares ($ USD), pago único salvo donde se indique mensualidad. Todos los planes incluyen adaptación para celulares, botón flotante de WhatsApp y entrega lista para usar. Entrega estimada desde que recibimos fotos y textos: Landing 3–5 días hábiles, Catálogo 5–7, Autogestionable 7–10 y Web Pro 2–4 semanas.</p>
   </div>
 </section>
 
@@ -897,15 +986,15 @@ body.ct-lock{overflow:hidden}
       <a href="mailto:mesacreativaccs@gmail.com">mesacreativaccs@gmail.com</a>
     </div>
     <nav class="foot-links" aria-label="Secciones">
-      <a href="#quienes-somos">Quiénes Somos</a>
-      <a href="#paquetes">Paquetes</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#carta">Carta</a>
-      <a href="#reservas">Reservas</a>
+      <a href="#paquetes">Planes</a>
+      <a href="#ejemplos">Ejemplos</a>
+      <a href="#como-trabajamos">Cómo trabajamos</a>
+      <a href="#quienes-somos">Quiénes somos</a>
+      <a href="#preguntas">Preguntas</a>
       <a href="#contacto" data-contact-open>Contacto</a>
       <a class="btn btn-ghost foot-wa" href="#" data-wa>WhatsApp</a>
     </nav>
-    <p class="tiny">Páginas web y apps para negocios · Caracas, Venezuela · Propuesta con validez de 15 días desde su emisión.</p>
+    <p class="tiny">Páginas web y apps para negocios · Caracas, Venezuela</p>
     <a class="foot-admin" href="/admin-hoy.html" target="_top" rel="nofollow">Administrar</a>
   </div>
 </footer>
@@ -935,25 +1024,49 @@ body.ct-lock{overflow:hidden}
           <span class="ct-ico wa"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.02c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.13.82.84-3.05-.2-.31a8.2 8.2 0 0 1-1.26-4.24c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.82c0 4.54-3.7 8.1-8.24 8.1Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.65-1.23-1.46-1.38-1.71-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07s.9 2.4 1.02 2.56c.12.17 1.76 2.68 4.26 3.76.6.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.28Z"/></svg></span>
         </a>
       </li>
+      <li>
+        <a class="ct-item" href="https://wa.me/34668580249?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20crear%20la%20web%20de%20mi%20negocio." target="_blank" rel="noopener" aria-label="Escribir por WhatsApp a Mesa Creativa en España">
+          <span class="ct-txt"><b>Mesa Creativa</b><small>Dirección · España</small></span>
+          <span class="ct-ico wa"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.02c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.13.82.84-3.05-.2-.31a8.2 8.2 0 0 1-1.26-4.24c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.82c0 4.54-3.7 8.1-8.24 8.1Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.65-1.23-1.46-1.38-1.71-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07s.9 2.4 1.02 2.56c.12.17 1.76 2.68 4.26 3.76.6.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.28Z"/></svg></span>
+        </a>
+      </li>
     </ul>
   </div>
 </div>
 
 <!-- ============ WHATSAPP FLOTANTE ============ -->
-<a class="wa-float" href="#" data-wa aria-label="Escríbeme por WhatsApp">
+<a class="wa-float" href="#" data-wa aria-label="Escríbenos por WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.02c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.13.82.84-3.05-.2-.31a8.2 8.2 0 0 1-1.26-4.24c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.82c0 4.54-3.7 8.1-8.24 8.1Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.65-1.23-1.46-1.38-1.71-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07s.9 2.4 1.02 2.56c.12.17 1.76 2.68 4.26 3.76.6.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.28Z"/></svg>
 </a>
 
 <nav class="mbar" id="mbar" aria-label="Contacto rápido">
-  <a class="m-sec" href="#carta">Ver carta</a>
+  <a class="m-sec" href="#ejemplos">Ejemplos</a>
   <a class="m-sec" href="#paquetes">Tarifas</a>
   <a class="m-wa" href="#" data-wa>WhatsApp</a>
 </nav>
 <script>
-/* ==== WhatsApp: número de contacto ==== */
-var WA_PHONE = "34668580249";
+/* ==== WhatsApp: los botones principales van a un comercial en Caracas ====
+   A cada visitante se le asigna al azar Aníbal o Alexander y se le mantiene
+   el mismo en sus siguientes visitas. Para añadir o quitar comerciales,
+   edita la lista COMERCIALES. El número de Mesa Creativa en España
+   está en la ventana de Contacto. */
+var COMERCIALES = [
+  { nombre: "Aníbal",    tel: "584145086400" },
+  { nombre: "Alexander", tel: "584142611653" }
+];
+var WA_REP = (function(){
+  var i = -1;
+  try { i = parseInt(localStorage.getItem("mc_comercial"), 10); } catch(e){}
+  if (!(i >= 0 && i < COMERCIALES.length)) {
+    i = Math.floor(Math.random() * COMERCIALES.length);
+    try { localStorage.setItem("mc_comercial", String(i)); } catch(e){}
+  }
+  return COMERCIALES[i];
+})();
+var WA_PHONE = WA_REP.tel;
+var WA_HOLA = "Hola " + WA_REP.nombre + ", ";
 
-document.querySelectorAll(".pf-card").forEach(function(c){c.addEventListener("click",function(){window.open("https://wa.me/"+WA_PHONE+"?text="+encodeURIComponent("Hola, vi el diseño de la web de "+c.dataset.pf+" en su portfolio y quiero cotizar una similar para mi negocio."),"_blank","noopener");});});
+document.querySelectorAll(".pf-card").forEach(function(c){c.addEventListener("click",function(){window.open("https://wa.me/"+WA_PHONE+"?text="+encodeURIComponent(WA_HOLA+"vi el diseño de la web de "+c.dataset.pf+" en su página y quiero cotizar una similar para mi negocio."),"_blank","noopener");});});
 var WA_ZONA = new URLSearchParams(window.location.search).get("zona");
 var WA_TRAZA = WA_ZONA === "oeste"
   ? "\n\nZona de contacto: Caracas Oeste"
@@ -961,14 +1074,11 @@ var WA_TRAZA = WA_ZONA === "oeste"
     ? "\n\nZona de contacto: Caracas Este"
     : "";
 
-var WA_TEXT =
-  "Hola, requiero más información sobre cómo crear la página web de mi negocio." +
-  WA_TRAZA;
-
-var WA_URL =
-  "https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent(WA_TEXT);
+var WA_TEXT = "requiero más información sobre cómo crear la página web de mi negocio.";
 document.querySelectorAll("[data-wa]").forEach(function(a){
-  a.href = WA_URL; a.target = "_blank"; a.rel = "noopener";
+  var t = WA_HOLA + (a.getAttribute("data-wa-text") || WA_TEXT) + WA_TRAZA;
+  a.href = "https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent(t);
+  a.target = "_blank"; a.rel = "noopener";
 });
 
 /* ==== Menú móvil ==== */
@@ -1019,7 +1129,7 @@ if (reservaForm){
     var platos = (document.getElementById("r-platos").value || "").trim();
     var f = vals["r-fecha"].split("-");
     var fechaLegible = (f.length === 3) ? f[2] + "/" + f[1] + "/" + f[0] : vals["r-fecha"];
-    var msg = "Hola, quiero reservar mesa para " + vals["r-comensales"] + " personas el " + fechaLegible +
+    var msg = "[DEMO de la web de Mesa Creativa] Hola, quiero reservar mesa para " + vals["r-comensales"] + " personas el " + fechaLegible +
       " a las " + vals["r-hora"] + ". Mi nombre es " + vals["r-nombre"] + ".";
     if(vals["r-telefono"]) msg += " Mi teléfono es " + vals["r-telefono"] + ".";
     // Enlace para que el restaurante añada la reserva a Google Calendar (2 h de duración)
@@ -1106,7 +1216,7 @@ var it=el("div","b-items");m.items.forEach(function(x,i){if(m.div&&i>0)it.append
 blk(el("div","b-foot",m.pie));
 if(note)note.textContent="Ejemplo ilustrativo · "+m.tipo;if(ps)ps.setAttribute("aria-label","Ejemplo de página web para "+m.tipo);}
 sel.addEventListener("change",build);
-if(btn)btn.addEventListener("click",function(){var m=cur();var msg="Hola, vi los ejemplos en su web y me gustó el estilo "+sel.value+" (como el ejemplo de "+m.tipo+"). Quiero cotizar una página para mi negocio.";window.open("https://wa.me/"+WA_PHONE+"?text="+encodeURIComponent(msg),"_blank","noopener");});
+if(btn)btn.addEventListener("click",function(){var m=cur();var msg=WA_HOLA+"vi los ejemplos en su web y me gustó el estilo "+sel.value+" (como el ejemplo de "+m.tipo+"). Quiero cotizar una página para mi negocio.";window.open("https://wa.me/"+WA_PHONE+"?text="+encodeURIComponent(msg),"_blank","noopener");});
 var sec=document.getElementById("brief");
 if("IntersectionObserver"in window&&sec){var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();build();}},{threshold:.4});io.observe(sec);}else build();
 })();
