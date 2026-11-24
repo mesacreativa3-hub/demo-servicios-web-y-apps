@@ -1,0 +1,50 @@
+# Optimiza automáticamente las imágenes que se suben a public/media.
+# Cada vez que subes una foto a main, GitHub la reduce (máx. 1920 px, o 1200 px
+# para fotos de platos "demo-..." y "producto-..."), la comprime y guarda el
+# resultado en el mismo archivo y con el mismo nombre. No hay que hacer nada más.
+
+name: Optimizar imágenes
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "public/media/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: optimizar-imagenes
+  cancel-in-progress: false
+
+jobs:
+  optimizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar Pillow
+        run: pip install --quiet "pillow>=10"
+
+      - name: Optimizar
+        run: python scripts/optimizar_imagenes.py public/media
+
+      - name: Guardar las imágenes optimizadas
+        run: |
+          if git diff --quiet -- public/media; then
+            echo "Nada que guardar."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/media
+          git commit -m "Optimizar imágenes"
+          git pull --rebase origin main
+          git push origin HEAD:main
