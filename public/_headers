@@ -16,3 +16,8 @@
 /admin-*
   X-Robots-Tag: noindex, nofollow
   Cache-Control: no-store
+
+# La dirección antigua (workers.dev) sigue funcionando, pero Google
+# solo debe mostrar la nueva: mesacreativaccs.com
+https://demo-servicios-web-y-apps.mesacreativa3.workers.dev/*
+  X-Robots-Tag: noindex
