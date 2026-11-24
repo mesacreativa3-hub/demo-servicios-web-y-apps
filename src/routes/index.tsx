@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { property: "og:image:type", content: "image/jpeg" },
-      { property: "og:locale", content: "es_ES" },
+      { property: "og:locale", content: "es_VE" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESC },
       { name: "twitter:image", content: OG_IMAGE },

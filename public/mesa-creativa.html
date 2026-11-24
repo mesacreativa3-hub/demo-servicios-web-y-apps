@@ -22,7 +22,7 @@
 <meta property="og:image:height" content="630" />
 <meta property="og:image:type" content="image/jpeg" />
 <meta property="og:image:alt" content="Mesa Creativa: páginas web para negocios en Caracas" />
-<meta property="og:locale" content="es_ES" />
+<meta property="og:locale" content="es_VE" />
 
 <!-- ===== Twitter Card ===== -->
 <meta name="twitter:card" content="summary_large_image" />
@@ -30,6 +30,83 @@
 <meta name="twitter:description" content="Páginas web profesionales para negocios en Caracas: catálogo, menú y WhatsApp directo. Planes desde $149." />
 <meta name="twitter:image" content="https://demo-servicios-web-y-apps.mesacreativa3.workers.dev/media/og-mesa-creativa.jpg" />
 <meta name="twitter:image:alt" content="Mesa Creativa: páginas web para negocios en Caracas" />
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "ProfessionalService",
+ "@id": "https://demo-servicios-web-y-apps.mesacreativa3.workers.dev/#negocio",
+ "name": "Mesa Creativa",
+ "url": "https://demo-servicios-web-y-apps.mesacreativa3.workers.dev/",
+ "logo": "https://demo-servicios-web-y-apps.mesacreativa3.workers.dev/media/Logo_mesa_creativa_blanco.png",
+ "image": "https://demo-servicios-web-y-apps.mesacreativa3.workers.dev/media/og-mesa-creativa.jpg",
+ "description": "Páginas web profesionales para negocios en Caracas: catálogo, menú y WhatsApp directo. Planes desde $149.",
+ "email": "mesacreativaccs@gmail.com",
+ "address": {
+  "@type": "PostalAddress",
+  "addressLocality": "Caracas",
+  "addressCountry": "VE"
+ },
+ "areaServed": {
+  "@type": "City",
+  "name": "Caracas"
+ },
+ "priceRange": "$149 - $590+",
+ "contactPoint": [
+  {
+   "@type": "ContactPoint",
+   "contactType": "sales",
+   "name": "Aníbal Sánchez",
+   "telephone": "+58-414-508-6400",
+   "areaServed": "VE",
+   "availableLanguage": "es"
+  },
+  {
+   "@type": "ContactPoint",
+   "contactType": "sales",
+   "name": "Alexander Ojeda",
+   "telephone": "+58-414-261-1653",
+   "areaServed": "VE",
+   "availableLanguage": "es"
+  }
+ ],
+ "hasOfferCatalog": {
+  "@type": "OfferCatalog",
+  "name": "Planes de páginas web",
+  "itemListElement": [
+   {
+    "@type": "Offer",
+    "name": "Landing Emprendedor",
+    "price": "149",
+    "priceCurrency": "USD"
+   },
+   {
+    "@type": "Offer",
+    "name": "Web Catálogo + Menú",
+    "price": "190",
+    "priceCurrency": "USD"
+   },
+   {
+    "@type": "Offer",
+    "name": "Catálogo Autogestionable",
+    "price": "390",
+    "priceCurrency": "USD",
+    "description": "Más $10 al mes por panel, servidor y respaldos"
+   },
+   {
+    "@type": "Offer",
+    "name": "Web Pro a Medida",
+    "priceSpecification": {
+     "@type": "PriceSpecification",
+     "minPrice": "590",
+     "priceCurrency": "USD"
+    },
+    "description": "Más $20 al mes por panel, servidor, respaldos y cambios"
+   }
+  ]
+ }
+}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,7 +133,7 @@ body{
   font-family:var(--sans);font-weight:300;line-height:1.7;
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
-img,video{max-width:100%;display:block}
+img,video{max-width:100%;height:auto;display:block}
 a{color:inherit}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
 section{padding:clamp(64px,10vw,132px) 0;position:relative;scroll-margin-top:84px}
@@ -416,7 +493,7 @@ body.ct-lock{overflow:hidden}
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
   <div class="wrap nav-in">
-    <a href="#top"><img class="logo" src="/media/Logo_mesa_creativa_blanco.png" width="256" height="256" alt="Mesa Creativa" /></a>
+    <a href="#top"><img class="logo" src="/media/logo-mesa-creativa-128.webp" width="128" height="128" alt="Mesa Creativa" /></a>
     <nav class="nav-links" id="nav-links">
       <a href="#quienes-somos">Quiénes Somos</a>
       <a href="#paquetes">Paquetes</a>
@@ -435,7 +512,7 @@ body.ct-lock{overflow:hidden}
 <!-- ============ A. HERO ============ -->
 <section class="hero" id="top">
   <div class="hero-media">
-    <img src="/media/caracas-avila.webp" width="1920" height="1088" fetchpriority="high" decoding="async" alt="Caracas al atardecer con el cerro Ávila, el Hotel Humboldt en la cima y el teleférico" />
+    <img src="/media/caracas-avila.webp" srcset="/media/caracas-avila-960.webp 960w, /media/caracas-avila.webp 1920w" sizes="100vw" width="1920" height="1088" fetchpriority="high" decoding="async" alt="Caracas al atardecer con el cerro Ávila, el Hotel Humboldt en la cima y el teleférico" />
   </div>
   <div class="wrap hero-in">
     <p class="eyebrow rv">Desarrollo web y presencia digital · Caracas, Venezuela</p>
@@ -515,7 +592,7 @@ body.ct-lock{overflow:hidden}
       <div class="menu-cat">
         <h3>Entrantes</h3>
         <div class="dish star">
-          <div class="dish-photo"><img src="/media/Burrata_cremosa_con_tomate_de_temporada.jpg" alt="Burrata cremosa con tomate de temporada" loading="eager" decoding="async" /></div>
+          <div class="dish-photo"><img width="900" height="900" src="/media/Burrata_cremosa_con_tomate_de_temporada.jpg" alt="Burrata cremosa con tomate de temporada" loading="lazy" decoding="async" /></div>
           <div class="dish-body">
             <span class="star-tag">Recomendado del chef</span>
             <p class="dish-name">Burrata cremosa con tomate de temporada</p>
@@ -525,7 +602,7 @@ body.ct-lock{overflow:hidden}
           <span class="price">$12</span>
         </div>
         <div class="dish star">
-          <div class="dish-photo"><img src="/media/Croquetas_caseras_de_jamon_iberico.jpg" alt="Croquetas caseras de jamón" loading="eager" decoding="async" /></div>
+          <div class="dish-photo"><img width="900" height="600" src="/media/Croquetas_caseras_de_jamon_iberico.jpg" alt="Croquetas caseras de jamón" loading="lazy" decoding="async" /></div>
           <div class="dish-body">
             <p class="dish-name">Croquetas caseras de jamón</p>
             <p class="dish-desc">Doradas, jugosas y de bechamel sedosa.</p>
@@ -534,7 +611,7 @@ body.ct-lock{overflow:hidden}
           <span class="price">$10</span>
         </div>
         <div class="dish star">
-          <div class="dish-photo"><img src="/media/Ensaladilla_de_la_casa.jpg" alt="Ensalada rusa de la casa" loading="eager" decoding="async" /></div>
+          <div class="dish-photo"><img width="900" height="607" src="/media/Ensaladilla_de_la_casa.jpg" alt="Ensalada rusa de la casa" loading="lazy" decoding="async" /></div>
           <div class="dish-body">
             <p class="dish-name">Ensalada rusa de la casa</p>
             <p class="dish-desc">Suave, con atún claro y un punto de pimentón.</p>
@@ -566,21 +643,21 @@ body.ct-lock{overflow:hidden}
       <p class="lead rv">No importa si vendes repuestos, ropa, atiendes en un consultorio o prestas servicios profesionales: estructuramos tu web para que tus clientes en Caracas y desde cualquier lugar vean tu catálogo, entiendan lo que ofreces y te escriban directamente al WhatsApp listos para comprar.</p>
       <div class="pf-grid">
         <button type="button" class="pf-card rv" data-pf="un catálogo para comercio (Ferretería)">
-          <div class="phone"><div class="scr fx"><div class="fx-top"><b>Ferretería La Gran Caracas</b>Catálogo · precios en $<div class="fx-search">Buscar tornillo, pintura, bombillo…</div></div><div class="fx-item"><img class="fx-ico" src="/media/fx-taladro.jpg" alt="Taladro" loading="lazy"><div><p class="n">Taladro percutor 650W</p><p class="d">Incluye maletín y brocas</p></div><p class="pr">$45<small>Pedir</small></p></div><div class="fx-item"><img class="fx-ico" src="/media/fx-llaves.jpg" alt="Llaves" loading="lazy"><div><p class="n">Juego de llaves combinadas</p><p class="d">12 piezas, acero cromo-vanadio</p></div><p class="pr">$22<small>Pedir</small></p></div><div class="fx-item"><img class="fx-ico" src="/media/fx-pintura.jpg" alt="Pintura" loading="lazy"><div><p class="n">Pintura caucho mate blanco</p><p class="d">Cuñete 4 galones, alto rendimiento</p></div><p class="pr">$38<small>Pedir</small></p></div><div class="fx-item"><img class="fx-ico" src="/media/fx-cerradura.jpg" alt="Cerradura" loading="lazy"><div><p class="n">Cerradura de pomo</p><p class="d">Acero inoxidable, 3 llaves</p></div><p class="pr">$14<small>Pedir</small></p></div><div class="fx-item"><img class="fx-ico" src="/media/fx-bombillo.jpg" alt="Bombillo LED" loading="lazy"><div><p class="n">Bombillo LED 12W</p><p class="d">Luz blanca, pack de 4</p></div><p class="pr">$9<small>Pedir</small></p></div></div></div>
+          <div class="phone"><div class="scr fx"><div class="fx-top"><b>Ferretería La Gran Caracas</b>Catálogo · precios en $<div class="fx-search">Buscar tornillo, pintura, bombillo…</div></div><div class="fx-item"><img width="128" height="128" class="fx-ico" src="/media/fx-taladro.jpg" alt="Taladro" loading="lazy"><div><p class="n">Taladro percutor 650W</p><p class="d">Incluye maletín y brocas</p></div><p class="pr">$45<small>Pedir</small></p></div><div class="fx-item"><img width="128" height="128" class="fx-ico" src="/media/fx-llaves.jpg" alt="Llaves" loading="lazy"><div><p class="n">Juego de llaves combinadas</p><p class="d">12 piezas, acero cromo-vanadio</p></div><p class="pr">$22<small>Pedir</small></p></div><div class="fx-item"><img width="128" height="128" class="fx-ico" src="/media/fx-pintura.jpg" alt="Pintura" loading="lazy"><div><p class="n">Pintura caucho mate blanco</p><p class="d">Cuñete 4 galones, alto rendimiento</p></div><p class="pr">$38<small>Pedir</small></p></div><div class="fx-item"><img width="128" height="128" class="fx-ico" src="/media/fx-cerradura.jpg" alt="Cerradura" loading="lazy"><div><p class="n">Cerradura de pomo</p><p class="d">Acero inoxidable, 3 llaves</p></div><p class="pr">$14<small>Pedir</small></p></div><div class="fx-item"><img width="128" height="128" class="fx-ico" src="/media/fx-bombillo.jpg" alt="Bombillo LED" loading="lazy"><div><p class="n">Bombillo LED 12W</p><p class="d">Luz blanca, pack de 4</p></div><p class="pr">$9<small>Pedir</small></p></div></div></div>
           <span class="pf-tag">Comercios y tiendas</span>
           <p class="pf-name">Ferretería La Gran Caracas</p>
           <p class="pf-txt">Catálogo digital con precios en dólares y pedidos al WhatsApp sin comisiones.</p>
           <span class="pf-cta">Quiero una web así</span>
         </button>
         <button type="button" class="pf-card rv" data-pf="veterinaria / salud">
-          <div class="phone"><div class="scr" style="background:#fff;font-family:Manrope,system-ui,sans-serif;color:#0b2a4a;text-align:left;display:flex;flex-direction:column"><div style="display:flex;align-items:center;gap:6px;padding:10px 12px;border-bottom:1px solid #e6edf5"><span style="width:22px;height:22px;border-radius:50%;background:#0b5fa5;color:#fff;display:grid;place-items:center;font-size:12px">🐾</span><b style="font-size:11px;line-height:1.1">Centro Veterinario Ávila<br><small style="font-weight:400;color:#5b7690;font-size:8px">Salud y cuidado para tu mascota</small></b></div><img src="/media/vet-avila.jpg" alt="Consulta veterinaria" loading="lazy" style="width:100%;height:120px;object-fit:cover"><div style="background:#0b3a66;color:#fff;padding:12px;flex:1"><p style="font-size:8px;letter-spacing:.1em;color:#7fd3ff;margin:0 0 6px">MÁS DE 15 AÑOS EN CARACAS</p><p style="font-size:15px;font-weight:800;line-height:1.15;margin:0 0 8px">Un chequeo a tiempo puede salvar la vida de tu mascota.</p><p style="font-size:9px;opacity:.85;margin:0 0 10px">Consultas, vacunación, laboratorio y emergencias.</p><span style="display:block;background:#1fb6e8;color:#fff;font-size:9px;font-weight:700;text-align:center;padding:7px;border-radius:5px;margin-bottom:6px">Agendar cita</span><span style="display:block;border:1px solid #ffffff55;font-size:9px;text-align:center;padding:7px;border-radius:5px">Escríbenos por WhatsApp</span></div></div></div>
+          <div class="phone"><div class="scr" style="background:#fff;font-family:Manrope,system-ui,sans-serif;color:#0b2a4a;text-align:left;display:flex;flex-direction:column"><div style="display:flex;align-items:center;gap:6px;padding:10px 12px;border-bottom:1px solid #e6edf5"><span style="width:22px;height:22px;border-radius:50%;background:#0b5fa5;color:#fff;display:grid;place-items:center;font-size:12px">🐾</span><b style="font-size:11px;line-height:1.1">Centro Veterinario Ávila<br><small style="font-weight:400;color:#5b7690;font-size:8px">Salud y cuidado para tu mascota</small></b></div><img width="800" height="542" src="/media/vet-avila.jpg" alt="Consulta veterinaria" loading="lazy" style="width:100%;height:120px;object-fit:cover"><div style="background:#0b3a66;color:#fff;padding:12px;flex:1"><p style="font-size:8px;letter-spacing:.1em;color:#7fd3ff;margin:0 0 6px">MÁS DE 15 AÑOS EN CARACAS</p><p style="font-size:15px;font-weight:800;line-height:1.15;margin:0 0 8px">Un chequeo a tiempo puede salvar la vida de tu mascota.</p><p style="font-size:9px;opacity:.85;margin:0 0 10px">Consultas, vacunación, laboratorio y emergencias.</p><span style="display:block;background:#1fb6e8;color:#fff;font-size:9px;font-weight:700;text-align:center;padding:7px;border-radius:5px;margin-bottom:6px">Agendar cita</span><span style="display:block;border:1px solid #ffffff55;font-size:9px;text-align:center;padding:7px;border-radius:5px">Escríbenos por WhatsApp</span></div></div></div>
           <span class="pf-tag">Clínicas, salud y estética</span>
           <p class="pf-name">Centro Veterinario Ávila</p>
           <p class="pf-txt">Servicios claros, testimonios y botón directo para agendar consultas.</p>
           <span class="pf-cta">Quiero una web así</span>
         </button>
         <button type="button" class="pf-card rv" data-pf="servicio técnico de celulares">
-          <div class="phone"><div class="scr fx"><div class="fx-top" style="background:linear-gradient(135deg,#0a1a3a,#1559d6)"><b>TecnoExpress Taller &amp; Accesorios</b>Servicio técnico express · iPhone y Android<div class="fx-search">Buscar pantalla, batería, cargador…</div></div><div class="fx-item"><img class="fx-ico" src="/media/tx-pantalla.jpg" alt="Cambio de pantalla" loading="lazy"><div><p class="n">Cambio de pantalla</p><p class="d">Instalación en 45 min, con garantía</p></div><p class="pr">$35<small>Cotizar</small></p></div><div class="fx-item"><img class="fx-ico" src="/media/tx-placa.jpg" alt="Reparación de placa" loading="lazy"><div><p class="n">Reparación de placa</p><p class="d">Microelectrónica especializada</p></div><p class="pr">$40<small>Cotizar</small></p></div><div class="fx-item"><img class="fx-ico" src="/media/tx-pantalla.jpg" alt="Cambio de batería" loading="lazy"><div><p class="n">Cambio de batería</p><p class="d">Original, listo el mismo día</p></div><p class="pr">$25<small>Cotizar</small></p></div><div class="fx-item"><img class="fx-ico" src="/media/tx-accesorios.jpg" alt="Cargador rápido 65W" loading="lazy"><div><p class="n">Cargador rápido 65W</p><p class="d">USB-C, incluye cable</p></div><p class="pr">$18<small>Cotizar</small></p></div><div class="fx-item"><img class="fx-ico" src="/media/tx-accesorios.jpg" alt="Forro y mica" loading="lazy"><div><p class="n">Forro y mica</p><p class="d">Hidrogel antigolpes</p></div><p class="pr">$12<small>Cotizar</small></p></div></div></div>
+          <div class="phone"><div class="scr fx"><div class="fx-top" style="background:linear-gradient(135deg,#0a1a3a,#1559d6)"><b>TecnoExpress Taller &amp; Accesorios</b>Servicio técnico express · iPhone y Android<div class="fx-search">Buscar pantalla, batería, cargador…</div></div><div class="fx-item"><img width="128" height="128" class="fx-ico" src="/media/tx-pantalla.jpg" alt="Cambio de pantalla" loading="lazy"><div><p class="n">Cambio de pantalla</p><p class="d">Instalación en 45 min, con garantía</p></div><p class="pr">$35<small>Cotizar</small></p></div><div class="fx-item"><img width="128" height="128" class="fx-ico" src="/media/tx-placa.jpg" alt="Reparación de placa" loading="lazy"><div><p class="n">Reparación de placa</p><p class="d">Microelectrónica especializada</p></div><p class="pr">$40<small>Cotizar</small></p></div><div class="fx-item"><img width="128" height="128" class="fx-ico" src="/media/tx-pantalla.jpg" alt="Cambio de batería" loading="lazy"><div><p class="n">Cambio de batería</p><p class="d">Original, listo el mismo día</p></div><p class="pr">$25<small>Cotizar</small></p></div><div class="fx-item"><img width="128" height="128" class="fx-ico" src="/media/tx-accesorios.jpg" alt="Cargador rápido 65W" loading="lazy"><div><p class="n">Cargador rápido 65W</p><p class="d">USB-C, incluye cable</p></div><p class="pr">$18<small>Cotizar</small></p></div><div class="fx-item"><img width="128" height="128" class="fx-ico" src="/media/tx-accesorios.jpg" alt="Forro y mica" loading="lazy"><div><p class="n">Forro y mica</p><p class="d">Hidrogel antigolpes</p></div><p class="pr">$12<small>Cotizar</small></p></div></div></div>
           <span class="pf-tag">Servicios técnicos y reparación</span>
           <p class="pf-name">TecnoExpress Taller &amp; Accesorios</p>
           <p class="pf-txt">Diagnóstico en línea, catálogo de repuestos y botón directo para cotizar reparaciones al WhatsApp.</p>
@@ -652,15 +729,13 @@ body.ct-lock{overflow:hidden}
     <p class="eyebrow rv">Portfolio</p>
     <h2 class="rv">Trabajo seleccionado</h2>
     <div class="masonry rv" style="margin-top:40px">
-      <div class="shot light wide"><img loading="lazy" src="/media/bandeja-desayuno.jpg" alt="Bandeja de desayuno con bollería, wraps y bebidas" /></div>
-      <div class="shot light"><img loading="lazy" src="/media/croissant-chocolate.jpg" alt="Croissants de chocolate con chocolate caliente" /></div>
-      <div class="shot light"><img loading="lazy" src="/media/rollos-canela.jpg" alt="Rollos de canela con capuchino sobre mármol" /></div>
-      <div class="shot light"><img loading="lazy" src="/media/wraps-crujientes.jpg" alt="Trío de wraps crujientes con refresco" /></div>
-      <div class="shot light"><img loading="lazy" src="/media/evento-boda.jpg" alt="Bocados gourmet en catering de boda" /></div>
+      <div class="shot light wide"><img width="1200" height="960" loading="lazy" src="/media/bandeja-desayuno.jpg" alt="Bandeja de desayuno con bollería, wraps y bebidas" /></div>
+      <div class="shot light"><img width="1200" height="799" loading="lazy" src="/media/croissant-chocolate.jpg" alt="Croissants de chocolate con chocolate caliente" /></div>
+      <div class="shot light"><img width="1200" height="799" loading="lazy" src="/media/rollos-canela.jpg" alt="Rollos de canela con capuchino sobre mármol" /></div>
+      <div class="shot light"><img width="1200" height="849" loading="lazy" src="/media/wraps-crujientes.jpg" alt="Trío de wraps crujientes con refresco" /></div>
+      <div class="shot light"><img width="1200" height="799" loading="lazy" src="/media/evento-boda.jpg" alt="Bocados gourmet en catering de boda" /></div>
     </div>
-
-
-    <div class="rv" style="margin-top:64px">
+  </div>
 </section>
 
 <!-- ============ H. CONDICIONES ============ -->
@@ -719,7 +794,7 @@ body.ct-lock{overflow:hidden}
         <select id="b-estilo"><option>Minimalista y elegante</option><option>Moderno y tecnológico</option><option>Clásico y formal</option><option>Cálido y artesanal</option><option>Colorido y juvenil</option></select></div>
       <div class="field form-full" style="margin-top:10px"><button class="btn btn-primary" type="button" id="b-btn">Quiero una página así</button></div>
     </form>
-      <div class="bp-side rv"><div class="phone-photo"><div class="pp-screen" aria-label="Ejemplo de página web"><div id="bp-scr"><div class="bp-empty">Elige un estilo para ver un ejemplo</div></div></div><img src="/media/movil-marco.webp" alt="" loading="lazy" /></div><p class="bp-note">Ejemplo ilustrativo</p></div>
+      <div class="bp-side rv"><div class="phone-photo"><div class="pp-screen" aria-label="Ejemplo de página web"><div id="bp-scr"><div class="bp-empty">Elige un estilo para ver un ejemplo</div></div></div><img width="565" height="1003" src="/media/movil-marco.webp" alt="" loading="lazy" /></div><p class="bp-note">Ejemplo ilustrativo</p></div>
     </div>
   </div>
 </section>
@@ -818,7 +893,7 @@ body.ct-lock{overflow:hidden}
 <footer>
   <div class="wrap">
     <div class="foot">
-      <img class="logo" loading="lazy" src="/media/Logo_mesa_creativa_blanco.png" width="256" height="256" alt="Mesa Creativa" />
+      <img class="logo" loading="lazy" src="/media/logo-mesa-creativa-128.webp" width="128" height="128" alt="Mesa Creativa" />
       <a href="mailto:mesacreativaccs@gmail.com">mesacreativaccs@gmail.com</a>
     </div>
     <nav class="foot-links" aria-label="Secciones">
