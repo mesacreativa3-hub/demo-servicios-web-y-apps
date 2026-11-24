@@ -72,7 +72,7 @@ header.nav{position:fixed;top:38px;left:0;right:0;z-index:60;backdrop-filter:blu
 .hero-media{position:absolute;inset:0}
 .hero-media img{width:100%;height:100%;object-fit:cover}
 .hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,13,11,.75),rgba(14,13,11,.5) 40%,rgba(14,13,11,.97))}
-.hero-in{position:relative;width:100%;padding:150px 0 clamp(56px,10vw,100px)}
+.hero-in{position:relative;width:100%;padding:150px 22px clamp(56px,10vw,100px)}
 .hero h1{font-size:clamp(2.4rem,8vw,5rem);max-width:15ch}
 .hero h1 em{font-style:italic;color:var(--gold)}
 .hero p{margin-top:22px;max-width:52ch}
@@ -183,7 +183,7 @@ footer.site p+p{margin-top:10px}
 <main>
 <!-- ===== INICIO ===== -->
 <section class="hero" id="inicio">
-  <div class="hero-media"><img src="/media/caracas-avila.jpg" alt="El Ávila visto desde Caracas" fetchpriority="high"></div>
+  <div class="hero-media"><img src="/media/caracas-avila-panorama.jpg" onerror="this.onerror=null;this.src='/media/caracas-avila.jpg'" alt="Panorámica del cerro El Ávila visto desde Caracas" fetchpriority="high"></div>
   <div class="wrap hero-in">
     <p class="eyebrow">Restaurante de ejemplo · Caracas</p>
     <h1>La cocina caraqueña <em>de siempre</em>, hecha al momento.</h1>
@@ -201,7 +201,7 @@ footer.site p+p{margin-top:10px}
   <div class="wrap grid g2">
     <div class="rv">
       <p class="eyebrow">Nosotros</p>
-      <h2>Una cocina de barrio con recetas de familia</h2>
+      <h2>Cocina criolla venezolana, hecha como en casa</h2>
       <p class="lead" style="margin-top:22px">Casa Araguaney es un restaurante ficticio creado para mostrar cómo luce una web completa. Aquí iría la historia real del negocio: quién lo fundó, qué lo hace distinto y por qué la gente vuelve.</p>
       <p class="lead" style="margin-top:14px">Cocinamos cada día con ingredientes del mercado: maíz pilado para las arepas, queso de mano de Guárico y carne mechada a fuego lento.</p>
     </div>
@@ -289,6 +289,7 @@ footer.site p+p{margin-top:10px}
     <p>Casa Araguaney es un restaurante ficticio. Esta web es un ejemplo del plan <b>Web Pro a Medida</b> de Mesa Creativa.</p>
     <p>¿Quieres ver cómo se cambian precios y platos desde el celular? <a href="/admin-catalogo.html" style="color:var(--gold)">Probar el panel</a> con el correo <b>demo@example.com</b> y la clave <b>DemoMesa2026</b>.</p>
     <p><a class="btn btn-ghost btn-sm" href="/#paquetes" style="margin-top:14px">Quiero una web así</a></p>
+    <p style="font-size:.72rem;opacity:.7">Foto de portada: «Cerro El Ávila - Caracas», de Periodismodepaz (recortada y con ajuste de color), en <a href="https://commons.wikimedia.org/wiki/File:Cerro_El_%C3%81vila_-_Caracas.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, con licencia <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" target="_blank" rel="noopener">CC BY-SA 4.0</a>. La versión modificada se comparte con la misma licencia.</p>
   </div>
 </footer>
 
