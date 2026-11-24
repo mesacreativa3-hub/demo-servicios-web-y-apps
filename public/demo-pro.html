@@ -158,6 +158,8 @@ header.nav{position:fixed;top:38px;left:0;right:0;z-index:60;backdrop-filter:blu
 
 footer.site{padding:56px 0 120px;border-top:1px solid var(--line);text-align:center;color:var(--cream-dim);font-size:.85rem}
 footer.site p+p{margin-top:10px}
+.foot-admin{display:block;width:fit-content;margin:14px auto 0;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cream-dim);opacity:.45;text-decoration:none;padding:6px 10px}
+.foot-admin:hover,.foot-admin:focus-visible{opacity:1;color:var(--gold)}
 .rv{opacity:0;transform:translateY(18px);transition:opacity .5s ease-out,transform .5s ease-out}
 .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
@@ -287,9 +289,9 @@ footer.site p+p{margin-top:10px}
 <footer class="site">
   <div class="wrap">
     <p>Casa Araguaney es un restaurante ficticio. Esta web es un ejemplo del plan <b>Web Pro a Medida</b> de Mesa Creativa.</p>
-    <p>¿Quieres ver cómo se cambian precios y platos desde el celular? <a href="/admin-catalogo.html" style="color:var(--gold)">Probar el panel</a> con el correo <b>demo@example.com</b> y la clave <b>DemoMesa2026</b>.</p>
     <p><a class="btn btn-ghost btn-sm" href="/#paquetes" style="margin-top:14px">Quiero una web así</a></p>
     <p style="font-size:.72rem;opacity:.7">Foto de portada: «Cerro El Ávila - Caracas», de Periodismodepaz (recortada y con ajuste de color), en <a href="https://commons.wikimedia.org/wiki/File:Cerro_El_%C3%81vila_-_Caracas.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, con licencia <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" target="_blank" rel="noopener">CC BY-SA 4.0</a>. La versión modificada se comparte con la misma licencia.</p>
+    <a class="foot-admin" href="/admin-catalogo.html" rel="nofollow">Administrar</a>
   </div>
 </footer>
 
