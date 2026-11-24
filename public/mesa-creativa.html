@@ -1054,8 +1054,16 @@ var COMERCIALES = [
   { nombre: "Aníbal",    tel: "584145086400" },
   { nombre: "Alexander", tel: "584142611653" }
 ];
+/* Los QR de cada comercial llevan ?zona=oeste (Aníbal) o ?zona=este (Alexander):
+   quien entra por ese QR queda asignado a ese comercial. */
+var ZONAS = { oeste: 0, este: 1 };
 var WA_REP = (function(){
-  var i = -1;
+  var i = -1, z = new URLSearchParams(window.location.search).get("zona");
+  if (z && ZONAS.hasOwnProperty(z)) {
+    i = ZONAS[z];
+    try { localStorage.setItem("mc_comercial", String(i)); } catch(e){}
+    return COMERCIALES[i];
+  }
   try { i = parseInt(localStorage.getItem("mc_comercial"), 10); } catch(e){}
   if (!(i >= 0 && i < COMERCIALES.length)) {
     i = Math.floor(Math.random() * COMERCIALES.length);
