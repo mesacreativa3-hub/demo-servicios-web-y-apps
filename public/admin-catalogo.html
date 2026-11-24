@@ -214,6 +214,7 @@ $("lista").addEventListener("change",async function(e){
   catch(err){fail(err)}
 });
 $("q").addEventListener("input",render);
+document.addEventListener("error",function(e){var im=e.target,b=im&&im.parentNode;if(im&&im.tagName==="IMG"&&b&&b.classList&&b.classList.contains("thumb"))b.textContent="Sin foto"},true);
 $("sel").addEventListener("change",function(){neg=negocios[+this.value];loadCatalogo().catch(fail)});
 
 function paintPhoto(){
