@@ -173,7 +173,7 @@ create policy catalogo_borrar on storage.objects for delete to authenticated
 
 -- ---------- 6. Negocio "demo": Casa Araguaney (93 productos) ----------
 insert into public.negocios (slug, nombre, whatsapp, plan, web)
-values ('demo', 'Casa Araguaney (restaurante de ejemplo)', '34604343158', 'demo', '/demo-pro.html')
+values ('demo', 'Casa Araguaney (restaurante de ejemplo)', '34668580249', 'demo', '/demo-pro.html')
 on conflict (slug) do update set nombre = excluded.nombre, plan = 'demo', activo = true, web = excluded.web;
 
 -- Copia maestra de la demo (sin acceso desde la web: RLS activado y sin políticas)
