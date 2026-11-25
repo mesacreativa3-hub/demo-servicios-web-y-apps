@@ -11,9 +11,9 @@
 
 fecha: Domingo 22 de noviembre de 2026
 novedades: Hoy abrimos con música en vivo a partir de las 8 pm. ¡Te esperamos!
-plato: Arroz meloso de mariscos con fumet de la casa
-postre: Tarta de queso con frutos rojos
+plato: Pabellón criollo con baranda (tajadas de plátano maduro)
+postre: Quesillo casero
 
 foto1: /media/hoy-musica-en-vivo.jpg
-foto2: /media/Entrecot_a_la_brasa.jpg
-foto3: /media/Tarta_de_queso_con_frutos_rojos.jpg
+foto2: /media/demo-pabellon-criollo.jpg
+foto3: /media/demo-quesillo.jpg
