@@ -516,6 +516,9 @@ body.ct-lock{overflow:hidden}
 .como-grid{display:grid;gap:40px;margin-top:44px;align-items:start}
 @media(min-width:900px){.como-grid{grid-template-columns:1.2fr .8fr;gap:56px}}
 .como-grid .timeline{margin-top:0}
+.como-grid>*{min-width:0}
+.tl p,.tl span{overflow-wrap:anywhere}
+@media(max-width:600px){.tl{padding-left:24px}.tl span{letter-spacing:.16em;line-height:1.5}}
 .tl b,.faq b{color:var(--cream);font-weight:500}
 .plazos{list-style:none;padding:0;margin:18px 0 0}
 .plazos li{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px solid var(--line);font-size:.92rem;color:var(--cream-dim)}
