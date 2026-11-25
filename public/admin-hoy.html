@@ -23,11 +23,15 @@ input:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
 .btn.big{width:100%;font-size:1.05rem;padding:16px}
 .btn.small{padding:9px 8px;font-size:.85rem;width:100%}
 .btn.ghost{background:transparent;color:var(--cream);border:1px solid var(--line)}
-.slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.slot{display:flex;flex-direction:column;gap:8px;min-width:0}
-.ph{aspect-ratio:1;border-radius:12px;border:1px dashed var(--line);background:#0e0d0b;display:grid;place-items:center;color:var(--dim);font-size:.8rem;overflow:hidden}
+.slots{display:grid;gap:22px}
+.slot{display:grid;gap:8px;min-width:0}
+.slot-t{font-size:.85rem;color:var(--dim)}
+.ph{position:relative;display:block;width:100%;aspect-ratio:4/3;border-radius:14px;border:1px dashed var(--line);background:#0e0d0b;color:var(--dim);overflow:hidden;padding:0;cursor:pointer;font:inherit}
 .ph img{width:100%;height:100%;object-fit:cover;display:block}
-.row{display:flex;flex-direction:column;gap:6px}
+.ph-empty{display:grid;place-items:center;align-content:center;height:100%;gap:6px;font-size:.95rem}
+.ph-chip{position:absolute;right:10px;bottom:10px;background:rgba(14,13,11,.82);color:var(--cream);border:1px solid var(--line);border-radius:999px;padding:7px 13px;font-size:.85rem;font-weight:600}
+.menu-foto{display:grid;gap:8px}
+.menu-foto .btn{width:100%}
 .msg{min-height:1.4em;font-size:.92rem;margin:12px 0 0}
 .msg.err{color:var(--err)}.msg.ok{color:var(--ok)}
 .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
@@ -64,10 +68,38 @@ input:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
 
     <div class="card">
       <label class="l">Fotos del día (hasta 3)</label>
+      <p class="sub" style="margin:0 0 14px">Toca una foto para tomarla con la cámara o elegirla de la galería.</p>
       <div class="slots">
-        <div class="slot"><div class="ph" id="ph1">Sin foto</div><div class="row"><label class="btn small">Elegir<input type="file" accept="image/*" id="f1" hidden></label><button type="button" class="btn small ghost" id="x1">Quitar</button></div></div>
-        <div class="slot"><div class="ph" id="ph2">Sin foto</div><div class="row"><label class="btn small">Elegir<input type="file" accept="image/*" id="f2" hidden></label><button type="button" class="btn small ghost" id="x2">Quitar</button></div></div>
-        <div class="slot"><div class="ph" id="ph3">Sin foto</div><div class="row"><label class="btn small">Elegir<input type="file" accept="image/*" id="f3" hidden></label><button type="button" class="btn small ghost" id="x3">Quitar</button></div></div>
+        <div class="slot">
+          <span class="slot-t">Foto 1</span>
+          <button type="button" class="ph" id="ph1" aria-label="Cambiar la foto 1"></button>
+          <div class="menu-foto" id="m1" hidden>
+            <label class="btn">📷 Tomar foto con la cámara<input type="file" accept="image/*" capture="environment" id="c1" hidden></label>
+            <label class="btn ghost">🖼️ Elegir de la galería<input type="file" accept="image/*" id="f1" hidden></label>
+            <button type="button" class="btn ghost" id="x1">Quitar foto</button>
+          </div>
+          <button type="button" class="btn ghost" id="r1" hidden style="width:100%">↺ Repetir la foto 1</button>
+        </div>
+        <div class="slot">
+          <span class="slot-t">Foto 2</span>
+          <button type="button" class="ph" id="ph2" aria-label="Cambiar la foto 2"></button>
+          <div class="menu-foto" id="m2" hidden>
+            <label class="btn">📷 Tomar foto con la cámara<input type="file" accept="image/*" capture="environment" id="c2" hidden></label>
+            <label class="btn ghost">🖼️ Elegir de la galería<input type="file" accept="image/*" id="f2" hidden></label>
+            <button type="button" class="btn ghost" id="x2">Quitar foto</button>
+          </div>
+          <button type="button" class="btn ghost" id="r2" hidden style="width:100%">↺ Repetir la foto 2</button>
+        </div>
+        <div class="slot">
+          <span class="slot-t">Foto 3</span>
+          <button type="button" class="ph" id="ph3" aria-label="Cambiar la foto 3"></button>
+          <div class="menu-foto" id="m3" hidden>
+            <label class="btn">📷 Tomar foto con la cámara<input type="file" accept="image/*" capture="environment" id="c3" hidden></label>
+            <label class="btn ghost">🖼️ Elegir de la galería<input type="file" accept="image/*" id="f3" hidden></label>
+            <button type="button" class="btn ghost" id="x3">Quitar foto</button>
+          </div>
+          <button type="button" class="btn ghost" id="r3" hidden style="width:100%">↺ Repetir la foto 3</button>
+        </div>
       </div>
     </div>
 
@@ -110,8 +142,10 @@ function view(v){$("v-login").hidden=v!=="login";$("v-edit").hidden=v!=="edit"}
 function paint(n){
   var s=slots[n],ph=$("ph"+n);ph.textContent="";
   var src=s.blob?s.prev:(s.url?s.url+"?v="+(s.v||Date.now()):null);
-  if(!src){ph.textContent="Sin foto";return}
+  $("r"+n).hidden=!s.blob;$("x"+n).hidden=!src;
+  if(!src){ph.innerHTML='<span class="ph-empty"><span style="font-size:2rem">📷</span>Toca para añadir una foto</span>';return}
   var im=new Image();im.alt="Foto "+n;im.src=src;ph.appendChild(im);
+  var c=document.createElement("span");c.className="ph-chip";c.textContent="📷 Cambiar foto";ph.appendChild(c);
 }
 function toJpeg(file){return new Promise(function(res,rej){
   var u=URL.createObjectURL(file),img=new Image();
@@ -132,7 +166,7 @@ async function load(){
   if(!r.ok)throw new Error("No se pudieron cargar los datos actuales.");
   var a=await r.json(),d=a[0]||{};
   $("t-nov").value=d.novedades||"";$("t-plato").value=d.plato||"";$("t-postre").value=d.postre||"";
-  for(var n=1;n<=3;n++){slots[n]={url:d["foto"+n]||null,blob:null,v:d.updated_at};paint(n)}
+  for(var n=1;n<=3;n++){slots[n]={url:d["foto"+n]||null,blob:null,v:d.updated_at};orig[n]={url:slots[n].url,v:d.updated_at};$("m"+n).hidden=true;paint(n)}
 }
 async function show(){
   view("edit");
@@ -153,15 +187,24 @@ $("login").addEventListener("submit",async function(e){
 });
 $("b-out").addEventListener("click",function(){setS(null);view("login")});
 
+var orig={};
 [1,2,3].forEach(function(n){
-  $("f"+n).addEventListener("change",async function(e){
+  async function onFoto(e){
     var f=e.target.files&&e.target.files[0];if(!f)return;
     msg("m-edit","Preparando foto…");
-    try{var b=await toJpeg(f);slots[n]={url:slots[n].url,blob:b,prev:URL.createObjectURL(b)};paint(n);msg("m-edit","")}
+    try{var b=await toJpeg(f);slots[n]={url:slots[n].url,v:slots[n].v,blob:b,prev:URL.createObjectURL(b)};$("m"+n).hidden=true;paint(n);msg("m-edit","Foto "+n+" lista. Pulsa «Publicar en la web» para que se vea.","ok")}
     catch(err){msg("m-edit",err.message,"err")}
     e.target.value="";
+  }
+  $("ph"+n).addEventListener("click",function(){$("m"+n).hidden=!$("m"+n).hidden});
+  $("f"+n).addEventListener("change",onFoto);
+  $("c"+n).addEventListener("change",onFoto);
+  $("x"+n).addEventListener("click",function(){slots[n]={url:null,blob:null};$("m"+n).hidden=true;paint(n)});
+  $("r"+n).addEventListener("click",function(){
+    var o=orig[n]||{};slots[n]={url:o.url||null,v:o.v,blob:null};paint(n);$("m"+n).hidden=false;
+    msg("m-edit","Foto "+n+" descartada. Elige cámara o galería para intentarlo de nuevo.");
+    $("ph"+n).scrollIntoView({behavior:"smooth",block:"start"});
   });
-  $("x"+n).addEventListener("click",function(){slots[n]={url:null,blob:null};paint(n)});
 });
 
 $("b-pub").addEventListener("click",async function(){
@@ -181,7 +224,7 @@ $("b-pub").addEventListener("click",async function(){
     var r=await api("/rest/v1/hoy?id=eq.1",{method:"PATCH",headers:{"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify(row)},tok);
     if(r.status===401)throw new Error("login");
     if(!r.ok)throw new Error("No se pudo guardar. Inténtalo de nuevo.");
-    for(var k=1;k<=3;k++){slots[k].v=row.updated_at;paint(k)}
+    for(var k=1;k<=3;k++){slots[k].v=row.updated_at;orig[k]={url:slots[k].url,v:row.updated_at};paint(k)}
     msg("m-edit","✅ Publicado. Ya se ve en la web.","ok");
   }catch(err){
     if(err.message==="login"){view("login");msg("m-login","Tu sesión venció. Vuelve a entrar.","err")}
