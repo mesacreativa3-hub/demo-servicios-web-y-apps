@@ -30,10 +30,11 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--gold);outline-of
 .link{color:var(--gold);background:none;border:0;cursor:pointer;font:inherit;text-decoration:underline;padding:0}
 .bar{display:flex;gap:10px;align-items:center;margin:8px 0 4px;flex-wrap:wrap}
 .bar input{flex:1;min-width:180px}
-.prod{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
-.prod .thumb{width:76px;height:76px;border-radius:12px;cursor:pointer}
-.mid{display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-width:0}
-.pname{overflow-wrap:anywhere}
+.prod{display:grid;grid-template-columns:84px minmax(0,1fr);grid-template-areas:"name name" "thumb right" "mid right";column-gap:16px;row-gap:8px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
+.prod .thumb{grid-area:thumb;width:84px;height:84px;border-radius:12px;cursor:pointer}
+.prod .pname{grid-area:name;font-size:1.05rem}
+.mid{grid-area:mid;display:flex}
+.mid .tg.ed{width:100%;text-align:center}
 .prod:last-child{border-bottom:0}
 .thumb{width:52px;height:52px;border-radius:10px;background:#0e0d0b;border:1px dashed var(--line);overflow:hidden;display:grid;place-items:center;color:var(--dim);font-size:.65rem;text-align:center}
 .thumb img{width:100%;height:100%;object-fit:cover}
@@ -43,7 +44,7 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--gold);outline-of
 .tg{font-size:.72rem;border:1px solid var(--line);border-radius:999px;padding:3px 10px;background:none;color:var(--dim);cursor:pointer}
 .tg.on{border-color:var(--gold);color:var(--gold)}
 .price{width:100%!important;text-align:right;padding:9px 12px!important;font-weight:600;font-variant-numeric:tabular-nums}
-.right{display:grid;gap:8px;width:118px;justify-items:stretch}
+.right{grid-area:right;display:grid;gap:8px;width:100%;max-width:190px;justify-self:end;justify-items:stretch}
 .right .tg{width:100%;text-align:center;padding:5px 8px}
 .tg.ed{padding:5px 16px}
 .two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
@@ -114,6 +115,7 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--gold);outline-of
       <div><label class="l" for="e-cat">Categoría</label><select id="e-cat"></select></div>
     </div>
     <p class="msg" id="m-edit" role="status"></p>
+    <button class="btn ghost" type="button" id="e-redo" hidden style="width:100%;margin-top:14px">↺ Repetir la foto</button>
     <div class="row-btns">
       <button class="btn" type="submit" id="e-save">Guardar</button>
       <button class="btn danger" type="button" id="e-del">Borrar producto</button>
@@ -191,8 +193,8 @@ function render(){
     list.forEach(function(p){
       var img=safeImg(p.foto);
       h+='<div class="prod" data-id="'+p.id+'"><div class="thumb" data-edit role="button" aria-label="Editar '+esc(p.nombre)+'">'+(img?'<img src="'+esc(img)+'" alt="">':'Sin foto')+'</div>'+
-        '<div class="mid"><div class="pname'+(p.disponible?'':' off')+'">'+esc(p.nombre)+'</div>'+
-        '<button type="button" class="tg ed" data-t="editar">Editar</button></div>'+
+        '<div class="pname'+(p.disponible?'':' off')+'">'+esc(p.nombre)+'</div>'+
+        '<div class="mid"><button type="button" class="tg ed" data-t="editar">Editar</button></div>'+
         '<div class="right">'+
         '<button type="button" class="tg'+(p.destacado?' on':'')+'" data-t="destacado">★ Recomendado</button>'+
         '<input class="price" type="text" inputmode="decimal" autocomplete="off" value="'+money(p.precio)+'" aria-label="Precio de '+esc(p.nombre)+'">'+
@@ -235,13 +237,14 @@ function paintPhoto(){
   var c=document.createElement("span");c.className="ph-chip";c.textContent="📷 Cambiar foto";ph.appendChild(c);
   $("e-nofoto").hidden=false;
 }
+function redoState(){$("e-redo").hidden=!photo.blob}
 function openEdit(p){
   editing=p||null;msg("m-edit","");
   $("e-title").textContent=p?"Editar producto":"Nuevo producto";
   $("e-cat").innerHTML=cats.map(function(c){return '<option value="'+c.id+'">'+esc(c.nombre)+'</option>'}).join("");
   $("e-nombre").value=p?p.nombre:"";$("e-desc").value=p&&p.descripcion?p.descripcion:"";
   $("e-precio").value=p?money(p.precio):"";if(p)$("e-cat").value=p.categoria_id;
-  photo={url:p?p.foto:null,blob:null,prev:null};paintPhoto();
+  photo={url:p?p.foto:null,blob:null,prev:null};paintPhoto();redoState();
   $("e-menu").hidden=true;$("e-demo-foto").hidden=neg.slug!=="demo";
   $("e-del").hidden=!p;$("sheet").hidden=false;$("sheet").querySelector(".card").scrollTop=0;
 }
@@ -253,14 +256,19 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("sheet")
 $("e-ph").addEventListener("click",function(){$("e-menu").hidden=!$("e-menu").hidden});
 async function onFoto(e){
   var f=e.target.files&&e.target.files[0];if(!f)return;msg("m-edit","Preparando foto…");
-  try{var b=await toJpeg(f);photo={url:photo.url,blob:b,prev:URL.createObjectURL(b)};paintPhoto();$("e-menu").hidden=true;
+  try{var b=await toJpeg(f);photo={url:photo.url,blob:b,prev:URL.createObjectURL(b)};paintPhoto();redoState();$("e-menu").hidden=true;
     msg("m-edit",neg.slug==="demo"?"Así se vería. En la demo la foto no se guarda.":"Foto lista. Pulsa Guardar para publicarla.",neg.slug==="demo"?"":"ok")}
   catch(err){msg("m-edit",err.message,"err")}
   e.target.value="";
 }
 $("e-file").addEventListener("change",onFoto);
 $("e-cam").addEventListener("change",onFoto);
-$("e-nofoto").addEventListener("click",function(){photo={url:null,blob:null,prev:null};paintPhoto();$("e-menu").hidden=true});
+$("e-nofoto").addEventListener("click",function(){photo={url:null,blob:null,prev:null};paintPhoto();redoState();$("e-menu").hidden=true});
+$("e-redo").addEventListener("click",function(){
+  photo={url:editing?editing.foto:null,blob:null,prev:null};paintPhoto();redoState();
+  $("e-menu").hidden=false;msg("m-edit","Foto descartada. Elige cámara o galería para intentarlo de nuevo.");
+  $("sheet").querySelector(".card").scrollTo({top:0,behavior:"smooth"});
+});
 
 $("edit").addEventListener("submit",async function(e){
   e.preventDefault();var btn=$("e-save");btn.disabled=true;msg("m-edit","Guardando…");
