@@ -414,7 +414,7 @@ body.ct-lock{overflow:hidden}
 .mbar .m-wa{background:linear-gradient(120deg,var(--gold),var(--copper));color:#17140c}
 .mbar .m-sec{color:var(--gold);border:1px solid rgba(201,162,39,.4)}
 @media(min-width:900px){.mbar{display:none}}
-@media(max-width:899px){body:not(.mbar-on) .mca-btn{display:none}}
+@media(max-width:899px){body:not(.mbar-on) .mca-btn{bottom:calc(18px + env(safe-area-inset-bottom))}.mca-btn{transition:bottom .35s ease-out}}
 /* ===== Pantallas estrechas o letra grande: que nada se salga ===== */
 .nav-wa{padding:10px 20px}
 @media(max-width:380px){
