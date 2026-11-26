@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 const BASE_URL = "https://mesacreativaccs.com";
 const TITLE = "Mesa Creativa — Páginas web para negocios en Caracas";
 const DESC =
-  "Páginas web profesionales para negocios en Caracas: catálogo, menú y WhatsApp directo. Planes desde $149.";
+  "Páginas web profesionales para negocios en Caracas: catálogo, menú y WhatsApp directo. Planes desde $99.";
 const OG_IMAGE = `${BASE_URL}/media/caracas-og.jpg`;
 export const Route = createFileRoute("/")({
   component: Index,

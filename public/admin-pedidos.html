@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Mis pedidos · Administración</title>
+<link rel="stylesheet" href="/panel/panel.css">
+<script src="/hoy/config.js"></script>
+</head>
+<body>
+<div class="box">
+
+  <section id="v-login" hidden>
+    <h1>Mis pedidos</h1>
+    <p class="sub">Entra con tu correo y contraseña para ver los pedidos de tu web.</p>
+    <form class="card" id="login" autocomplete="on">
+      <label class="l" for="em">Correo</label>
+      <input type="email" id="em" autocomplete="username" required>
+      <label class="l" for="pw">Contraseña</label>
+      <input type="password" id="pw" autocomplete="current-password" required>
+      <p class="msg" id="m-login" role="status"></p>
+      <button class="btn big" type="submit" id="b-login" style="margin-top:10px">Entrar</button>
+    </form>
+  </section>
+
+  <section id="v-panel" hidden>
+    <nav class="paneles" aria-label="Paneles">
+      <a href="/admin-catalogo.html">Catálogo</a>
+      <a href="/admin-pedidos.html" class="on" aria-current="page">Pedidos</a>
+      <a href="/admin-reservas.html">Reservas</a>
+      <a href="/admin-asistente.html">Asistente IA</a>
+      <a href="/admin-resumen.html">Resumen</a>
+      <a href="/admin-hoy.html">Novedades</a>
+    </nav>
+    <div class="top">
+      <h1 id="titulo">Pedidos</h1>
+      <button class="link" type="button" id="b-out">Salir</button>
+    </div>
+    <p class="sub" id="nota">Los pedidos que hacen tus clientes en la web aparecen aquí al momento. Cambia su estado y avísales por WhatsApp con un toque.</p>
+    <div id="sel-box" hidden><label class="l" for="sel">Negocio</label><select id="sel"></select></div>
+    <div class="tabs" role="tablist">
+      <button type="button" data-f="activos" class="on">En curso<span class="badge" id="n-nuevos" hidden></span></button>
+      <button type="button" data-f="hoy">Hoy</button>
+      <button type="button" data-f="todos">Todos</button>
+    </div>
+    <p class="msg" id="m-panel" role="status"></p>
+    <div id="lista"></div>
+  </section>
+
+</div>
+<script src="/panel/panel.js"></script>
+<script>
+(function(){
+"use strict";
+var P=window.Panel,$=P.$,esc=P.esc,pedidos=[],filtro="activos",neg=null,vistos=null;
+var SIG={nuevo:"preparando",preparando:"listo",listo:"entregado"};
+var BOTON={nuevo:"👨‍🍳 Preparando",preparando:"✓ Listo",listo:"📦 Entregado"};
+function aviso(p,estado){
+  var saludo="Hola "+p.nombre+", te escribimos de "+neg.nombre+". ";
+  if(estado==="preparando")return saludo+"¡Recibimos tu pedido y ya lo estamos preparando! Total: "+P.money(p.total)+".";
+  if(estado==="listo")return saludo+(p.entrega==="Delivery"?"Tu pedido ya va en camino 🛵.":"Tu pedido ya está listo para retirar ✅.");
+  if(estado==="cancelado")return saludo+"Lamentablemente no podemos atender tu pedido. Escríbenos si quieres cambiar algo.";
+  return saludo+"Sobre tu pedido de "+P.money(p.total)+":";
+}
+function hora(ts){var d=new Date(ts);return d.toLocaleTimeString("es-VE",{hour:"2-digit",minute:"2-digit"})}
+function fecha(ts){var d=new Date(ts),t=d.toLocaleDateString("es-VE",{weekday:"long",day:"numeric",month:"long"});t=t.charAt(0).toUpperCase()+t.slice(1);return d.toDateString()===new Date().toDateString()?"Hoy · "+t:t}
+async function cargar(n){
+  neg=n;
+  $("titulo").textContent=P.negocios.length>1?"Pedidos":"Pedidos · "+n.nombre;
+  $("nota").textContent=n.slug==="demo"?"Demo: aquí ves los pedidos de prueba que hacen los visitantes en Casa Araguaney. Se borran solos a los 7 días.":"Los pedidos que hacen tus clientes en la web aparecen aquí al momento. Cambia su estado y avísales por WhatsApp con un toque.";
+  var desde=new Date(Date.now()-30*864e5).toISOString();
+  pedidos=await P.call("/rest/v1/pedidos?negocio_id=eq."+n.id+"&creado=gte."+desde+"&select=id,nombre,telefono,entrega,direccion,nota,items,total,estado,creado&order=creado.desc&limit=300",{cache:"no-store"});
+  var nuevos=pedidos.filter(function(p){return p.estado==="nuevo"}).map(function(p){return p.id});
+  if(vistos&&nuevos.some(function(id){return vistos.indexOf(id)<0})){try{navigator.vibrate&&navigator.vibrate(200)}catch(e){}document.title="🔔 Nuevo pedido · Mis pedidos"}
+  vistos=nuevos;
+  pintar();
+}
+function pintar(){
+  var hoy=new Date().toDateString();
+  var n=pedidos.filter(function(p){return p.estado==="nuevo"}).length,b=$("n-nuevos");b.textContent=n;b.hidden=!n;
+  var lista=pedidos.filter(function(p){
+    if(filtro==="activos")return ["nuevo","preparando","listo"].indexOf(p.estado)>=0;
+    if(filtro==="hoy")return new Date(p.creado).toDateString()===hoy;
+    return true;
+  });
+  if(!lista.length){$("lista").innerHTML='<div class="card"><p class="sub" style="margin:0">'+(filtro==="activos"?"No hay pedidos en curso. Cuando un cliente pida en tu web, aparecerá aquí.":"No hay pedidos.")+'</p></div>';return}
+  var h="",dia="";
+  lista.forEach(function(p){
+    var f=fecha(p.creado);
+    if(f!==dia){if(dia)h+="</div>";dia=f;h+="<h2>"+esc(f)+'</h2><div class="card">'}
+    h+='<div class="res '+esc(p.estado)+'" data-id="'+p.id+'">'+
+      '<div class="res-top"><span class="hora">'+esc(hora(p.creado))+'</span><span class="quien">'+esc(p.nombre)+'</span><span class="est '+esc(p.estado)+'">'+esc(p.estado)+'</span></div>'+
+      '<div class="det">'+(p.entrega==="Delivery"?"🛵":p.entrega==="Comer aquí"?"🍽️":"🛍️")+" "+esc(p.entrega)+' · 📞 '+esc(p.telefono)+'</div>'+
+      (p.direccion?'<div class="det">📍 '+esc(p.direccion)+'</div>':'')+
+      '<ul class="items">'+(p.items||[]).map(function(i){return '<li><span>'+esc(i.cantidad)+' × '+esc(i.nombre)+'</span><span>'+P.money(i.precio*i.cantidad)+'</span></li>'}).join("")+
+      '<li class="total"><span>Total</span><span>'+P.money(p.total)+'</span></li></ul>'+
+      (p.nota?'<div class="det">📝 '+esc(p.nota)+'</div>':'')+
+      '<div class="acc">'+
+        (SIG[p.estado]?'<button class="btn sm" type="button" data-a="'+SIG[p.estado]+'">'+BOTON[p.estado]+'</button>':'')+
+        (["entregado","cancelado"].indexOf(p.estado)<0?'<button class="btn sm danger" type="button" data-a="cancelado">Cancelar</button>':'')+
+        '<a class="btn sm wa" target="_blank" rel="noopener" href="'+esc(P.wa(p.telefono,aviso(p,"")))+'">WhatsApp</a>'+
+      '</div></div>';
+  });
+  h+="</div>";
+  $("lista").innerHTML=h;
+}
+$("lista").addEventListener("click",async function(e){
+  var b=e.target.closest("button[data-a]");if(!b)return;
+  var p=pedidos.find(function(x){return x.id===b.closest(".res").getAttribute("data-id")}),estado=b.getAttribute("data-a");
+  if(estado==="cancelado"&&!confirm("¿Cancelar el pedido de "+p.nombre+"?"))return;
+  // Avisar al cliente por WhatsApp en el mismo toque (si no, el navegador bloquea la ventana)
+  if(estado==="preparando"||estado==="listo"||estado==="cancelado")window.open(P.wa(p.telefono,aviso(p,estado)),"_blank","noopener");
+  try{b.disabled=true;
+    await P.call("/rest/v1/pedidos?id=eq."+p.id,{method:"PATCH",headers:{"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify({estado:estado})});
+    p.estado=estado;pintar();P.msg("m-panel","✅ Pedido marcado como «"+estado+"».","ok");
+  }catch(err){P.fail(err)}finally{b.disabled=false}
+});
+document.querySelector(".tabs").addEventListener("click",function(e){
+  var b=e.target.closest("button[data-f]");if(!b)return;filtro=b.getAttribute("data-f");
+  this.querySelectorAll("button").forEach(function(x){x.classList.toggle("on",x===b)});pintar();
+});
+document.addEventListener("visibilitychange",function(){if(!document.hidden)document.title="Mis pedidos · Administración"});
+setInterval(function(){if(!$("v-panel").hidden&&neg)cargar(neg).catch(function(){})},30000);
+P.iniciar({alCargar:cargar,excluir:["mesa-creativa"]});
+})();
+</script>
+</body>
+</html>

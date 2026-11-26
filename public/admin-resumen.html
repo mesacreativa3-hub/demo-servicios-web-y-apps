@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Resumen · Administración</title>
+<link rel="stylesheet" href="/panel/panel.css">
+<script src="/hoy/config.js"></script>
+</head>
+<body>
+<div class="box">
+
+  <section id="v-login" hidden>
+    <h1>Resumen</h1>
+    <p class="sub">Entra con tu correo y contraseña para ver cómo le va a tu web.</p>
+    <form class="card" id="login" autocomplete="on">
+      <label class="l" for="em">Correo</label>
+      <input type="email" id="em" autocomplete="username" required>
+      <label class="l" for="pw">Contraseña</label>
+      <input type="password" id="pw" autocomplete="current-password" required>
+      <p class="msg" id="m-login" role="status"></p>
+      <button class="btn big" type="submit" id="b-login" style="margin-top:10px">Entrar</button>
+    </form>
+  </section>
+
+  <section id="v-panel" hidden>
+    <nav class="paneles" aria-label="Paneles">
+      <a href="/admin-catalogo.html">Catálogo</a>
+      <a href="/admin-pedidos.html">Pedidos</a>
+      <a href="/admin-reservas.html">Reservas</a>
+      <a href="/admin-asistente.html">Asistente IA</a>
+      <a href="/admin-resumen.html" class="on" aria-current="page">Resumen</a>
+      <a href="/admin-hoy.html">Novedades</a>
+    </nav>
+    <div class="top">
+      <h1 id="titulo">Resumen</h1>
+      <button class="link" type="button" id="b-out">Salir</button>
+    </div>
+    <p class="sub">Lo que tu web hizo por tu negocio. Compártelo con tu equipo o úsalo para decidir promociones.</p>
+    <div id="sel-box" hidden><label class="l" for="sel">Negocio</label><select id="sel"></select></div>
+    <div class="tabs" role="tablist">
+      <button type="button" data-d="7">7 días</button>
+      <button type="button" data-d="30" class="on">30 días</button>
+      <button type="button" data-d="mes">Este mes</button>
+    </div>
+    <p class="msg" id="m-panel" role="status"></p>
+    <div class="tiles" id="tiles"></div>
+    <div class="card" style="margin-top:12px">
+      <h2 style="margin-top:0">Visitas por día</h2>
+      <div class="bars" id="bars" role="img" aria-label="Visitas por día"></div>
+      <div class="bars-eje"><span id="eje-ini"></span><span>hoy</span></div>
+    </div>
+    <div class="card">
+      <h2 style="margin-top:0">Lo más pedido</h2>
+      <ul class="items" id="top"></ul>
+    </div>
+    <div class="acc"><a class="btn wa" id="b-compartir" target="_blank" rel="noopener" href="#">Compartir resumen por WhatsApp</a></div>
+  </section>
+
+</div>
+<script src="/panel/panel.js"></script>
+<script>
+(function(){
+"use strict";
+var P=window.Panel,$=P.$,esc=P.esc,neg=null,periodo="30";
+function desde(){
+  var d=new Date();
+  if(periodo==="mes")return new Date(d.getFullYear(),d.getMonth(),1).toISOString().slice(0,10);
+  return new Date(Date.now()-(+periodo-1)*864e5).toISOString().slice(0,10);
+}
+function nombrePeriodo(){return periodo==="mes"?"este mes":"los últimos "+periodo+" días"}
+async function cargar(n){
+  neg=n;
+  $("titulo").textContent=P.negocios.length>1?"Resumen":"Resumen · "+n.nombre;
+  var r=await P.rpc("resumen_negocio",{p_negocio:n.id,p_desde:desde()});
+  var T=[["Visitas a tu web",r.visitas],["Preguntas al asistente IA",r.preguntas_ia],["Pedidos",r.pedidos],["Ventas por pedidos",P.money(r.ventas)],["Reservas",r.reservas],["Personas reservadas",r.personas]];
+  $("tiles").innerHTML=T.map(function(t){return '<div class="tile"><b>'+esc(t[1])+'</b><span>'+esc(t[0])+'</span></div>'}).join("");
+  var dias=r.por_dia||[],max=Math.max.apply(null,dias.map(function(d){return d.n}).concat([1]));
+  $("bars").innerHTML=dias.map(function(d){return '<i title="'+esc(String(d.dia).slice(0,10)+": "+d.n)+'" style="height:'+Math.max(2,Math.round(d.n/max*100))+'%"></i>'}).join("");
+  $("eje-ini").textContent=dias.length?String(dias[0].dia).slice(5,10).split("-").reverse().join("/"):"";
+  $("top").innerHTML=(r.top&&r.top.length)?r.top.map(function(t,i){return '<li><span>'+(i+1)+". "+esc(t.nombre)+'</span><span>'+esc(t.cantidad)+'</span></li>'}).join(""):'<li><span class="sub" style="margin:0">Todavía no hay pedidos en este periodo.</span></li>';
+  var txt="📊 Resumen de "+n.nombre+" ("+nombrePeriodo()+")\n\n👀 Visitas: "+r.visitas+"\n🤖 Preguntas a la IA: "+r.preguntas_ia+"\n🛍️ Pedidos: "+r.pedidos+" ("+P.money(r.ventas)+")\n📅 Reservas: "+r.reservas+" ("+r.personas+" personas)"+((r.top&&r.top[0])?"\n⭐ Lo más pedido: "+r.top[0].nombre:"");
+  $("b-compartir").href="https://wa.me/?text="+encodeURIComponent(txt);
+}
+document.querySelector(".tabs").addEventListener("click",function(e){
+  var b=e.target.closest("button[data-d]");if(!b)return;periodo=b.getAttribute("data-d");
+  this.querySelectorAll("button").forEach(function(x){x.classList.toggle("on",x===b)});
+  if(neg)cargar(neg).catch(P.fail);
+});
+P.iniciar({alCargar:cargar});
+})();
+</script>
+</body>
+</html>

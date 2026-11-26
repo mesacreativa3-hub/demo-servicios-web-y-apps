@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Mi asistente IA · Administración</title>
+<link rel="stylesheet" href="/panel/panel.css">
+<script src="/hoy/config.js"></script>
+</head>
+<body>
+<div class="box">
+
+  <section id="v-login" hidden>
+    <h1>Mi asistente IA</h1>
+    <p class="sub">Entra con tu correo y contraseña para decidir qué responde tu asistente.</p>
+    <form class="card" id="login" autocomplete="on">
+      <label class="l" for="em">Correo</label>
+      <input type="email" id="em" autocomplete="username" required>
+      <label class="l" for="pw">Contraseña</label>
+      <input type="password" id="pw" autocomplete="current-password" required>
+      <p class="msg" id="m-login" role="status"></p>
+      <button class="btn big" type="submit" id="b-login" style="margin-top:10px">Entrar</button>
+    </form>
+  </section>
+
+  <section id="v-panel" hidden>
+    <nav class="paneles" aria-label="Paneles">
+      <a href="/admin-catalogo.html">Catálogo</a>
+      <a href="/admin-pedidos.html">Pedidos</a>
+      <a href="/admin-reservas.html">Reservas</a>
+      <a href="/admin-asistente.html" class="on" aria-current="page">Asistente IA</a>
+      <a href="/admin-resumen.html">Resumen</a>
+      <a href="/admin-hoy.html">Novedades</a>
+    </nav>
+    <div class="top">
+      <h1 id="titulo">Mi asistente IA</h1>
+      <button class="link" type="button" id="b-out">Salir</button>
+    </div>
+    <p class="sub">Tu asistente ya conoce tu catálogo y tus precios. Aquí le cuentas lo demás: horario, dirección, delivery, formas de pago, promociones… Escríbelo como se lo explicarías a un empleado nuevo.</p>
+    <div id="sel-box" hidden><label class="l" for="sel">Negocio</label><select id="sel"></select></div>
+
+    <form class="card" id="f-info">
+      <label class="switch"><input type="checkbox" id="activo"> <span>Asistente activo en mi web</span></label>
+      <label class="l" for="info">Lo que sabe tu asistente</label>
+      <textarea id="info" maxlength="6000" style="min-height:300px" placeholder="Horario: …&#10;Dirección: …&#10;Delivery: …&#10;Formas de pago: …&#10;Promociones de esta semana: …"></textarea>
+      <div class="cont" id="cont">0 / 6000</div>
+      <div class="acc">
+        <button class="btn" type="submit" id="b-save">Guardar</button>
+        <button class="btn ghost sm" type="button" id="b-plantilla">Usar plantilla</button>
+      </div>
+      <p class="msg" id="m-info" role="status"></p>
+    </form>
+
+    <div class="card">
+      <h2 style="margin-top:0">Pruébalo</h2>
+      <p class="sub" style="margin-bottom:10px">Haz una pregunta como lo haría un cliente. Usa lo último que guardaste.</p>
+      <form id="f-prueba" style="display:flex;gap:8px">
+        <input type="text" id="q" maxlength="300" placeholder="¿Hasta qué hora abren hoy?" autocomplete="off">
+        <button class="btn sm" type="submit" id="b-q">Preguntar</button>
+      </form>
+      <div class="chat-a" id="resp" hidden></div>
+    </div>
+
+    <p class="msg" id="m-panel" role="status"></p>
+  </section>
+
+</div>
+<script src="/panel/panel.js"></script>
+<script>
+(function(){
+"use strict";
+var P=window.Panel,$=P.$,neg=null;
+var PLANTILLA="Horario: lunes a sábado de __ a __; domingo de __ a __.\nDirección: __ (punto de referencia: __).\nDelivery: sí/no. Zonas: __. Costo del envío: __.\nPara llevar: pide por WhatsApp y retira sin esperar.\nFormas de pago: efectivo en dólares, pago móvil, punto de venta, Zelle…\nReservas: con el formulario de la web; grupos de más de __ personas, escribir por WhatsApp.\nPromociones de esta semana: __.\nPreguntas frecuentes:\n- ¿Tienen opciones vegetarianas? __\n- ¿Tienen estacionamiento? __";
+function contar(){$("cont").textContent=$("info").value.length+" / 6000"}
+async function cargar(n){
+  neg=n;
+  $("titulo").textContent=P.negocios.length>1?"Mi asistente IA":"Asistente IA · "+n.nombre;
+  $("info").value=n.info||"";$("activo").checked=n.asistente!==false;contar();
+  $("resp").hidden=true;P.msg("m-info","");
+}
+$("info").addEventListener("input",contar);
+$("b-plantilla").addEventListener("click",function(){
+  if($("info").value.trim()&&!confirm("¿Añadir la plantilla al final de tu texto?"))return;
+  $("info").value=($("info").value.trim()?$("info").value.trim()+"\n\n":"")+PLANTILLA;contar();$("info").focus();
+});
+$("f-info").addEventListener("submit",async function(e){
+  e.preventDefault();$("b-save").disabled=true;P.msg("m-info","Guardando…");
+  try{
+    await P.rpc("guardar_asistente",{p_negocio:neg.id,p_info:$("info").value,p_activo:$("activo").checked});
+    neg.info=$("info").value;neg.asistente=$("activo").checked;
+    P.msg("m-info","✅ Guardado. Tu asistente ya responde con esta información.","ok");
+  }catch(err){P.fail(err,"m-info")}finally{$("b-save").disabled=false}
+});
+$("f-prueba").addEventListener("submit",async function(e){
+  e.preventDefault();var q=$("q").value.trim();if(!q)return;
+  var r=$("resp");r.hidden=false;r.textContent="Pensando…";$("b-q").disabled=true;
+  try{
+    var x=await fetch(P.U+"/functions/v1/asistente",{method:"POST",headers:{"Content-Type":"application/json",apikey:P.K},body:JSON.stringify({slug:neg.slug,mensaje:q,historial:[]})}).then(function(r){return r.json()});
+    r.textContent=x&&x.ok?x.respuesta:(x&&x.motivo==="no_disponible"?"El asistente está desactivado. Actívalo arriba y guarda.":x&&x.motivo==="limite"?"Hoy se alcanzó el límite de preguntas. Vuelve a probar mañana.":"No se pudo obtener respuesta. Inténtalo de nuevo.");
+  }catch(err){r.textContent="No hay conexión. Inténtalo de nuevo."}
+  finally{$("b-q").disabled=false}
+});
+P.iniciar({alCargar:async function(n){await cargar(n)}});
+})();
+</script>
+</body>
+</html>

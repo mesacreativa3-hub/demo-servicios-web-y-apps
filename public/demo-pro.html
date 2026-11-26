@@ -316,9 +316,11 @@ footer.site p+p{margin-top:10px}
           <div><label for="p-modo">Entrega</label><select id="p-modo"><option>Para llevar</option><option>Delivery</option><option>Comer aquí</option></select></div>
           <div><label for="p-nombre">Nombre</label><input id="p-nombre" required maxlength="60" autocomplete="name"></div>
         </div>
+        <div><label for="p-tel">Teléfono</label><input id="p-tel" type="tel" required maxlength="20" autocomplete="tel" placeholder="0414 000 0000"></div>
         <div id="p-dir-box" hidden><label for="p-dir">Dirección de entrega</label><input id="p-dir" maxlength="160" autocomplete="street-address"></div>
         <div><label for="p-nota">Nota (opcional)</label><input id="p-nota" maxlength="160" placeholder="Sin cebolla, salsa aparte…"></div>
-        <button class="btn btn-primary" type="submit">Enviar pedido por WhatsApp</button>
+        <button class="btn btn-primary" type="submit">Enviar pedido</button>
+        <p id="p-ok" role="status" style="min-height:1.2em;margin:6px 0 0;font-size:.88rem;color:#86e0a0"></p>
       </form>
     </div>
   </div>
@@ -441,8 +443,19 @@ $("pedido").addEventListener("submit",function(e){
   var lines=Object.keys(cart).map(function(k){var it=cart[k];return "• "+it.q+" × "+it.n+" — "+money(it.p*it.q)});
   var t="[DEMO] Pedido para Casa Araguaney\n\n"+lines.join("\n")+"\n\nTotal: "+money(s.t)+"\nEntrega: "+$("p-modo").value+"\nNombre: "+$("p-nombre").value.trim();
   if($("p-modo").value==="Delivery")t+="\nDirección: "+$("p-dir").value.trim();
+  t+="\nTeléfono: "+$("p-tel").value.trim();
   if($("p-nota").value.trim())t+="\nNota: "+$("p-nota").value.trim();
   wa(t);
+  /* El pedido queda guardado en el panel del restaurante */
+  var C=window.HOY_CONFIG||{},ok=$("p-ok");
+  if(!C.url||!C.key)return;
+  ok.style.color="#86e0a0";ok.textContent="Guardando el pedido…";
+  var items=Object.keys(cart).map(function(k){return{id:k,q:cart[k].q}});
+  fetch(C.url.replace(/\/$/,"")+"/rest/v1/rpc/crear_pedido",{method:"POST",keepalive:true,headers:{"Content-Type":"application/json",apikey:C.key},
+    body:JSON.stringify({p_slug:NEGOCIO,p_nombre:$("p-nombre").value,p_telefono:$("p-tel").value,p_entrega:$("p-modo").value,p_direccion:$("p-dir").value||null,p_nota:$("p-nota").value||null,p_items:items})})
+  .then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})})
+  .then(function(x){if(x.ok){ok.textContent="✅ Pedido guardado en el panel del restaurante. Termina de enviarlo por WhatsApp."}else{ok.style.color="#ff9a8a";ok.textContent="⚠️ "+((x.j&&x.j.message)||"No se pudo guardar; envíalo por WhatsApp.")}})
+  .catch(function(){ok.style.color="#ff9a8a";ok.textContent="⚠️ No se pudo guardar; envíalo por WhatsApp."});
 });
 $("reserva").addEventListener("submit",function(e){
   e.preventDefault();
@@ -476,6 +489,12 @@ window.MC_ASISTENTE = {
   sugerencias: ["¿Qué me recomiendas para almorzar?", "¿Hasta qué hora abren el domingo?", "¿Cuánto cuesta el pabellón?", "¿Hacen delivery?"],
   whatsapp: function (t) { return "https://wa.me/34668580249?text=" + encodeURIComponent("[DEMO] Casa Araguaney: " + t); }
 };
+</script>
+<script>
+/* Cuenta una visita por sesión para el «Resumen» del panel */
+(function(){try{if(sessionStorage.getItem("mc_visita_demo"))return;sessionStorage.setItem("mc_visita_demo","1")}catch(e){}
+var C=window.HOY_CONFIG||{};if(!C.url||!C.key)return;
+fetch(C.url.replace(/\/$/,"")+"/rest/v1/rpc/registrar_visita",{method:"POST",keepalive:true,headers:{"Content-Type":"application/json",apikey:C.key},body:JSON.stringify({p_slug:"demo"})}).catch(function(){});})();
 </script>
 <script src="/asistente/asistente.js" defer></script>
 </body>
