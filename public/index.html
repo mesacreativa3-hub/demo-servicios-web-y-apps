@@ -145,7 +145,7 @@ p{margin:0}
 .lead{color:var(--cream-dim);font-size:clamp(1rem,2.1vw,1.12rem);max-width:62ch}
 
 /* ===== Nav ===== */
-header.nav{position:fixed;inset:0 0 auto 0;z-index:60;backdrop-filter:blur(14px);background:rgba(14,13,11,.55);border-bottom:1px solid transparent;transition:.4s ease}
+header.nav{position:fixed;inset:0 0 auto 0;z-index:60;backdrop-filter:blur(14px);background:rgba(14,13,11,.55);border-bottom:1px solid transparent;transition:background-color .4s ease}
 header.nav.solid{background:rgba(14,13,11,.94);border-bottom-color:var(--line)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;height:76px;gap:16px}
 /* REEMPLAZAR: ruta del logo real si cambia */
@@ -287,7 +287,7 @@ footer{padding:56px 0 120px;border-top:1px solid var(--line)}
 .foot a{color:var(--cream-dim);text-decoration:none;font-size:.9rem}
 .foot a:hover{color:var(--gold)}
 .foot .logo{height:48px}
-.tiny{font-size:.72rem;color:rgba(200,191,177,.5);margin-top:22px}
+.tiny{font-size:.72rem;color:rgba(200,191,177,.82);margin-top:22px}
 
 /* ===== Carta / Menú digital ===== */
 .menu{max-width:840px;margin:48px auto 0}
@@ -360,7 +360,7 @@ footer{padding:56px 0 120px;border-top:1px solid var(--line)}
 .form-msg{display:none;font-size:.85rem;color:#e05252;margin-top:4px}
 .form-msg.show{display:block}
 
-.foot-admin{display:block;width:fit-content;margin:14px auto 0;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cream-dim);opacity:.45;text-decoration:none;padding:6px 10px}
+.foot-admin{display:block;width:fit-content;margin:14px auto 0;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cream-dim);opacity:.8;text-decoration:none;padding:6px 10px}
 .foot-admin:hover,.foot-admin:focus-visible{opacity:1;color:var(--gold)}
 /* ===== Novedades del día ===== */
 .hoy-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:4px}
@@ -414,7 +414,7 @@ body.ct-lock{overflow:hidden}
 .mbar .m-wa{background:linear-gradient(120deg,var(--gold),var(--copper));color:#17140c}
 .mbar .m-sec{color:var(--gold);border:1px solid rgba(201,162,39,.4)}
 @media(min-width:900px){.mbar{display:none}}
-@media(max-width:899px){body:not(.mbar-on) .mca-btn{bottom:calc(18px + env(safe-area-inset-bottom))}.mca-btn{transition:bottom .35s ease-out}}
+@media(max-width:899px){.mca-btn{transition:transform .35s ease-out}body.mbar-on .mca-btn{transform:translateY(-66px)}}
 /* ===== Pantallas estrechas o letra grande: que nada se salga ===== */
 .nav-wa{padding:10px 20px}
 @media(max-width:380px){
@@ -555,7 +555,8 @@ h1,h2,h3,p,li,summary,figcaption{overflow-wrap:break-word}
 .faq details p{color:var(--cream-dim);font-size:.96rem;padding:0 0 22px;max-width:68ch}
 .ct-txt small{display:block;font-size:.78rem;color:var(--cream-dim)}
 </style>
-<script src="/hoy/config.js"></script>
+<script>/* Copia de /hoy/config.js: si cambias la clave allí, cámbiala también aquí. La clave "publishable" es pública por diseño. */
+window.HOY_CONFIG = { url: "https://wgiayjgmwsgayrmijbgz.supabase.co", key: "sb_publishable_WKVMc4D0uwPLPaa0mm5s3A_fbmhmtrs" };</script>
 </head>
 <body>
 
@@ -581,7 +582,7 @@ h1,h2,h3,p,li,summary,figcaption{overflow-wrap:break-word}
 <!-- ============ A. HERO ============ -->
 <section class="hero" id="top">
   <div class="hero-media">
-    <img src="/media/caracas-avila.webp" srcset="/media/caracas-avila-960.webp 960w, /media/caracas-avila.webp 1920w" sizes="100vw" width="1920" height="1088" fetchpriority="high" decoding="async" alt="Caracas al atardecer con el cerro Ávila, el Hotel Humboldt en la cima y el teleférico" />
+    <img src="/media/caracas-avila-960.webp" srcset="/media/caracas-avila-760.webp 760w, /media/caracas-avila-960.webp 960w, /media/caracas-avila-1920.webp 1920w" sizes="100vw" width="1920" height="1088" fetchpriority="high" decoding="async" alt="Caracas al atardecer con el cerro Ávila, el Hotel Humboldt en la cima y el teleférico" />
   </div>
   <div class="wrap hero-in">
     <p class="eyebrow rv">Desarrollo web y presencia digital · Caracas, Venezuela</p>
@@ -622,7 +623,7 @@ h1,h2,h3,p,li,summary,figcaption{overflow-wrap:break-word}
 
     <div class="qr-row">
       <figure class="qr-fig rv">
-        <img src="/media/movil-qr.webp" alt="Móvil mostrando la web junto a un código QR" width="896" height="1200" loading="lazy" style="width:100%;height:auto;display:block;margin:0">
+        <img src="/media/movil-qr-760.webp" alt="Móvil mostrando la web junto a un código QR" width="760" height="1018" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;margin:0">
         <figcaption class="lead qr-cap" style="position:relative;margin:-26% 0.8% 0 auto;width:fit-content;max-width:62%;text-align:center;font-size:1.05rem;line-height:1.5">Creamos un código QR personalizado<br>para que tus clientes accedan fácilmente<br>a la información de tu negocio.</figcaption>
       </figure>
       <div class="qr-side rv">
@@ -651,7 +652,7 @@ h1,h2,h3,p,li,summary,figcaption{overflow-wrap:break-word}
     <p class="lead rv" style="margin-top:26px">Ábrela desde tu celular, como lo harán tus clientes. Todo lo que ves en esta sección son ejemplos: los cambiamos por tu logo, tus fotos y tus precios.</p>
     <div class="ex-grid">
       <a class="card ex-card rv" href="/demo-pro.html" target="_blank" rel="noopener">
-        <img src="/media/ejemplo-casa-araguaney.webp" width="520" height="1040" loading="lazy" decoding="async" alt="Página de ejemplo del restaurante Casa Araguaney vista en un celular" />
+        <img src="/media/ejemplo-casa-araguaney-440.webp" width="440" height="880" loading="lazy" decoding="async" alt="Página de ejemplo del restaurante Casa Araguaney vista en un celular" />
         <div>
           <span class="pf-tag">Web Pro a Medida</span>
           <h3>Casa Araguaney, restaurante de ejemplo</h3>
@@ -1189,10 +1190,12 @@ function render(d,v){var any=false;
 var f=document.getElementById("hoy-fecha");if(d.fecha){f.textContent=d.fecha;f.hidden=false;}
 box.querySelectorAll(".hoy-item").forEach(function(el){var t=d[el.getAttribute("data-k")];if(t){el.querySelector("p").textContent=t;el.hidden=false;any=true;}});
 var g=document.getElementById("hoy-fotos");g.textContent="";
-["foto1","foto2","foto3"].forEach(function(k,i){if(!d[k])return;var im=new Image();im.alt="Foto "+(i+1)+" del día";im.loading="lazy";im.decoding="async";im.onerror=function(){im.remove();};im.src=src(d[k],v);g.appendChild(im);any=true;});
+["foto1","foto2","foto3"].forEach(function(k,i){if(!d[k])return;var im=new Image(600,600);im.alt="Foto "+(i+1)+" del día";im.loading="lazy";im.decoding="async";im.onerror=function(){im.remove();};im.src=src(d[k],v);g.appendChild(im);any=true;});
 document.getElementById("hoy-vacio").hidden=any;}
 function fromTxt(){fetch("/hoy/hoy.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){if(!r.ok)throw 0;return r.text();}).then(function(t){var d=parse(t);render(d,d.fecha||"");}).catch(function(){});}
-if(U&&K){fetch(U+"/rest/v1/hoy?id=eq.1&select=*",{headers:{apikey:K},cache:"no-store"}).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(a){if(!a||!a[0])throw 0;render(a[0],a[0].updated_at);}).catch(fromTxt);}else{fromTxt();}})();
+function cargarHoy(){if(U&&K){fetch(U+"/rest/v1/hoy?id=eq.1&select=*",{headers:{apikey:K},cache:"no-store"}).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(a){if(!a||!a[0])throw 0;render(a[0],a[0].updated_at);}).catch(fromTxt);}else{fromTxt();}}
+/* Se carga cuando la sección está cerca de la pantalla: no retrasa la portada */
+if("IntersectionObserver" in window){var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();cargarHoy();}},{rootMargin:"800px 0px"});io.observe(box);}else{cargarHoy();}})();
 
 /* ==== Modal de contacto ==== */
 (function(){var m=document.getElementById("ct-modal");if(!m)return;var last=null;
@@ -1260,16 +1263,16 @@ var nav = document.getElementById("nav");
 addEventListener("scroll", function(){ nav.classList.toggle("solid", scrollY > 40); }, {passive:true});
 
 /* ==== Altura real del header -> --header-h (evita que tape el Hero en móvil) ==== */
-function setHeaderH(){
+function setHeaderH(h){
   if(!nav) return;
-  document.documentElement.style.setProperty("--header-h", Math.round(nav.getBoundingClientRect().height) + "px");
+  document.documentElement.style.setProperty("--header-h", Math.round(h) + "px");
 }
-setHeaderH();
-addEventListener("resize", setHeaderH, {passive:true});
-addEventListener("orientationchange", setHeaderH);
-addEventListener("load", setHeaderH);
-if (window.ResizeObserver && nav){ new ResizeObserver(setHeaderH).observe(nav); }
-if (document.fonts && document.fonts.ready){ document.fonts.ready.then(setHeaderH); }
+if(nav && "ResizeObserver" in window){
+  new ResizeObserver(function(){ setHeaderH(nav.offsetHeight); }).observe(nav);
+} else if(nav){
+  requestAnimationFrame(function(){ setHeaderH(nav.offsetHeight); });
+  addEventListener("resize", function(){ requestAnimationFrame(function(){ setHeaderH(nav.offsetHeight); }); }, {passive:true});
+}
 
 /* ==== Fade-in al entrar en viewport (una sola vez) ==== */
 var revealItems = document.querySelectorAll(".rv");
@@ -1330,7 +1333,7 @@ if("IntersectionObserver"in window&&sec){var io=new IntersectionObserver(functio
 </script>
 <script>
 window.MC_ASISTENTE = {
-  slug: "mesa-creativa", nombre: "Mesa Creativa", titulo: "Asistente de Mesa Creativa", bottomMovil: 84,
+  slug: "mesa-creativa", nombre: "Mesa Creativa", titulo: "Asistente de Mesa Creativa", bottomMovil: 18,
   saludo: "¡Hola! 👋 Soy el asistente con IA de Mesa Creativa. Pregúntame por planes, precios, plazos o cómo trabajamos. Así respondería también el asistente de tu negocio.",
   sugerencias: ["¿Qué plan me recomiendas para un restaurante?", "¿Cuánto cuesta cada plan?", "¿En cuánto tiempo está lista mi web?", "¿Puedo cambiar los precios yo mismo?"],
   whatsapp: function (t) { return "https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent(WA_HOLA + t.charAt(0).toLowerCase() + t.slice(1) + WA_TRAZA); }
