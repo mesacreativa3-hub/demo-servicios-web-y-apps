@@ -15,7 +15,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
 <!-- Cloudflare Web Analytics: pega aquí el fragmento que te da Cloudflare (Web Analytics → Add a site).
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "TU_TOKEN"}'></script>
 -->
 <script src="/hoy/config.js"></script>
 <style>
@@ -276,14 +275,19 @@ footer.site p+p{margin-top:10px}
     </div>
     <form class="card form rv" id="reserva">
       <h3 style="margin:0 0 6px">Reservar mesa</h3>
-      <div><label for="r-nombre">Nombre</label><input id="r-nombre" required maxlength="60" autocomplete="name"></div>
+      <div class="two">
+        <div><label for="r-nombre">Nombre</label><input id="r-nombre" required maxlength="60" autocomplete="name"></div>
+        <div><label for="r-tel">Teléfono</label><input id="r-tel" type="tel" required maxlength="20" autocomplete="tel" placeholder="0414 000 0000"></div>
+      </div>
       <div class="two">
         <div><label for="r-fecha">Fecha</label><input id="r-fecha" type="date" required></div>
         <div><label for="r-hora">Hora</label><input id="r-hora" type="time" required min="07:00" max="21:30"></div>
       </div>
-      <div><label for="r-pers">Personas</label><select id="r-pers"><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>Más de 8</option></select></div>
+      <div><label for="r-pers">Personas</label><select id="r-pers"><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option value="9">Más de 8</option></select></div>
       <div><label for="r-nota">Comentario (opcional)</label><input id="r-nota" maxlength="140" placeholder="Cumpleaños, silla para bebé…"></div>
-      <button class="btn btn-primary" type="submit" style="margin-top:6px">Reservar por WhatsApp</button>
+      <button class="btn btn-primary" type="submit" style="margin-top:6px">Reservar</button>
+      <p id="r-ok" role="status" style="min-height:1.4em;margin:8px 0 0;font-size:.9rem;color:#86e0a0"></p>
+      <p style="font-size:.78rem;color:var(--cream-dim);margin:0">Tu reserva queda en la agenda del restaurante y se abre WhatsApp para confirmarla. Demo: se borra sola a los 7 días.</p>
     </form>
   </div>
 </section>
@@ -442,9 +446,18 @@ $("pedido").addEventListener("submit",function(e){
 });
 $("reserva").addEventListener("submit",function(e){
   e.preventDefault();
-  var t="[DEMO] Reserva en Casa Araguaney\n\nNombre: "+$("r-nombre").value.trim()+"\nFecha: "+$("r-fecha").value+"\nHora: "+$("r-hora").value+"\nPersonas: "+$("r-pers").value;
-  if($("r-nota").value.trim())t+="\nComentario: "+$("r-nota").value.trim();
+  var pers=$("r-pers").value,masDe8=pers==="9",nota=$("r-nota").value.trim();
+  var t="[DEMO] Reserva en Casa Araguaney\n\nNombre: "+$("r-nombre").value.trim()+"\nTeléfono: "+$("r-tel").value.trim()+"\nFecha: "+$("r-fecha").value+"\nHora: "+$("r-hora").value+"\nPersonas: "+(masDe8?"más de 8":pers);
+  if(nota)t+="\nComentario: "+nota;
   wa(t);
+  var C=window.HOY_CONFIG||{},ok=$("r-ok");
+  if(!C.url||!C.key)return;
+  ok.style.color="#86e0a0";ok.textContent="Guardando en la agenda…";
+  fetch(C.url.replace(/\/$/,"")+"/rest/v1/rpc/crear_reserva",{method:"POST",keepalive:true,headers:{"Content-Type":"application/json",apikey:C.key},
+    body:JSON.stringify({p_slug:NEGOCIO,p_nombre:$("r-nombre").value,p_telefono:$("r-tel").value,p_fecha:$("r-fecha").value,p_hora:$("r-hora").value,p_personas:masDe8?9:parseInt(pers,10),p_notas:(masDe8?"Grupo de más de 8. ":"")+nota||null})})
+  .then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})})
+  .then(function(x){if(x.ok){ok.textContent="✅ Reserva guardada en la agenda. Termina de enviarla por WhatsApp."}else{ok.style.color="#ff9a8a";ok.textContent="⚠️ "+((x.j&&x.j.message)||"No se pudo guardar en la agenda; envíala por WhatsApp.")}})
+  .catch(function(){ok.style.color="#ff9a8a";ok.textContent="⚠️ No se pudo guardar en la agenda; envíala por WhatsApp."});
 });
 (function(){var d=new Date();$("r-fecha").min=d.toISOString().slice(0,10)})();
 $("toggle").addEventListener("click",function(){var o=$("nav").classList.toggle("open");this.setAttribute("aria-expanded",o)});
@@ -456,5 +469,14 @@ document.querySelectorAll(".rv").forEach(function(el){io?io.observe(el):el.class
 load().then(function(){chips();render();paintCart()});
 })();
 </script>
+<script>
+window.MC_ASISTENTE = {
+  slug: "demo", nombre: "Casa Araguaney", titulo: "Asistente de Casa Araguaney",
+  saludo: "¡Hola! 👋 Soy el asistente de Casa Araguaney (restaurante de ejemplo). Pregúntame por la carta, precios, horarios, delivery o reservas.",
+  sugerencias: ["¿Qué me recomiendas para almorzar?", "¿Hasta qué hora abren el domingo?", "¿Cuánto cuesta el pabellón?", "¿Hacen delivery?"],
+  whatsapp: function (t) { return "https://wa.me/34668580249?text=" + encodeURIComponent("[DEMO] Casa Araguaney: " + t); }
+};
+</script>
+<script src="/asistente/asistente.js" defer></script>
 </body>
 </html>

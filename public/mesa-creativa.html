@@ -414,6 +414,7 @@ body.ct-lock{overflow:hidden}
 .mbar .m-wa{background:linear-gradient(120deg,var(--gold),var(--copper));color:#17140c}
 .mbar .m-sec{color:var(--gold);border:1px solid rgba(201,162,39,.4)}
 @media(min-width:900px){.mbar{display:none}}
+@media(max-width:899px){body:not(.mbar-on) .mca-btn{display:none}}
 /* ===== Pantallas estrechas o letra grande: que nada se salga ===== */
 .nav-wa{padding:10px 20px}
 @media(max-width:380px){
@@ -521,6 +522,12 @@ h1,h2,h3,p,li,summary,figcaption{overflow-wrap:break-word}
 .ex-card .pf-tag{margin-top:0}
 .ex-card .pf-cta{display:inline-block;margin-top:14px}
 .ex-card .btn{margin-top:18px}
+.nuevo{display:inline-block;font-style:normal;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#17140c;background:linear-gradient(120deg,var(--gold),var(--copper));border-radius:999px;padding:2px 7px;margin-left:4px;vertical-align:middle}
+.ex-ia{grid-column:1/-1}
+.ia-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.ia-chips button{border:1px solid rgba(201,162,39,.45);background:none;color:var(--cream);border-radius:999px;padding:8px 14px;font:inherit;font-size:.85rem;cursor:pointer}
+.ia-chips button:hover{background:rgba(201,162,39,.12)}
+.r-ok{color:#86e0a0;margin-top:10px;min-height:1.4em}
 .ex-ico{width:54px;height:54px;flex:none;align-self:flex-start;stroke:var(--gold);fill:none;stroke-width:1.4;stroke-linecap:round}
 @media(max-width:560px){.ex-card{flex-direction:column;align-items:flex-start}.ex-card img{width:min(220px,70%);align-self:center}}
 /* ===== Cómo trabajamos ===== */
@@ -657,8 +664,22 @@ h1,h2,h3,p,li,summary,figcaption{overflow-wrap:break-word}
         <div>
           <span class="pf-tag">Catálogo Autogestionable y Web Pro</span>
           <h3>Tu panel de administración</h3>
-          <p>Entras con tu correo y tu clave desde el celular. Cambias precios, subes fotos, marcas qué está disponible y publicas las «Novedades del día». Los cambios se ven al momento.</p>
+          <p>Entras con tu correo y tu clave desde el celular. Cambias precios, subes fotos, marcas qué está disponible y publicas las «Novedades del día» y gestionas tus reservas. Los cambios se ven al momento.</p>
           <a class="btn btn-ghost" href="#" data-wa data-wa-text="quiero ver una demostración del panel de administración.">Pide que te lo enseñemos</a>
+        </div>
+      </div>
+      <div class="card ex-card ex-panel ex-ia rv">
+        <svg class="ex-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M18.5 15.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg>
+        <div>
+          <span class="pf-tag">Incluido en todos los planes</span>
+          <h3>Asistente con IA 24/7 <em class="nuevo">Nuevo</em></h3>
+          <p>Responde a tus clientes a cualquier hora con la información real de tu negocio: carta, precios, horarios, dirección y formas de pago. Si no sabe algo, no lo inventa: lo pasa a tu WhatsApp. Pruébalo ahora: este es el asistente de Mesa Creativa.</p>
+          <div class="ia-chips">
+            <button type="button" data-asistente-abrir="¿Qué plan me recomiendas para un restaurante?">¿Qué plan me recomiendas?</button>
+            <button type="button" data-asistente-abrir="¿Cuánto cuesta y qué incluye el Catálogo Autogestionable?">¿Qué incluye el Autogestionable?</button>
+            <button type="button" data-asistente-abrir="">Hacer otra pregunta</button>
+          </div>
+          <p style="margin-top:14px"><a class="pf-cta" href="/demo-pro.html" target="_blank" rel="noopener">Pruébalo también en Casa Araguaney, preguntando por la carta →</a></p>
         </div>
       </div>
     </div>
@@ -775,7 +796,7 @@ h1,h2,h3,p,li,summary,figcaption{overflow-wrap:break-word}
   <div class="wrap">
     <p class="eyebrow rv">Ejemplo · Reservas</p>
     <h2 class="rv">Reserva tu mesa</h2>
-    <p class="lead rv" style="margin-top:26px">Así reciben reservas los restaurantes: el cliente completa el formulario y se abre WhatsApp con la solicitud ya redactada. No se guarda nada en ningún servidor. Pruébalo: el mensaje llegará marcado como demostración.</p>
+    <p class="lead rv" style="margin-top:26px">Así reciben reservas los restaurantes: el cliente completa el formulario, la reserva queda guardada en la agenda del panel y se abre WhatsApp con la solicitud ya redactada. En esta demo se guarda en la agenda del restaurante de ejemplo y se borra sola a los 7 días. Pruébalo: el mensaje llegará marcado como demostración.</p>
 
     <form class="form-grid rv" id="reserva-form" novalidate>
       <div class="field">
@@ -817,7 +838,8 @@ h1,h2,h3,p,li,summary,figcaption{overflow-wrap:break-word}
         <textarea id="r-platos" rows="3" maxlength="400" placeholder="Ej.: 1 arroz meloso de marisco para 2 personas, sin gluten…" style="resize:vertical;font:inherit"></textarea>
       </div>
       <div class="field form-full" style="margin-top:10px">
-        <button class="btn btn-primary" type="submit">Enviar reserva por WhatsApp</button>
+        <button class="btn btn-primary" type="submit">Reservar</button>
+        <p class="r-ok" id="r-ok" role="status"></p>
       </div>
       <p class="form-msg form-full" id="r-error">Revisa los campos marcados antes de enviar la reserva.</p>
     </form>
@@ -906,6 +928,18 @@ h1,h2,h3,p,li,summary,figcaption{overflow-wrap:break-word}
         <p>Cubre el panel, el servidor donde vive tu web, los respaldos de tus datos y el soporte por WhatsApp. Se paga al inicio de cada mes. Si se deja de pagar, avisamos antes de pausar el panel y la página.</p>
       </details>
       <details>
+        <summary>¿Qué hace el asistente con IA? ¿Cuesta más?</summary>
+        <p>Responde a tus clientes las 24 horas con la información de tu negocio: carta, precios, horarios, dirección y formas de pago. Si no sabe algo, no lo inventa: invita a escribirte por WhatsApp. Está incluido en todos los planes sin costo extra, con un límite diario de uso justo; al pasarlo, el asistente ofrece tu WhatsApp. Pruébalo con el botón «Pregúntale a la IA».</p>
+      </details>
+      <details>
+        <summary>¿Cómo funcionan las reservas?</summary>
+        <p>Tu cliente elige fecha, hora y número de personas en tu web. En el Catálogo Autogestionable y en el Web Pro, la reserva queda guardada en la agenda de tu panel y además te llega por WhatsApp. Desde el celular la confirmas o la cancelas y le escribes al cliente con un toque.</p>
+      </details>
+      <details>
+        <summary>¿Incluye correo con mi dominio?</summary>
+        <p>Sí, en los planes con dominio (Catálogo Autogestionable y Web Pro): creamos direcciones como ventas@tunegocio.com que llegan a tu Gmail u otro correo que ya uses. Sirven para recibir mensajes; si quieres responder desde esa misma dirección, te cotizamos un servicio de correo aparte.</p>
+      </details>
+      <details>
         <summary>¿Cómo se paga?</summary>
         <p>En dólares: 50 % de anticipo para reservar la fecha y 50 % a la entrega. Te indicamos los medios de pago disponibles al enviarte la cotización.</p>
       </details>
@@ -934,6 +968,7 @@ h1,h2,h3,p,li,summary,figcaption{overflow-wrap:break-word}
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Presentación de hasta 5 servicios o productos</span></li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Hasta 6 fotos optimizadas para celular</span></li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Botones directos a WhatsApp</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Asistente con IA 24/7</b> que responde por ti a tus clientes <em class="nuevo">Nuevo</em></span></li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Ubicación en Google Maps y enlaces a tus redes</span></li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Código QR listo para imprimir</span></li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Publicada en enlace gratuito · 1 ronda de ajustes</span></li>
@@ -951,6 +986,7 @@ h1,h2,h3,p,li,summary,figcaption{overflow-wrap:break-word}
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Fotos organizadas por categorías</span></li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Buscador y filtros</span></li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Botón «Pedir por WhatsApp» en cada producto</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Asistente con IA 24/7</b> que conoce tu catálogo y tus precios <em class="nuevo">Nuevo</em></span></li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Código QR digital para compartir</span></li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>2 rondas de ajustes</span></li>
         </ul>
@@ -965,8 +1001,10 @@ h1,h2,h3,p,li,summary,figcaption{overflow-wrap:break-word}
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Todo lo del Web Catálogo + Menú</span></li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Panel privado con tu clave: cambia precios, fotos y «Novedades del día» desde tu celular</span></li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Hasta 10 productos o platos</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Formulario de reservas o pedidos por WhatsApp</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Agenda de reservas</b> en tu panel: el cliente reserva en tu web y tú confirmas desde el celular <em class="nuevo">Nuevo</em></span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Pedidos por WhatsApp con el total calculado</span></li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Dominio .com propio incluido el primer año (renovación opcional: $22 al año)</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Correo con tu dominio</b> para recibir mensajes (ej.: ventas@tunegocio.com) <em class="nuevo">Nuevo</em></span></li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Respaldo de tus datos y soporte por WhatsApp</span></li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>La mensualidad cubre el panel, el servidor y los respaldos</span></li>
         </ul>
@@ -979,7 +1017,8 @@ h1,h2,h3,p,li,summary,figcaption{overflow-wrap:break-word}
         <div class="amount">Desde $590<span class="iva">+IVA</span></div>
         <p class="note" style="margin-top:-8px">Cotización según alcance · + $20/mes: panel, servidor, respaldos y cambios</p>
         <ul class="feat">
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Todo lo del Catálogo Autogestionable</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Todo lo del Catálogo Autogestionable, con asistente IA, agenda y correo</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Asistente con IA</b> que conoce todos tus servicios, políticas y eventos <em class="nuevo">Nuevo</em></span></li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Múltiples secciones: inicio, nosotros, servicios, galería y contacto</span></li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Catálogo extenso, con más de 30 productos y categorías</span></li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Cotizador por WhatsApp</span></li>
@@ -1196,6 +1235,19 @@ if (reservaForm){
     if(platos) msg += "\n\n🍽️ Platos / encargo previo: " + platos;
     msg += "\n\n📅 Añadir al calendario: " + gcal;
     window.open("https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
+    /* Guarda la reserva en la agenda (demo: restaurante de ejemplo) */
+    var okEl = document.getElementById("r-ok"), CF = window.HOY_CONFIG || {};
+    if (CF.url && CF.key) {
+      okEl.textContent = "Guardando en la agenda…";
+      fetch(CF.url.replace(/\/$/, "") + "/rest/v1/rpc/crear_reserva", {
+        method: "POST", keepalive: true,
+        headers: { "Content-Type": "application/json", apikey: CF.key },
+        body: JSON.stringify({ p_slug: "demo", p_nombre: vals["r-nombre"], p_telefono: vals["r-telefono"], p_fecha: vals["r-fecha"],
+          p_hora: vals["r-hora"], p_personas: parseInt(vals["r-comensales"], 10), p_notas: platos || null })
+      }).then(function(r){ return r.json().then(function(j){ return { ok: r.ok, j: j }; }); })
+        .then(function(x){ okEl.textContent = x.ok ? "✅ Reserva guardada en la agenda del restaurante. Termina de enviarla por WhatsApp." : "⚠️ " + ((x.j && x.j.message) || "No se pudo guardar en la agenda, pero puedes enviarla por WhatsApp."); })
+        .catch(function(){ okEl.textContent = "⚠️ No se pudo guardar en la agenda, pero puedes enviarla por WhatsApp."; });
+    }
   });
 }
 
@@ -1244,7 +1296,7 @@ if (heroMedia && !matchMedia("(prefers-reduced-motion: reduce)").matches){
   }, {passive:true});
 }
 </script>
-<script>(function(){var b=document.getElementById("mbar"),h=document.getElementById("top");if(!b||!h)return;if("IntersectionObserver"in window){new IntersectionObserver(function(e){b.classList.toggle("show",!e[0].isIntersecting)}).observe(h)}else b.classList.add("show")})();</script>
+<script>(function(){var b=document.getElementById("mbar"),h=document.getElementById("top");if(!b||!h)return;if("IntersectionObserver"in window){new IntersectionObserver(function(e){var v=!e[0].isIntersecting;b.classList.toggle("show",v);document.body.classList.toggle("mbar-on",v)}).observe(h)}else{b.classList.add("show");document.body.classList.add("mbar-on")}})();</script>
 <script>
 (function(){var scr=document.getElementById("bp-scr"),sel=document.getElementById("b-estilo"),btn=document.getElementById("b-btn"),note=document.querySelector("#brief .bp-note"),ps=document.querySelector("#brief .pp-screen");if(!scr||!sel)return;
 var MODELOS={
@@ -1272,5 +1324,14 @@ var sec=document.getElementById("brief");
 if("IntersectionObserver"in window&&sec){var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();build();}},{threshold:.4});io.observe(sec);}else build();
 })();
 </script>
+<script>
+window.MC_ASISTENTE = {
+  slug: "mesa-creativa", nombre: "Mesa Creativa", titulo: "Asistente de Mesa Creativa", bottomMovil: 84,
+  saludo: "¡Hola! 👋 Soy el asistente con IA de Mesa Creativa. Pregúntame por planes, precios, plazos o cómo trabajamos. Así respondería también el asistente de tu negocio.",
+  sugerencias: ["¿Qué plan me recomiendas para un restaurante?", "¿Cuánto cuesta cada plan?", "¿En cuánto tiempo está lista mi web?", "¿Puedo cambiar los precios yo mismo?"],
+  whatsapp: function (t) { return "https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent(WA_HOLA + t.charAt(0).toLowerCase() + t.slice(1) + WA_TRAZA); }
+};
+</script>
+<script src="/asistente/asistente.js" defer></script>
 </body>
 </html>

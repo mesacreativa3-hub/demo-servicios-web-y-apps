@@ -58,6 +58,9 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--gold);outline-of
 .sheet{position:fixed;inset:0;background:rgba(0,0,0,.65);display:flex;align-items:flex-end;justify-content:center;z-index:9}
 .sheet .card{width:100%;max-width:640px;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;margin:0}
 @media(min-width:700px){.sheet{align-items:center}.sheet .card{border-radius:18px}}
+.paneles{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 14px}
+.paneles a{font-size:.82rem;color:var(--dim);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+.paneles a.on{color:#17140c;background:var(--gold);border-color:var(--gold);font-weight:600}
 [hidden]{display:none!important}
 </style>
 <script src="/hoy/config.js"></script>
@@ -79,6 +82,11 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--gold);outline-of
   </section>
 
   <section id="v-panel" hidden>
+    <nav class="paneles" aria-label="Paneles">
+      <a href="/admin-catalogo.html" class="on" aria-current="page">Catálogo</a>
+      <a href="/admin-reservas.html">Reservas</a>
+      <a href="/admin-hoy.html">Novedades</a>
+    </nav>
     <div class="top">
       <h1 id="titulo">Mi catálogo</h1>
       <button class="link" type="button" id="b-out">Salir</button>
@@ -171,7 +179,7 @@ function toJpeg(file){return new Promise(function(res,rej){
 
 async function loadNegocios(){
   var a=await call("/rest/v1/negocio_usuarios?select=negocios(id,slug,nombre,web)",{cache:"no-store"});
-  negocios=(a||[]).map(function(x){return x.negocios}).filter(Boolean);
+  negocios=(a||[]).map(function(x){return x.negocios}).filter(function(n){return n&&n.slug!=="mesa-creativa"});
   if(!negocios.length)throw new Error("Tu usuario todavía no tiene un negocio asignado. Escríbele a Mesa Creativa.");
   $("sel").innerHTML=negocios.map(function(n,i){return '<option value="'+i+'">'+esc(n.nombre)+'</option>'}).join("");
   $("sel-box").hidden=negocios.length<2;

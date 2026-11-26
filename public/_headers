@@ -13,6 +13,9 @@
 /hoy/*
   Cache-Control: no-cache
 
+/asistente/*
+  Cache-Control: no-cache
+
 /admin-*
   X-Robots-Tag: noindex, nofollow
   Cache-Control: no-store

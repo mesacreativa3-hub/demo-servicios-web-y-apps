@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Mis reservas · Administración</title>
+<style>
+:root{--bg:#0e0d0b;--card:#17150f;--cream:#f7f3ec;--dim:#b9b2a3;--gold:#c9a227;--line:rgba(247,243,236,.16);--err:#ff9a8a;--ok:#86e0a0;--wa:#25D366}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--cream);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:20px 16px 60px}
+.box{max-width:640px;margin:0 auto}
+h1{font-size:1.45rem;margin:6px 0 4px;font-weight:600}
+h2{font-size:1rem;margin:24px 0 10px;color:var(--gold);font-weight:600}
+.sub{color:var(--dim);font-size:.92rem;margin:0 0 16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px}
+label.l{display:block;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin:12px 0 6px}
+input,select,textarea{width:100%;font:inherit;font-size:16px;color:var(--cream);background:#0e0d0b;border:1px solid var(--line);border-radius:12px;padding:11px 13px}
+textarea{min-height:70px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--gold);outline-offset:1px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font:inherit;font-weight:600;border:0;border-radius:999px;padding:12px 20px;background:linear-gradient(120deg,#c9a227,#b87333);color:#17140c;cursor:pointer;text-decoration:none}
+.btn:disabled{opacity:.55;cursor:wait}
+.btn.big{width:100%;font-size:1.05rem;padding:15px}
+.btn.ghost{background:transparent;color:var(--cream);border:1px solid var(--line)}
+.btn.danger{background:transparent;color:var(--err);border:1px solid rgba(255,154,138,.4)}
+.btn.wa{background:var(--wa);color:#0b3d24}
+.btn.sm{padding:8px 14px;font-size:.85rem;white-space:nowrap}
+.msg{min-height:1.4em;font-size:.92rem;margin:10px 0 0}
+.msg.err{color:var(--err)}.msg.ok{color:var(--ok)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.link{color:var(--gold);background:none;border:0;cursor:pointer;font:inherit;text-decoration:underline;padding:0}
+.paneles{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 14px}
+.paneles a{font-size:.82rem;color:var(--dim);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+.paneles a.on{color:#17140c;background:var(--gold);border-color:var(--gold);font-weight:600}
+.tabs{display:flex;gap:6px;margin:6px 0 4px;flex-wrap:wrap}
+.tabs button{font:inherit;font-size:.86rem;border:1px solid var(--line);background:none;color:var(--dim);border-radius:999px;padding:7px 14px;cursor:pointer}
+.tabs button.on{border-color:var(--gold);color:var(--gold)}
+.badge{display:inline-block;min-width:20px;padding:0 6px;border-radius:999px;background:var(--gold);color:#17140c;font-size:.75rem;font-weight:700;text-align:center;margin-left:4px}
+.res{padding:14px 0;border-bottom:1px solid var(--line)}
+.res:last-child{border-bottom:0}
+.res-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.hora{font-size:1.25rem;font-weight:700;font-variant-numeric:tabular-nums}
+.quien{font-weight:600;font-size:1.02rem}
+.det{color:var(--dim);font-size:.9rem;margin-top:2px;overflow-wrap:anywhere}
+.est{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:3px 9px;border:1px solid var(--line);margin-left:auto}
+.est.pendiente{color:#ffd27a;border-color:rgba(255,210,122,.5)}
+.est.confirmada{color:var(--ok);border-color:rgba(134,224,160,.5)}
+.est.cancelada{color:var(--err);border-color:rgba(255,154,138,.45)}
+.res.cancelada .hora,.res.cancelada .quien{text-decoration:line-through;color:var(--dim)}
+.acc{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.65);display:flex;align-items:flex-end;justify-content:center;z-index:9}
+.sheet .card{width:100%;max-width:640px;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;margin:0}
+@media(min-width:700px){.sheet{align-items:center}.sheet .card{border-radius:18px}}
+[hidden]{display:none!important}
+</style>
+<script src="/hoy/config.js"></script>
+</head>
+<body>
+<div class="box">
+
+  <section id="v-login" hidden>
+    <h1>Mis reservas</h1>
+    <p class="sub">Entra con tu correo y contraseña para ver y confirmar las reservas de tu web.</p>
+    <form class="card" id="login" autocomplete="on">
+      <label class="l" for="em">Correo</label>
+      <input type="email" id="em" autocomplete="username" required>
+      <label class="l" for="pw">Contraseña</label>
+      <input type="password" id="pw" autocomplete="current-password" required>
+      <p class="msg" id="m-login" role="status"></p>
+      <button class="btn big" type="submit" id="b-login" style="margin-top:10px">Entrar</button>
+    </form>
+  </section>
+
+  <section id="v-panel" hidden>
+    <nav class="paneles" aria-label="Paneles">
+      <a href="/admin-catalogo.html">Catálogo</a>
+      <a href="/admin-reservas.html" class="on" aria-current="page">Reservas</a>
+      <a href="/admin-hoy.html">Novedades</a>
+    </nav>
+    <div class="top">
+      <h1 id="titulo">Mis reservas</h1>
+      <button class="link" type="button" id="b-out">Salir</button>
+    </div>
+    <p class="sub" id="nota">Las reservas que hacen tus clientes en la web aparecen aquí. Confírmalas y escríbeles por WhatsApp con un toque.</p>
+    <div id="sel-box" hidden><label class="l" for="sel">Negocio</label><select id="sel"></select></div>
+    <div class="top" style="margin-top:6px">
+      <div class="tabs" role="tablist">
+        <button type="button" data-f="proximas" class="on">Próximas<span class="badge" id="n-pend" hidden></span></button>
+        <button type="button" data-f="hoy">Hoy</button>
+        <button type="button" data-f="todas">Todas</button>
+      </div>
+      <button class="btn sm" type="button" id="b-new">+ Añadir</button>
+    </div>
+    <p class="msg" id="m-panel" role="status"></p>
+    <div id="lista"></div>
+  </section>
+
+</div>
+
+<div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="n-title">
+  <form class="card" id="nueva">
+    <div class="top"><h1 id="n-title" style="font-size:1.2rem">Nueva reserva</h1><button class="link" type="button" id="n-close">Cerrar</button></div>
+    <p class="sub" style="margin:4px 0 0">Para reservas que te llegan por teléfono o en persona.</p>
+    <label class="l" for="n-nombre">Nombre</label>
+    <input type="text" id="n-nombre" maxlength="80" required autocomplete="off">
+    <label class="l" for="n-tel">Teléfono</label>
+    <input type="tel" id="n-tel" maxlength="20" required placeholder="0414 000 0000" autocomplete="off">
+    <div class="two">
+      <div><label class="l" for="n-fecha">Fecha</label><input type="date" id="n-fecha" required></div>
+      <div><label class="l" for="n-hora">Hora</label><input type="time" id="n-hora" required></div>
+    </div>
+    <label class="l" for="n-pers">Personas</label>
+    <input type="number" id="n-pers" min="1" max="50" value="2" required inputmode="numeric">
+    <label class="l" for="n-notas">Notas</label>
+    <textarea id="n-notas" maxlength="400" placeholder="Cumpleaños, terraza, silla para bebé…"></textarea>
+    <p class="msg" id="m-new" role="status"></p>
+    <button class="btn big" type="submit" id="n-save" style="margin-top:12px">Guardar reserva</button>
+  </form>
+</div>
+
+<script>
+(function(){
+"use strict";
+var C=window.HOY_CONFIG||{},U=(C.url||"").replace(/\/$/,""),K=C.key||"";
+var $=function(i){return document.getElementById(i)};
+var SK="catalogo_admin_session";
+var negocios=[],neg=null,reservas=[],filtro="proximas";
+
+function getS(){try{return JSON.parse(localStorage.getItem(SK)||"null")}catch(e){return null}}
+function setS(s){try{if(s)localStorage.setItem(SK,JSON.stringify(s));else localStorage.removeItem(SK)}catch(e){}}
+function msg(id,t,cls){var m=$(id);m.textContent=t||"";m.className="msg"+(cls?" "+cls:"")}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function api(path,opt,tok){opt=opt||{};opt.headers=Object.assign({apikey:K},opt.headers||{});if(tok)opt.headers.Authorization="Bearer "+tok;return fetch(U+path,opt)}
+function saveSession(j){var s={access_token:j.access_token,refresh_token:j.refresh_token,expires_at:Math.floor(Date.now()/1000)+(j.expires_in||3600)};setS(s);return s}
+async function token(){
+  var s=getS();if(!s)throw new Error("login");
+  if(s.expires_at-60>Date.now()/1000)return s.access_token;
+  var r=await api("/auth/v1/token?grant_type=refresh_token",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({refresh_token:s.refresh_token})});
+  if(!r.ok){setS(null);throw new Error("login")}
+  return saveSession(await r.json()).access_token;
+}
+async function call(path,opt){
+  var tok=await token(),r=await api(path,opt,tok);
+  if(r.status===401)throw new Error("login");
+  if(!r.ok){var j=null;try{j=await r.json()}catch(e){}throw new Error((j&&j.message&&!/violates|constraint/.test(j.message))?j.message:"No se pudo guardar. Revisa los datos y tu conexión.")}
+  return r.status===204?null:r.json();
+}
+function view(v){$("v-login").hidden=v!=="login";$("v-panel").hidden=v!=="panel"}
+function fail(e,box){
+  if(e.message==="login"){view("login");msg("m-login","Tu sesión venció. Vuelve a entrar.","err")}
+  else msg(box||"m-panel",e.message,"err");
+}
+function hoyISO(){var d=new Date(Date.now()-new Date().getTimezoneOffset()*60000);return d.toISOString().slice(0,10)}
+function fechaLarga(iso){
+  var p=iso.split("-"),d=new Date(+p[0],+p[1]-1,+p[2]);
+  var t=d.toLocaleDateString("es-VE",{weekday:"long",day:"numeric",month:"long"});
+  t=t.charAt(0).toUpperCase()+t.slice(1);return iso===hoyISO()?"Hoy · "+t:t;
+}
+function telWa(t){
+  var d=String(t||"").replace(/[^0-9+]/g,"");
+  if(d.charAt(0)==="+")return d.slice(1);
+  d=d.replace(/\D/g,"");
+  if(d.length===11&&d.charAt(0)==="0")return "58"+d.slice(1);   // 0414… → 58414…
+  if(d.length===10&&d.charAt(0)==="4")return "58"+d;              // 414…  → 58414…
+  return d;
+}
+function waLink(r,texto){return "https://wa.me/"+telWa(r.telefono)+"?text="+encodeURIComponent(texto)}
+
+async function loadNegocios(){
+  var a=await call("/rest/v1/negocio_usuarios?select=negocios(id,slug,nombre)",{cache:"no-store"});
+  negocios=(a||[]).map(function(x){return x.negocios}).filter(Boolean)
+    .sort(function(x,y){return (x.slug==="mesa-creativa")-(y.slug==="mesa-creativa")});
+  if(!negocios.length)throw new Error("Tu usuario todavía no tiene un negocio asignado. Escríbele a Mesa Creativa.");
+  $("sel").innerHTML=negocios.map(function(n,i){return '<option value="'+i+'">'+esc(n.nombre)+'</option>'}).join("");
+  $("sel-box").hidden=negocios.length<2;
+  neg=negocios[0];
+}
+async function loadReservas(){
+  $("titulo").textContent=negocios.length>1?"Reservas":"Reservas · "+neg.nombre;
+  $("nota").textContent=neg.slug==="demo"
+    ?"Demo: aquí ves las reservas de prueba que hacen los visitantes en las webs de ejemplo. Se borran solas a los 7 días."
+    :"Las reservas que hacen tus clientes en la web aparecen aquí. Confírmalas y escríbeles por WhatsApp con un toque.";
+  var desde=new Date(Date.now()-30*864e5).toISOString().slice(0,10);
+  reservas=await call("/rest/v1/reservas?negocio_id=eq."+neg.id+"&fecha=gte."+desde+"&select=id,nombre,telefono,fecha,hora,personas,notas,estado,origen,creado&order=fecha.asc,hora.asc&limit=500",{cache:"no-store"});
+  render();
+}
+function render(){
+  var hoy=hoyISO();
+  var pend=reservas.filter(function(r){return r.estado==="pendiente"&&r.fecha>=hoy}).length;
+  var b=$("n-pend");b.textContent=pend;b.hidden=!pend;
+  var list=reservas.filter(function(r){
+    if(filtro==="hoy")return r.fecha===hoy;
+    if(filtro==="proximas")return r.fecha>=hoy&&r.estado!=="cancelada";
+    return true;
+  });
+  if(filtro==="todas")list=list.slice().reverse();
+  if(!list.length){$("lista").innerHTML='<div class="card"><p class="sub" style="margin:0">'+(filtro==="hoy"?"No hay reservas para hoy.":"No hay reservas todavía. Cuando un cliente reserve en tu web, aparecerá aquí.")+'</p></div>';return}
+  var h="",dia="";
+  list.forEach(function(r){
+    if(r.fecha!==dia){if(dia)h+='</div>';dia=r.fecha;h+='<h2>'+esc(fechaLarga(r.fecha))+'</h2><div class="card">'}
+    h+='<div class="res '+esc(r.estado)+'" data-id="'+r.id+'">'+
+      '<div class="res-top"><span class="hora">'+esc(String(r.hora).slice(0,5))+'</span><span class="quien">'+esc(r.nombre)+'</span><span class="est '+esc(r.estado)+'">'+esc(r.estado)+'</span></div>'+
+      '<div class="det">👥 '+r.personas+(r.personas==1?" persona":" personas")+' · 📞 '+esc(r.telefono)+(r.origen==="panel"?" · añadida en el panel":"")+'</div>'+
+      (r.notas?'<div class="det">📝 '+esc(r.notas)+'</div>':'')+
+      '<div class="acc">'+
+        (r.estado!=="confirmada"?'<button class="btn sm" type="button" data-a="confirmar">✓ Confirmar</button>':'')+
+        (r.estado!=="cancelada"?'<button class="btn sm danger" type="button" data-a="cancelar">Cancelar</button>':'<button class="btn sm ghost" type="button" data-a="reabrir">Reactivar</button>')+
+        '<a class="btn sm wa" target="_blank" rel="noopener" href="'+esc(waLink(r,"Hola "+r.nombre+", te escribimos de "+neg.nombre+" por tu reserva del "+fechaLarga(r.fecha).replace("Hoy · ","")+" a las "+String(r.hora).slice(0,5)+"."))+'">WhatsApp</a>'+
+      '</div></div>';
+  });
+  h+='</div>';
+  $("lista").innerHTML=h;
+}
+function byId(id){return reservas.find(function(r){return r.id===id})}
+async function setEstado(r,estado){
+  await call("/rest/v1/reservas?id=eq."+r.id,{method:"PATCH",headers:{"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify({estado:estado})});
+  r.estado=estado;render();
+}
+$("lista").addEventListener("click",async function(e){
+  var b=e.target.closest("button[data-a]");if(!b)return;
+  var r=byId(b.closest(".res").getAttribute("data-id")),a=b.getAttribute("data-a");
+  var cuando=fechaLarga(r.fecha).replace("Hoy · ","")+" a las "+String(r.hora).slice(0,5);
+  // La ventana de WhatsApp se abre en el mismo toque (si no, el navegador la bloquea)
+  var win=null;
+  if(a==="confirmar")win=window.open(waLink(r,"Hola "+r.nombre+", ¡tu reserva en "+neg.nombre+" está confirmada! 🗓️ "+cuando+" para "+r.personas+(r.personas==1?" persona":" personas")+". Te esperamos."),"_blank","noopener");
+  if(a==="cancelar"&&!confirm("¿Cancelar la reserva de "+r.nombre+"?"))return;
+  try{b.disabled=true;await setEstado(r,a==="confirmar"?"confirmada":a==="cancelar"?"cancelada":"pendiente");
+    msg("m-panel",a==="confirmar"?"✅ Confirmada. Envía el mensaje que se abrió en WhatsApp.":a==="cancelar"?"Reserva cancelada. Si quieres, avísale por WhatsApp.":"Reserva reactivada.","ok")}
+  catch(err){fail(err)}finally{b.disabled=false}
+});
+document.querySelector(".tabs").addEventListener("click",function(e){
+  var b=e.target.closest("button[data-f]");if(!b)return;
+  filtro=b.getAttribute("data-f");
+  this.querySelectorAll("button").forEach(function(x){x.classList.toggle("on",x===b)});
+  render();
+});
+$("sel").addEventListener("change",function(){neg=negocios[+this.value];loadReservas().catch(fail)});
+
+function openNew(){$("nueva").reset();$("n-fecha").value=hoyISO();$("n-fecha").min=hoyISO();msg("m-new","");$("sheet").hidden=false;$("n-nombre").focus()}
+function closeNew(){$("sheet").hidden=true}
+$("b-new").addEventListener("click",openNew);
+$("n-close").addEventListener("click",closeNew);
+$("sheet").addEventListener("click",function(e){if(e.target===this)closeNew()});
+$("nueva").addEventListener("submit",async function(e){
+  e.preventDefault();
+  var tel=$("n-tel").value.replace(/[^0-9+ ]/g," ").replace(/\s+/g," ").trim();
+  var p=parseInt($("n-pers").value,10);
+  if($("n-nombre").value.trim().length<2){msg("m-new","Escribe el nombre.","err");return}
+  if(tel.replace(/\D/g,"").length<7){msg("m-new","Escribe un teléfono válido.","err");return}
+  if(!(p>=1&&p<=50)){msg("m-new","Indica entre 1 y 50 personas.","err");return}
+  $("n-save").disabled=true;
+  try{
+    await call("/rest/v1/reservas",{method:"POST",headers:{"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify({
+      negocio_id:neg.id,nombre:$("n-nombre").value.trim(),telefono:tel,fecha:$("n-fecha").value,hora:$("n-hora").value,personas:p,
+      notas:$("n-notas").value.trim()||null,estado:"confirmada",origen:"panel"})});
+    closeNew();await loadReservas();msg("m-panel","✅ Reserva añadida.","ok");
+  }catch(err){if(err.message==="login"){closeNew();fail(err)}else msg("m-new",err.message,"err")}
+  finally{$("n-save").disabled=false}
+});
+
+async function show(){
+  view("panel");msg("m-panel","Cargando…");
+  try{await loadNegocios();await loadReservas();msg("m-panel","")}catch(err){fail(err)}
+}
+$("login").addEventListener("submit",async function(e){
+  e.preventDefault();$("b-login").disabled=true;msg("m-login","Entrando…");
+  try{
+    var r=await api("/auth/v1/token?grant_type=password",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:$("em").value.trim(),password:$("pw").value})});
+    if(!r.ok){msg("m-login","Correo o contraseña incorrectos.","err");return}
+    saveSession(await r.json());msg("m-login","");$("pw").value="";show();
+  }catch(err){msg("m-login","No hay conexión. Inténtalo de nuevo.","err")}
+  finally{$("b-login").disabled=false}
+});
+$("b-out").addEventListener("click",function(){setS(null);view("login")});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("sheet").hidden)closeNew()});
+setInterval(function(){if(!$("v-panel").hidden&&$("sheet").hidden&&neg)loadReservas().catch(function(){})},60000);
+
+if(!U||!K){view("login");msg("m-login","Falta configurar la conexión (archivo hoy/config.js).","err");$("b-login").disabled=true}
+else if(getS())show();else view("login");
+})();
+</script>
+</body>
+</html>
