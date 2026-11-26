@@ -110,7 +110,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Manrope:wght@300;400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<style>.fx-wait .hero-in{visibility:hidden}</style>
+<script>(function(){var d=document.documentElement;if(!document.fonts||!document.fonts.load)return;d.classList.add("fx-wait");var done=function(){d.classList.remove("fx-wait")};setTimeout(done,900);window.mcFont=function(){document.fonts.load('400 1em Fraunces').then(done,done)};})();</script>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Manrope:wght@300;400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet';window.mcFont&&mcFont()">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
 
 <style>
@@ -623,7 +625,7 @@ window.HOY_CONFIG = { url: "https://wgiayjgmwsgayrmijbgz.supabase.co", key: "sb_
 
     <div class="qr-row">
       <figure class="qr-fig rv">
-        <img src="/media/movil-qr-760.webp" alt="Móvil mostrando la web junto a un código QR" width="760" height="1018" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;margin:0">
+        <img src="/media/movil-qr-760.webp" srcset="/media/movil-qr-560.webp 560w, /media/movil-qr-760.webp 760w" sizes="(min-width:900px) 560px, 92vw" alt="Móvil mostrando la web junto a un código QR" width="760" height="1018" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;margin:0">
         <figcaption class="lead qr-cap" style="position:relative;margin:-26% 0.8% 0 auto;width:fit-content;max-width:62%;text-align:center;font-size:1.05rem;line-height:1.5">Creamos un código QR personalizado<br>para que tus clientes accedan fácilmente<br>a la información de tu negocio.</figcaption>
       </figure>
       <div class="qr-side rv">
@@ -652,7 +654,7 @@ window.HOY_CONFIG = { url: "https://wgiayjgmwsgayrmijbgz.supabase.co", key: "sb_
     <p class="lead rv" style="margin-top:26px">Ábrela desde tu celular, como lo harán tus clientes. Todo lo que ves en esta sección son ejemplos: los cambiamos por tu logo, tus fotos y tus precios.</p>
     <div class="ex-grid">
       <a class="card ex-card rv" href="/demo-pro.html" target="_blank" rel="noopener">
-        <img src="/media/ejemplo-casa-araguaney-440.webp" width="440" height="880" loading="lazy" decoding="async" alt="Página de ejemplo del restaurante Casa Araguaney vista en un celular" />
+        <img src="/media/ejemplo-casa-araguaney-440.webp" srcset="/media/ejemplo-casa-araguaney-300.webp 300w, /media/ejemplo-casa-araguaney-440.webp 440w" sizes="(max-width:560px) 220px, 150px" width="440" height="880" loading="lazy" decoding="async" alt="Página de ejemplo del restaurante Casa Araguaney vista en un celular" />
         <div>
           <span class="pf-tag">Web Pro a Medida</span>
           <h3>Casa Araguaney, restaurante de ejemplo</h3>
@@ -787,7 +789,7 @@ window.HOY_CONFIG = { url: "https://wgiayjgmwsgayrmijbgz.supabase.co", key: "sb_
         <select id="b-estilo"><option>Minimalista y elegante</option><option>Moderno y tecnológico</option><option>Clásico y formal</option><option>Cálido y artesanal</option><option>Colorido y juvenil</option></select></div>
       <div class="field form-full" style="margin-top:10px"><button class="btn btn-primary" type="button" id="b-btn">Quiero una página así</button></div>
     </form>
-      <div class="bp-side rv"><div class="phone-photo"><div class="pp-screen" aria-label="Ejemplo de página web"><div id="bp-scr"><div class="bp-empty">Elige un estilo para ver un ejemplo</div></div></div><img width="565" height="1003" src="/media/movil-marco.webp" alt="" loading="lazy" /></div><p class="bp-note">Ejemplo ilustrativo</p></div>
+      <div class="bp-side rv"><div class="phone-photo"><div class="pp-screen" aria-label="Ejemplo de página web"><div id="bp-scr"><div class="bp-empty">Elige un estilo para ver un ejemplo</div></div></div><img width="565" height="1003" src="/media/movil-marco.webp" srcset="/media/movil-marco-400.webp 400w, /media/movil-marco.webp 565w" sizes="380px" alt="" loading="lazy" decoding="async" /></div><p class="bp-note">Ejemplo ilustrativo</p></div>
     </div>
   </div>
 </section>
