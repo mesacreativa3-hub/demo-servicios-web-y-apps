@@ -25,6 +25,7 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--gold);outline-of
 .btn.danger{background:transparent;color:var(--err);border:1px solid rgba(255,154,138,.4)}
 .btn.wa{background:var(--wa);color:#0b3d24}
 .btn.sm{padding:8px 14px;font-size:.85rem;white-space:nowrap}
+.btn.borrar{background:transparent;color:var(--dim);border:1px solid transparent;margin-left:auto}.btn.borrar:hover,.btn.borrar:focus-visible{color:var(--err);border-color:rgba(255,154,138,.4)}
 .msg{min-height:1.4em;font-size:.92rem;margin:10px 0 0}
 .msg.err{color:var(--err)}.msg.ok{color:var(--ok)}
 .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
@@ -210,6 +211,7 @@ function render(){
         (r.estado!=="confirmada"?'<button class="btn sm" type="button" data-a="confirmar">✓ Confirmar</button>':'')+
         (r.estado!=="cancelada"?'<button class="btn sm danger" type="button" data-a="cancelar">Cancelar</button>':'<button class="btn sm ghost" type="button" data-a="reabrir">Reactivar</button>')+
         '<a class="btn sm wa" target="_blank" rel="noopener" href="'+esc(waLink(r,"Hola "+r.nombre+", te escribimos de "+neg.nombre+" por tu reserva del "+fechaLarga(r.fecha).replace("Hoy · ","")+" a las "+String(r.hora).slice(0,5)+"."))+'">WhatsApp</a>'+
+        '<button class="btn sm borrar" type="button" data-a="borrar" aria-label="Eliminar reserva de '+esc(r.nombre)+'">🗑 Eliminar</button>'+
       '</div></div>';
   });
   h+='</div>';
@@ -223,6 +225,15 @@ async function setEstado(r,estado){
 $("lista").addEventListener("click",async function(e){
   var b=e.target.closest("button[data-a]");if(!b)return;
   var r=byId(b.closest(".res").getAttribute("data-id")),a=b.getAttribute("data-a");
+  if(a==="borrar"){
+    if(!confirm("¿Eliminar la reserva de "+r.nombre+"?\n\nSe borra para siempre y no se puede recuperar."))return;
+    try{b.disabled=true;
+      var x=await call("/rest/v1/reservas?id=eq."+r.id,{method:"DELETE",headers:{Prefer:"return=representation"}});
+      if(!x||!x.length)throw new Error("No se pudo eliminar. Vuelve a entrar e inténtalo de nuevo.");
+      reservas=reservas.filter(function(y){return y.id!==r.id});render();msg("m-panel","🗑 Reserva de "+r.nombre+" eliminada.","ok");
+    }catch(err){fail(err);b.disabled=false}
+    return;
+  }
   var cuando=fechaLarga(r.fecha).replace("Hoy · ","")+" a las "+String(r.hora).slice(0,5);
   // La ventana de WhatsApp se abre en el mismo toque (si no, el navegador la bloquea)
   var win=null;

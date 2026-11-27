@@ -100,6 +100,7 @@ function pintar(){
         (SIG[p.estado]?'<button class="btn sm" type="button" data-a="'+SIG[p.estado]+'">'+BOTON[p.estado]+'</button>':'')+
         (["entregado","cancelado"].indexOf(p.estado)<0?'<button class="btn sm danger" type="button" data-a="cancelado">Cancelar</button>':'')+
         '<a class="btn sm wa" target="_blank" rel="noopener" href="'+esc(P.wa(p.telefono,aviso(p,"")))+'">WhatsApp</a>'+
+        '<button class="btn sm borrar" type="button" data-a="borrar" aria-label="Eliminar pedido de '+esc(p.nombre)+'">🗑 Eliminar</button>'+
       '</div></div>';
   });
   h+="</div>";
@@ -108,6 +109,15 @@ function pintar(){
 $("lista").addEventListener("click",async function(e){
   var b=e.target.closest("button[data-a]");if(!b)return;
   var p=pedidos.find(function(x){return x.id===b.closest(".res").getAttribute("data-id")}),estado=b.getAttribute("data-a");
+  if(estado==="borrar"){
+    if(!confirm("¿Eliminar el pedido de "+p.nombre+" ("+P.money(p.total)+")?\n\nSe borra para siempre y no se puede recuperar."))return;
+    try{b.disabled=true;
+      var r=await P.call("/rest/v1/pedidos?id=eq."+p.id,{method:"DELETE",headers:{Prefer:"return=representation"}});
+      if(!r||!r.length)throw new Error("No se pudo eliminar. Vuelve a entrar e inténtalo de nuevo.");
+      pedidos=pedidos.filter(function(x){return x.id!==p.id});pintar();P.msg("m-panel","🗑 Pedido de "+p.nombre+" eliminado.","ok");
+    }catch(err){P.fail(err);b.disabled=false}
+    return;
+  }
   if(estado==="cancelado"&&!confirm("¿Cancelar el pedido de "+p.nombre+"?"))return;
   // Avisar al cliente por WhatsApp en el mismo toque (si no, el navegador bloquea la ventana)
   if(estado==="preparando"||estado==="listo"||estado==="cancelado")window.open(P.wa(p.telefono,aviso(p,estado)),"_blank","noopener");

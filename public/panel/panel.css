@@ -17,6 +17,7 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--gold);outline-of
 .btn.danger{background:transparent;color:var(--err);border:1px solid rgba(255,154,138,.4)}
 .btn.wa{background:var(--wa);color:#0b3d24}
 .btn.sm{padding:8px 14px;font-size:.85rem;white-space:nowrap}
+.btn.borrar{background:transparent;color:var(--dim);border:1px solid transparent;margin-left:auto}.btn.borrar:hover,.btn.borrar:focus-visible{color:var(--err);border-color:rgba(255,154,138,.4)}
 .msg{min-height:1.4em;font-size:.92rem;margin:10px 0 0}
 .msg.err{color:var(--err)}.msg.ok{color:var(--ok)}
 .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
