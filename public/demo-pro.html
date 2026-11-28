@@ -165,6 +165,17 @@ footer.site p+p{margin-top:10px}
 .rv{opacity:0;transform:translateY(18px);transition:opacity .5s ease-out,transform .5s ease-out}
 .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+/* Ubicación: botones y mapa que solo se carga al tocarlo */
+.ubic{margin-top:26px}
+.ubic-acc{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.mapa{position:relative;display:block;width:100%;aspect-ratio:16/10;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#16140f;cursor:pointer;padding:0;color:var(--cream);font:inherit}
+.mapa svg.calles{position:absolute;inset:0;width:100%;height:100%}
+.mapa .pin{position:absolute;left:50%;top:44%;transform:translate(-50%,-100%);width:34px;height:34px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.5))}
+.mapa .ver{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:rgba(14,13,11,.85);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:.78rem;letter-spacing:.06em;white-space:nowrap}
+.mapa:hover .ver,.mapa:focus-visible .ver{border-color:var(--gold);color:var(--gold)}
+.mapa iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.ubic-nota{font-size:.78rem;color:var(--cream-dim);margin:8px 0 0}
 </style>
 </head>
 <body>
@@ -272,6 +283,27 @@ footer.site p+p{margin-top:10px}
         <li><b>Pagos:</b> efectivo en dólares, pago móvil, punto de venta y Zelle</li>
         <li><b>WhatsApp:</b> pedidos, reservas y eventos</li>
       </ul>
+      <div class="ubic">
+        <div class="ubic-acc">
+          <a class="btn btn-primary btn-sm" href="https://www.google.com/maps/dir/?api=1&amp;destination=Chacao%2C+Caracas" target="_blank" rel="noopener">📍 Cómo llegar</a>
+          <a class="btn btn-ghost btn-sm" href="https://waze.com/ul?q=Chacao%20Caracas&amp;navigate=yes" target="_blank" rel="noopener">Waze</a>
+          <a class="btn btn-ghost btn-sm" href="https://www.google.com/maps/search/?api=1&amp;query=Chacao%2C+Caracas" target="_blank" rel="noopener">⭐ Déjanos una reseña</a>
+        </div>
+        <button class="mapa" type="button" id="mapa" aria-label="Ver el mapa de Google con la ubicación">
+          <svg class="calles" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="320" height="200" fill="#16140f"/>
+            <path d="M138 0 C150 60 120 110 170 200" stroke="#1f3a2c" stroke-width="22" fill="none" opacity=".55"/>
+            <g stroke="#2a261d" stroke-width="10" fill="none" stroke-linecap="round">
+              <path d="M-10 70 L330 52"/><path d="M-10 140 L330 128"/><path d="M60 -10 L80 210"/><path d="M230 -10 L250 210"/>
+            </g>
+            <g stroke="#221f18" stroke-width="5" fill="none"><path d="M-10 105 L330 92"/><path d="M150 -10 L162 210"/><path d="M300 -10 L310 210"/><path d="M10 -10 L22 210"/></g>
+            <path d="M-10 70 L330 52" stroke="#c9a227" stroke-width="3" opacity=".35" fill="none"/>
+          </svg>
+          <svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Z" fill="#c9a227"/><circle cx="12" cy="9" r="2.6" fill="#17140c"/></svg>
+          <span class="ver">Toca para ver el mapa</span>
+        </button>
+        <p class="ubic-nota">Demo: la dirección es ficticia y los botones apuntan a Chacao. En tu web llevan a tu local y a tu ficha de Google para dejar reseñas.</p>
+      </div>
     </div>
     <form class="card form rv" id="reserva">
       <h3 style="margin:0 0 6px">Reservar mesa</h3>
@@ -497,5 +529,11 @@ var C=window.HOY_CONFIG||{};if(!C.url||!C.key)return;
 fetch(C.url.replace(/\/$/,"")+"/rest/v1/rpc/registrar_visita",{method:"POST",keepalive:true,headers:{"Content-Type":"application/json",apikey:C.key},body:JSON.stringify({p_slug:"demo"})}).catch(function(){});})();
 </script>
 <script src="/asistente/asistente.js" defer></script>
+<script>
+/* Mapa de Google: se carga solo cuando el visitante lo pide (la página sigue rápida) */
+(function(){var b=document.getElementById("mapa");if(!b)return;b.addEventListener("click",function(){
+  var f=document.createElement("iframe");f.src="https://www.google.com/maps?q=Chacao%2C+Caracas&z=15&output=embed";f.title="Mapa de ubicación";f.loading="lazy";f.referrerPolicy="no-referrer-when-downgrade";f.allowFullscreen=true;
+  b.replaceChildren(f);b.style.cursor="default";b.setAttribute("aria-label","Mapa de Google");},{once:true});})();
+</script>
 </body>
 </html>
