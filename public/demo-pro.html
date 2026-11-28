@@ -176,6 +176,14 @@ footer.site p+p{margin-top:10px}
 .mapa:hover .ver,.mapa:focus-visible .ver{border-color:var(--gold);color:var(--gold)}
 .mapa iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .ubic-nota{font-size:.78rem;color:var(--cream-dim);margin:8px 0 0}
+
+/* Botón flotante de WhatsApp (sube cuando aparece el botón del pedido) */
+.wa-fab{position:fixed;right:18px;bottom:18px;z-index:81;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:#25d366;color:#fff;box-shadow:0 12px 30px -8px rgba(0,0,0,.7);transition:transform .25s ease-out}
+.wa-fab svg{width:30px;height:30px}
+.wa-fab:hover,.wa-fab:focus-visible{transform:scale(1.06)}
+body:has(#cartBtn:not([hidden])) .wa-fab{transform:translateY(-70px)}
+body:has(#cartBtn:not([hidden])) .wa-fab:hover{transform:translateY(-70px) scale(1.06)}
+@media (prefers-reduced-motion:reduce){.wa-fab{transition:none}}
 </style>
 </head>
 <body>
@@ -334,6 +342,7 @@ footer.site p+p{margin-top:10px}
   </div>
 </footer>
 
+<a class="wa-fab" href="https://wa.me/584145086400?text=%5BDEMO%5D%20Casa%20Araguaney%3A%20Hola%2C%20quiero%20hacer%20una%20consulta" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.02c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.13.82.84-3.05-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.2 8.2 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg></a>
 <button class="cart-btn" id="cartBtn" hidden aria-haspopup="dialog"><span class="n" id="cartN">0</span><span>Ver pedido · <span id="cartT">$0.00</span></span></button>
 
 <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dTitle">
@@ -361,8 +370,17 @@ footer.site p+p{margin-top:10px}
 <script>
 (function(){
 "use strict";
-// WhatsApp que recibe pedidos y reservas de la demo (el de Mesa Creativa).
-var WA="34668580249", NEGOCIO="demo";
+// WhatsApp de la demo: va al comercial de la zona (Aníbal = oeste, Alexander = este).
+// Se respeta el comercial ya asignado en la web principal (?zona=... o el guardado); si no hay, se asigna uno.
+var COMERCIALES=[{nombre:"Aníbal",tel:"584145086400"},{nombre:"Alexander",tel:"584142611653"}];
+var REP=(function(){var Z={oeste:0,este:1},i=-1,z=new URLSearchParams(location.search).get("zona");
+  if(z&&Z.hasOwnProperty(z)){i=Z[z];try{localStorage.setItem("mc_comercial",String(i))}catch(e){}return COMERCIALES[i]}
+  try{i=parseInt(localStorage.getItem("mc_comercial"),10)}catch(e){}
+  if(!(i>=0&&i<COMERCIALES.length)){i=Math.floor(Math.random()*COMERCIALES.length);try{localStorage.setItem("mc_comercial",String(i))}catch(e){}}
+  return COMERCIALES[i]})();
+var WA=REP.tel, NEGOCIO="demo";
+window.DEMO_WA=WA;
+(function(){var a=document.querySelector(".wa-fab");if(a)a.href="https://wa.me/"+WA+"?text="+encodeURIComponent("[DEMO] Casa Araguaney: Hola, quiero hacer una consulta")})();
 // true: en la página solo se ven los platos con foto (los demás siguen guardados en la base de datos)
 var SOLO_CON_FOTO=true;
 // Copia local del menú: se usa si Supabase no responde.
@@ -519,7 +537,7 @@ window.MC_ASISTENTE = {
   slug: "demo", nombre: "Casa Araguaney", titulo: "Asistente de Casa Araguaney",
   saludo: "¡Hola! 👋 Soy el asistente de Casa Araguaney (restaurante de ejemplo). Pregúntame por la carta, precios, horarios, delivery o reservas.",
   sugerencias: ["¿Qué me recomiendas para almorzar?", "¿Hasta qué hora abren el domingo?", "¿Cuánto cuesta el pabellón?", "¿Hacen delivery?"],
-  whatsapp: function (t) { return "https://wa.me/34668580249?text=" + encodeURIComponent("[DEMO] Casa Araguaney: " + t); }
+  whatsapp: function (t) { return "https://wa.me/" + (window.DEMO_WA || "584145086400") + "?text=" + encodeURIComponent("[DEMO] Casa Araguaney: " + t); }
 };
 </script>
 <script>
