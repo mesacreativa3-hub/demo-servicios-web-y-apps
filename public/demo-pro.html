@@ -94,9 +94,9 @@ header.nav{position:fixed;top:38px;left:0;right:0;z-index:60;backdrop-filter:blu
 .menu-tools{position:sticky;top:106px;z-index:20;background:rgba(14,13,11,.94);backdrop-filter:blur(10px);padding:14px 0;margin-top:34px;border-bottom:1px solid var(--line)}
 .search{width:100%;max-width:420px;background:var(--carbon-2);border:1px solid var(--line);border-radius:999px;padding:11px 18px;font-size:.95rem}
 .search:focus{outline:2px solid var(--gold);outline-offset:1px}
-.chips{display:flex;gap:8px;overflow-x:auto;padding:12px 0 2px;scrollbar-width:none}
-.chips::-webkit-scrollbar{display:none}
-.chip{flex:none;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:.74rem;letter-spacing:.06em;cursor:pointer;background:none;color:var(--cream-dim)}
+.chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:12px 0 2px}
+@media(min-width:700px){.chips{grid-template-columns:repeat(4,max-content)}}
+.chip{border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:.78rem;letter-spacing:.06em;cursor:pointer;background:none;color:var(--cream-dim);text-align:center;white-space:nowrap}
 .chip[aria-pressed="true"]{border-color:var(--gold);color:#17140c;background:var(--gold)}
 .cat-title{margin:46px 0 18px;font-size:1.6rem}
 .dishes{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
@@ -294,8 +294,7 @@ body:has(#cartBtn:not([hidden])) .wa-fab:hover{transform:translateY(-70px) scale
       <div class="ubic">
         <div class="ubic-acc">
           <a class="btn btn-primary btn-sm" href="https://www.google.com/maps/dir/?api=1&amp;destination=Chacao%2C+Caracas" target="_blank" rel="noopener">📍 Cómo llegar</a>
-          <a class="btn btn-ghost btn-sm" href="https://waze.com/ul?q=Chacao%20Caracas&amp;navigate=yes" target="_blank" rel="noopener">Waze</a>
-          <a class="btn btn-ghost btn-sm" href="https://www.google.com/maps/search/?api=1&amp;query=Chacao%2C+Caracas" target="_blank" rel="noopener">⭐ Déjanos una reseña</a>
+          <a class="btn btn-ghost btn-sm" id="resena" href="https://www.google.com/maps/search/?api=1&amp;query=Chacao%2C+Caracas" target="_blank" rel="noopener">⭐ Déjanos una reseña</a>
         </div>
         <button class="mapa" type="button" id="mapa" aria-label="Ver el mapa de Google con la ubicación">
           <svg class="calles" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
@@ -406,7 +405,15 @@ function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){retur
 function money(n){return "$"+Number(n).toFixed(2)}
 function safeImg(u){u=String(u||"");return /^(https:\/\/|\/media\/|\/storage\/)/.test(u)?u:""}
 
-var cats=[],prods=[],cat="Todas",cart={};
+var cats=[],prods=[],cat="",cart={};
+// Grupos del menú (los botones de arriba). Cada categoría del panel cae en uno de ellos.
+var GRUPOS=["Desayunos","Almuerzos","Cenas","Postres y bebidas"];
+var GRUPO_CAT={"Desayunos y arepas":"Desayunos","Empanadas y pasapalos":"Desayunos","Cachapas":"Desayunos",
+  "Platos criollos":"Almuerzos","Parrilla":"Almuerzos","Pescados y mariscos":"Almuerzos","Sopas":"Almuerzos","Contornos":"Almuerzos",
+  "Hamburguesas y sándwiches":"Cenas","Postres":"Postres y bebidas","Bebidas":"Postres y bebidas"};
+// Platos que van en otro grupo que su categoría
+var GRUPO_PLATO=[[/patac[oó]n/i,"Cenas"]];
+function grupoDe(p){for(var i=0;i<GRUPO_PLATO.length;i++)if(GRUPO_PLATO[i][0].test(p.n))return GRUPO_PLATO[i][1];return GRUPO_CAT[p.c]||"Almuerzos"}
 
 function useLocal(){
   cats=LOCAL.categorias.slice();
@@ -425,18 +432,18 @@ async function load(){
 }
 
 function visible(p){return !SOLO_CON_FOTO||!!safeImg(p.f)}
-function catsVisibles(){return cats.filter(function(c){return prods.some(function(p){return p.c===c&&visible(p)})})}
+function gruposVisibles(){return GRUPOS.filter(function(g){return prods.some(function(p){return grupoDe(p)===g&&visible(p)})})}
 function chips(){
-  var h=["Todas"].concat(catsVisibles()).map(function(c){return '<button class="chip" type="button" data-c="'+esc(c)+'" aria-pressed="'+(c===cat)+'">'+esc(c)+'</button>'}).join("");
+  var h=gruposVisibles().map(function(c){return '<button class="chip" type="button" data-c="'+esc(c)+'" aria-pressed="'+(c===cat)+'">'+esc(c)+'</button>'}).join("");
   $("chips").innerHTML=h;
 }
 function render(){
   var q=$("q").value.trim().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
   var out="",total=0;
-  cats.forEach(function(c){
-    if(cat!=="Todas"&&c!==cat)return;
+  GRUPOS.forEach(function(c){
+    if(cat&&c!==cat)return;
     var list=prods.filter(function(p){
-      if(p.c!==c||!visible(p))return false;
+      if(grupoDe(p)!==c||!visible(p))return false;
       if(!q)return true;
       return (p.n+" "+(p.d||"")).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").indexOf(q)>=0;
     });
@@ -445,8 +452,8 @@ function render(){
     out+='<h3 class="cat-title">'+esc(c)+'</h3><div class="dishes">';
     list.forEach(function(p){
       var img=safeImg(p.f);
-      var ph=img?'<img src="'+esc(img)+'" alt="'+esc(p.n)+'" loading="lazy">':'<svg viewBox="0 0 24 24" aria-hidden="true">'+(ICONS[c]||DEF_ICON)+'</svg>';
-      out+='<article class="dish"><div class="ph" data-c="'+esc(c)+'">'+ph+'</div><div class="body">'+(p.x?'<span class="star">★ Recomendado</span>':'')+'<h4>'+esc(p.n)+'</h4><p>'+esc(p.d)+'</p><div class="row"><span class="price">'+money(p.p)+'</span><button class="add" type="button" data-id="'+esc(p.id)+'">Añadir</button></div></div></article>';
+      var ph=img?'<img src="'+esc(img)+'" alt="'+esc(p.n)+'" loading="lazy">':'<svg viewBox="0 0 24 24" aria-hidden="true">'+(ICONS[p.c]||DEF_ICON)+'</svg>';
+      out+='<article class="dish"><div class="ph" data-c="'+esc(p.c)+'">'+ph+'</div><div class="body">'+(p.x?'<span class="star">★ Recomendado</span>':'')+'<h4>'+esc(p.n)+'</h4><p>'+esc(p.d)+'</p><div class="row"><span class="price">'+money(p.p)+'</span><button class="add" type="button" data-id="'+esc(p.id)+'">Añadir</button></div></div></article>';
     });
     out+='</div>';
   });
@@ -462,6 +469,19 @@ function paintCart(){
 }
 function add(id){var p=prods.find(function(x){return String(x.id)===String(id)});if(!p)return;if(!cart[id])cart[id]={n:p.n,p:p.p,q:0};cart[id].q++;paintCart()}
 function openD(o){$("drawer").classList.toggle("open",o);document.body.style.overflow=o?"hidden":""}
+// Enlace que crea el evento en Google Calendar (hora de Caracas, 2 horas)
+function calLink(titulo,fecha,hora,detalles,lugar){
+  var f=String(fecha||"").replace(/-/g,""),h=String(hora||"00:00").slice(0,5).split(":");
+  if(f.length!==8)return "";
+  var d=new Date(Date.UTC(+f.slice(0,4),+f.slice(4,6)-1,+f.slice(6,8),+h[0]||0,+h[1]||0));
+  function fmt(x){return x.toISOString().slice(0,19).replace(/[-:]/g,"")}
+  var fin=new Date(d.getTime()+120*60000);
+  function enc(x){return encodeURIComponent(x).replace(/[()]/g,function(c){return c==="("?"%28":"%29"})}
+  return "https://calendar.google.com/calendar/render?action=TEMPLATE&text="+enc(titulo)+"&dates="+fmt(d)+"/"+fmt(fin)+"&ctz=America/Caracas&details="+enc(detalles||"")+"&location="+enc(lugar||"");
+}
+// Reseñas: con el Place ID del negocio en Google, el botón abre directo la ventana de «Escribir una reseña»
+var GOOGLE_PLACE_ID="";
+if(GOOGLE_PLACE_ID&&$("resena"))$("resena").href="https://search.google.com/local/writereview?placeid="+encodeURIComponent(GOOGLE_PLACE_ID);
 function wa(text){window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(text),"_blank","noopener")}
 
 // Si una foto aún no está subida, se muestra el icono de su categoría
@@ -476,7 +496,7 @@ document.addEventListener("error",function(e){
   }
   box.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true">'+(ICONS[box.getAttribute("data-c")]||DEF_ICON)+'</svg>';
 },true);
-$("chips").addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b)return;cat=b.getAttribute("data-c");chips();render();if($("carta").getBoundingClientRect().top<0)$("menu").scrollIntoView({behavior:"smooth"})});
+$("chips").addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b)return;var c=b.getAttribute("data-c");cat=(cat===c)?"":c;chips();render();if($("carta").getBoundingClientRect().top<0)$("menu").scrollIntoView({behavior:"smooth"})});
 $("q").addEventListener("input",render);
 $("carta").addEventListener("click",function(e){var b=e.target.closest(".add");if(!b)return;add(b.getAttribute("data-id"));b.textContent="✓ Añadido";setTimeout(function(){b.textContent="Añadir"},900)});
 $("cartBtn").addEventListener("click",function(){openD(true)});
@@ -512,6 +532,7 @@ $("reserva").addEventListener("submit",function(e){
   var pers=$("r-pers").value,masDe8=pers==="9",nota=$("r-nota").value.trim();
   var t="[DEMO] Reserva en Casa Araguaney\n\nNombre: "+$("r-nombre").value.trim()+"\nTeléfono: "+$("r-tel").value.trim()+"\nFecha: "+$("r-fecha").value+"\nHora: "+$("r-hora").value+"\nPersonas: "+(masDe8?"más de 8":pers);
   if(nota)t+="\nComentario: "+nota;
+  t+="\n\n📅 Agendar en Google Calendar:\n"+calLink("Reserva: "+$("r-nombre").value.trim()+" ("+(masDe8?"más de 8":pers)+" pers.)",$("r-fecha").value,$("r-hora").value,"Casa Araguaney\nTeléfono: "+$("r-tel").value.trim()+(nota?"\nComentario: "+nota:""),"Casa Araguaney, Chacao, Caracas");
   wa(t);
   var C=window.HOY_CONFIG||{},ok=$("r-ok");
   if(!C.url||!C.key)return;

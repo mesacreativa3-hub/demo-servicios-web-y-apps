@@ -592,7 +592,7 @@ window.HOY_CONFIG = { url: "https://wgiayjgmwsgayrmijbgz.supabase.co", key: "sb_
     <p class="lead hero-title-block">¿Tienes un negocio, emprendimiento o empresa de servicios? Creamos tu página web con tus fotos, catálogo de productos, lista de servicios o menú, y enlace directo a tu WhatsApp. Tus clientes entran, ven lo que ofreces con precios claros en dólares y te escriben al instante.</p>
     <div class="hero-cta rv">
       <a class="btn btn-primary btn-lg" href="#" data-wa>Escríbenos al WhatsApp</a>
-      <a class="btn btn-ghost btn-lg" href="#paquetes">Ver planes en dólares</a>
+      <a class="btn btn-ghost btn-lg" href="#paquetes">Planes</a>
     </div>
     <p class="scrollhint rv">Desliza para conocer más</p>
   </div>
@@ -1237,12 +1237,13 @@ if (reservaForm){
     var fin = new Date(ini.getTime() + 2*3600*1000);
     var p2 = function(n){ return (n<10?"0":"") + n; };
     var fmt = function(d){ return d.getFullYear()+p2(d.getMonth()+1)+p2(d.getDate())+"T"+p2(d.getHours())+p2(d.getMinutes())+"00"; };
+    var enc = function(x){ return encodeURIComponent(x).replace(/[()]/g, function(c){ return c === "(" ? "%28" : "%29"; }); };
     var gcal = "https://calendar.google.com/calendar/render?action=TEMPLATE" +
-      "&text=" + encodeURIComponent("Reserva: " + vals["r-nombre"] + " (" + vals["r-comensales"] + " pax)") +
-      "&dates=" + fmt(ini) + "/" + fmt(fin) + "&ctz=Europe/Madrid" +
-      "&details=" + encodeURIComponent("Cliente: " + vals["r-nombre"] + "\nTeléfono: " + (vals["r-telefono"]||"-") + "\nComensales: " + vals["r-comensales"] + (platos ? "\nPlatos / encargo: " + platos : ""));
+      "&text=" + enc("Reserva: " + vals["r-nombre"] + " (" + vals["r-comensales"] + " pax)") +
+      "&dates=" + fmt(ini) + "/" + fmt(fin) + "&ctz=America/Caracas" +
+      "&details=" + enc("Cliente: " + vals["r-nombre"] + "\nTeléfono: " + (vals["r-telefono"]||"-") + "\nComensales: " + vals["r-comensales"] + (platos ? "\nPlatos / encargo: " + platos : ""));
     if(platos) msg += "\n\n🍽️ Platos / encargo previo: " + platos;
-    msg += "\n\n📅 Añadir al calendario: " + gcal;
+    msg += "\n\n📅 Agendar en Google Calendar:\n" + gcal;
     window.open("https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
     /* Guarda la reserva en la agenda (demo: restaurante de ejemplo) */
     var okEl = document.getElementById("r-ok"), CF = window.HOY_CONFIG || {};
